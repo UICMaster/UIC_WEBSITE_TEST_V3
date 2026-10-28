@@ -1,0 +1,114 @@
+[
+  {
+    "id": "1563452947537338398",
+    "name": "Ultra Instinct Crew Eclipse vs. Skill Issue e.V.",
+    "description": "gameday 4",
+    "type": "ESPORTS MATCH",
+    "highlight": false,
+    "start": "2026-10-29T18:00:00+00:00",
+    "end": "2026-10-29T20:00:00+00:00",
+    "location": "https://www.primeleague.gg/de/leagues/matches/1167415",
+    "image": "https://cdn.discordapp.com/guild-events/1563452947537338398/2599258299b1bdffec28cfe7653915cf.png?size=1024",
+    "competitors": [
+      "Ultra Instinct Crew Eclipse",
+      "Skill Issue e.V."
+    ],
+    "streamUrl": "https://www.twitch.tv/ultrainstinctcrew"
+  },
+  {
+    "id": "1563328274292150335",
+    "name": "Ultra Instinct Crew Spark vs. Dynamo Aufbier",
+    "description": "gameday 4",
+    "type": "ESPORTS MATCH",
+    "highlight": false,
+    "start": "2026-10-30T20:00:00+00:00",
+    "end": "2026-10-30T22:00:00+00:00",
+    "location": "https://www.primeleague.gg/de/leagues/matches/1166045",
+    "image": "https://cdn.discordapp.com/guild-events/1563328274292150335/bc39ea2a7aafe0e43adc6014081d836c.png?size=1024",
+    "competitors": [
+      "Ultra Instinct Crew Spark",
+      "Dynamo Aufbier"
+    ],
+    "streamUrl": "https://www.twitch.tv/ultrainstinctcrew"
+  },
+  {
+    "id": "1563562993218752593",
+    "name": "Ultra Instinct Crew Hydra vs. Lausanne Esports Helvetia",
+    "description": "gameday 4",
+    "type": "ESPORTS MATCH",
+    "highlight": false,
+    "start": "2026-11-01T18:00:00+00:00",
+    "end": "2026-11-01T20:00:00+00:00",
+    "location": "https://www.primeleague.gg/de/leagues/matches/1165565",
+    "image": "https://cdn.discordapp.com/guild-events/1563562993218752593/6891e2b340b1b43d824755610db23869.png?size=1024",
+    "competitors": [
+      "Ultra Instinct Crew Hydra",
+      "Lausanne Esports Helvetia"
+    ],
+    "streamUrl": "https://www.twitch.tv/ultrainstinctcrew"
+  },
+  {
+    "id": "1564407956475355139",
+    "name": "Ultra Instinct Crew Vakuum vs. Arbeitszeit Betrug",
+    "description": "gameday 5",
+    "type": "ESPORTS MATCH",
+    "highlight": false,
+    "start": "2026-11-01T18:00:00+00:00",
+    "end": "2026-11-01T20:00:00+00:00",
+    "location": "https://www.primeleague.gg/de/leagues/matches/1167055",
+    "image": "https://cdn.discordapp.com/guild-events/1564407956475355139/78476513dae54e8b87c4eac8215d48f3.png?size=1024",
+    "competitors": [
+      "Ultra Instinct Crew Vakuum",
+      "Arbeitszeit Betrug"
+    ],
+    "streamUrl": "https://www.twitch.tv/ultrainstinctcrew"
+  },
+  {
+    "id": "1564714009368993948",
+    "name": "Ultra Instinct Crew Dinonuggets vs. Team RADICAL",
+    "description": "gameday 5",
+    "type": "ESPORTS MATCH",
+    "highlight": false,
+    "start": "2026-11-02T18:30:00+00:00",
+    "end": "2026-11-02T20:30:00+00:00",
+    "location": "https://www.primeleague.gg/de/leagues/matches/1167030",
+    "image": "https://cdn.discordapp.com/guild-events/1564714009368993948/632bfee944c0afa246956bee3e32dc74.png?size=1024",
+    "competitors": [
+      "Ultra Instinct Crew Dinonuggets",
+      "Team RADICAL"
+    ],
+    "streamUrl": "https://www.twitch.tv/ultrainstinctcrew"
+  },
+  {
+    "id": "1564389520303063221",
+    "name": "Ultra Instinct Crew vs. The Selected x Elektrolyse",
+    "description": "gameday 4",
+    "type": "ESPORTS MATCH",
+    "highlight": false,
+    "start": "2026-11-04T18:00:00+00:00",
+    "end": "2026-11-04T20:00:00+00:00",
+    "location": "https://www.primeleague.gg/de/leagues/matches/1165669",
+    "image": "https://cdn.discordapp.com/guild-events/1564389520303063221/d53a0352d3a7a2b247be88844616dd5f.png?size=1024",
+    "competitors": [
+      "Ultra Instinct Crew",
+      "The Selected x Elektrolyse"
+    ],
+    "streamUrl": "https://www.twitch.tv/ultrainstinctcrew"
+  },
+  {
+    "id": "1564548247874310186",
+    "name": "Ultra Instinct Crew Raiders vs. Noot Noot",
+    "description": "gameday 5",
+    "type": "ESPORTS MATCH",
+    "highlight": false,
+    "start": "2026-11-08T18:00:00+00:00",
+    "end": "2026-11-08T20:00:00+00:00",
+    "location": "https://www.primeleague.gg/de/leagues/matches/1168066",
+    "image": "https://cdn.discordapp.com/guild-events/1564548247874310186/7e8bbcbd5ab8ba474546f169f885fa76.png?size=1024",
+    "competitors": [
+      "Ultra Instinct Crew Raiders",
+      "Noot Noot"
+    ],
+    "streamUrl": "https://www.twitch.tv/ultrainstinctcrew"
+  }
+]

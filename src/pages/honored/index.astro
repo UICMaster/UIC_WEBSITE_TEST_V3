@@ -1,0 +1,265 @@
+---
+// src/pages/honored/index.astro
+import Layout from '../../layouts/Layout.astro';
+import { honoredPlayers } from '../../utils/honoredData';
+---
+
+<Layout
+  title="Ruhmeshalle | Ultra Instinct Crew"
+  description="Die Ruhmeshalle der Ultra Instinct Crew: Ausgezeichnete Persönlichkeiten, ihr Werdegang und ihr Beitrag für die Organisation."
+>
+  <section class="ruhmeshalle-index-page section-pad">
+    <div class="container">
+      <div class="top-nav-row">
+        <a href="/#teams" class="back-pill text-mono">&larr; ZURÜCK ZU DEN TEAMS</a>
+        <span class="archive-count-pill text-mono">
+          {honoredPlayers.length} {honoredPlayers.length === 1 ? 'MITGLIED' : 'MITGLIEDER'}
+        </span>
+      </div>
+
+      <div class="section-header">
+        <div class="section-badge-pill">RUHMESHALLE</div>
+        <h1 class="section-title">
+          UIC <span class="text-gradient">RUHMESHALLE</span>
+        </h1>
+        <p class="section-desc">
+          Mitglieder und Persönlichkeiten der Ultra Instinct Crew, deren Werdegang und Beitrag die Organisation nachhaltig geprägt haben.
+        </p>
+      </div>
+
+      <div class="honored-grid">
+        {honoredPlayers.map((player) => (
+          <a href={`/honored/${player.slug}`} class="honored-card">
+            <div class="hc-stage">
+              <div class="hc-badges text-mono">
+                <span class="hc-serial">#{player.playerId}</span>
+                <span class="hc-crown">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5"><path d="M2 4l3 12h14l3-12-6 7-4-7-4 7-6-7zm3 16h14"/></svg>
+                  <time datetime={player.inductedAtRaw}>{player.inductedAtFormatted}</time>
+                </span>
+              </div>
+              <img
+                src={player.photoSrc}
+                alt={`Porträt von ${player.name}`}
+                class="hc-photo"
+                width="340"
+                height="260"
+                loading="lazy"
+                onerror="this.src='/assets/profile/profile_placeholder.png'"
+              />
+              <div class="hc-shade"></div>
+            </div>
+
+            <div class="hc-body">
+              <h2 class="hc-name">{player.name}</h2>
+              <p class="hc-title">{player.title}</p>
+
+              <div class="hc-meta-strip text-mono">
+                <span>{player.seasons.length} SPLITS</span>
+                <span>&bull;</span>
+                <span>{player.voiceClips.length} AUDIOS</span>
+                <span>&bull;</span>
+                <span>{player.videos.length} VIDEOS</span>
+              </div>
+
+              <div class="hc-cta-row text-mono">
+                <span>PROFIL ANSEHEN</span>
+                <span aria-hidden="true">&rarr;</span>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .ruhmeshalle-index-page {
+    padding-top: 8.5rem;
+    padding-bottom: 7rem;
+    min-height: 92vh;
+    background-color: #000000;
+  }
+
+  .top-nav-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-xl);
+  }
+
+  .back-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: var(--text-secondary);
+    text-decoration: none;
+    padding: 0.55rem 1rem;
+    background: #0d0d10;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-sm);
+    transition: all var(--transition-fast);
+  }
+
+  .back-pill:hover {
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+
+  .archive-count-pill {
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+    background: #0d0d10;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0.45rem 0.9rem;
+    border-radius: var(--radius-sm);
+    font-weight: 700;
+  }
+
+  .honored-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--space-lg);
+  }
+
+  /* Clean edge-to-edge card matching main page Teams & About aesthetic */
+  .honored-card {
+    background: #0d0d10;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    transition: border-color var(--transition-fast), transform var(--transition-smooth);
+  }
+
+  .honored-card:hover {
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-3px);
+  }
+
+  .hc-stage {
+    position: relative;
+    height: 240px;
+    background: #070709;
+    overflow: hidden;
+  }
+
+  .hc-badges {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    right: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 4;
+    pointer-events: none;
+  }
+
+  .hc-serial {
+    font-size: 0.6875rem;
+    font-weight: 800;
+    color: #ffffff;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    padding: 2px 7px;
+    border-radius: var(--radius-xs);
+    letter-spacing: 0.06em;
+  }
+
+  /* Subtle gold accent only where it matters: the Crown badge */
+  .hc-crown {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.6875rem;
+    font-weight: 800;
+    color: #fbbf24;
+    background: rgba(10, 10, 14, 0.8);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(245, 158, 11, 0.4);
+    padding: 2px 8px;
+    border-radius: var(--radius-xs);
+  }
+
+  .hc-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    transition: transform var(--transition-smooth);
+  }
+
+  .honored-card:hover .hc-photo {
+    transform: scale(1.05);
+  }
+
+  .hc-shade {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 45%;
+    background: linear-gradient(180deg, transparent 0%, #0d0d10 100%);
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .hc-body {
+    padding: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .hc-name {
+    font-family: var(--font-display);
+    font-size: 1.45rem;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: -0.01em;
+  }
+
+  .hc-title {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  .hc-meta-strip {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.6875rem;
+    color: var(--text-muted);
+    padding-top: 8px;
+    margin-top: 4px;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+  }
+
+  .hc-cta-row {
+    margin-top: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #ffffff;
+    transition: color var(--transition-fast);
+  }
+
+  .honored-card:hover .hc-cta-row {
+    color: #fbbf24;
+  }
+</style>

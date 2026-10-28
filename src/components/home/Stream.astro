@@ -1,0 +1,186 @@
+---
+// src/components/home/Stream.astro
+---
+
+<section id="stream" class="section-pad stream-section">
+  <div class="container">
+    
+    <div class="stream-layout">
+      <!-- Text details -->
+      <div class="stream-intro">
+        <div class="section-badge-pill">LIVE-ÜBERTRAGUNG</div>
+        <h2 class="section-title">
+          SPIELTAGE <span class="text-gradient">LIVE</span>
+        </h2>
+        <p class="stream-desc">
+          Verfolge die Spiele unserer Teams live auf Twitch. Erlebe spannende Spieltage mit Live-Kommentar, Spielanalysen und gemeinsame Abende direkt im Chat.
+        </p>
+
+        <div class="stream-ctas">
+          <a href="https://www.twitch.tv/ultrainstinctcrew" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
+            <span>ZUM TWITCH-KANAL</span>
+            <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Video Player Frame with 2-Click Consent -->
+      <div class="stream-frame-wrap card-monochrome">
+        <div id="twitch-stage" class="twitch-stage">
+          
+          <div id="twitch-consent-gate" class="consent-overlay">
+            <div class="consent-icon-box">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M2.149 0l-1.612 4.119v16.836h5.331v3.045h3.224l3.045-3.045h4.119l6.245-6.245v-14.709h-20.352zm18.269 13.627l-3.582 3.582h-4.657l-2.687 2.687v-2.687h-3.94v-15.045h14.866v11.463zm-3.582-7.343h-2.149v6.448h2.149v-6.448zm-5.731 0h-2.149v6.448h2.149v-6.448z"/>
+              </svg>
+            </div>
+            
+            <h3 class="consent-title">Twitch-Livestream laden?</h3>
+            <p class="consent-text">
+              Zum Schutz deiner Daten wird der externe Stream erst nach deiner Zustimmung geladen. Dabei können Cookies gesetzt und Daten an Twitch (Amazon) übertragen werden.
+            </p>
+
+            <button id="btn-activate-stream" class="btn btn-primary consent-btn">
+              STREAM AKTIVIEREN
+            </button>
+
+            <a href="/datenschutzbestimmungen" target="_blank" class="consent-privacy-link">
+              Datenschutzbestimmungen einsehen
+            </a>
+          </div>
+
+          <!-- Target container for iframe -->
+          <div id="twitch-embed-target" class="twitch-embed-target"></div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .stream-section {
+    background-color: #000000;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .stream-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: center;
+  }
+
+  .stream-desc {
+    color: var(--text-secondary);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    margin-top: var(--space-sm);
+    margin-bottom: var(--space-xl);
+  }
+
+  .stream-frame-wrap {
+    padding: 0;
+    aspect-ratio: 16 / 9;
+    border-radius: var(--radius-md);
+    background-color: #070709;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    overflow: hidden;
+  }
+
+  .twitch-stage {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .consent-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: var(--space-xl);
+    background: #0d0d10;
+    z-index: 10;
+  }
+
+  .consent-icon-box {
+    margin-bottom: var(--space-md);
+    color: var(--text-white);
+  }
+
+  .consent-title {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: var(--text-white);
+    margin-bottom: var(--space-xs);
+  }
+
+  .consent-text {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    max-width: 440px;
+    line-height: 1.5;
+    margin-bottom: var(--space-lg);
+  }
+
+  .consent-btn {
+    padding: 0.85rem 1.75rem;
+  }
+
+  .consent-privacy-link {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-decoration: underline;
+    margin-top: var(--space-md);
+  }
+
+  .consent-privacy-link:hover {
+    color: var(--text-white);
+  }
+
+  .twitch-embed-target {
+    width: 100%;
+    height: 100%;
+  }
+
+  .twitch-embed-target iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  @media (max-width: 900px) {
+    .stream-layout {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  const activateBtn = document.getElementById('btn-activate-stream');
+  const consentGate = document.getElementById('twitch-consent-gate');
+  const embedTarget = document.getElementById('twitch-embed-target');
+
+  if (activateBtn && consentGate && embedTarget) {
+    activateBtn.addEventListener('click', () => {
+      consentGate.style.display = 'none';
+
+      const hostname = window.location.hostname || 'localhost';
+      const iframe = document.createElement('iframe');
+      iframe.src = `https://player.twitch.tv/?channel=ultrainstinctcrew&parent=${hostname}&parent=ultrainstinctcrew.com&parent=localhost&autoplay=true&muted=false`;
+      iframe.width = '100%';
+      iframe.height = '100%';
+      iframe.allow = 'autoplay; fullscreen';
+      iframe.setAttribute('allowfullscreen', 'true');
+      iframe.title = 'Ultra Instinct Crew Twitch Stream';
+
+      embedTarget.appendChild(iframe);
+    });
+  }
+</script>

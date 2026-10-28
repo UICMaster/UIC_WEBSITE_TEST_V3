@@ -1,0 +1,30 @@
+{
+  "name": "uic-website",
+  "version": "12.0.0",
+  "description": "Ultra Instinct Crew (UIC) - League of Legends eSport Organisation & Gaming Community",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "sync:stats": "node automation/fetch_stats.js",
+    "sync:prime": "node automation/fetch_prime_stats.js",
+    "sync:events": "node automation/sync_events.js"
+  },
+  "keywords": [
+    "esports",
+    "league-of-legends",
+    "prime-league",
+    "uic",
+    "ultra-instinct-crew"
+  ],
+  "author": "Ultra Instinct Crew",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@fontsource/plus-jakarta-sans": "^5.3.0",
+    "@fontsource/space-grotesk": "^5.3.0",
+    "astro": "^7.4.2"
+  }
+}

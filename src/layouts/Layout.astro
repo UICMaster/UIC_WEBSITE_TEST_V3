@@ -1,0 +1,138 @@
+---
+// src/layouts/Layout.astro
+import '../styles/global.css';
+import fontJakarta800 from '@fontsource/plus-jakarta-sans/files/plus-jakarta-sans-latin-800-normal.woff2?url';
+import fontJakarta400 from '@fontsource/plus-jakarta-sans/files/plus-jakarta-sans-latin-400-normal.woff2?url';
+import fontSpace700 from '@fontsource/space-grotesk/files/space-grotesk-latin-700-normal.woff2?url';
+import Navbar from '../components/common/Navbar.astro';
+import Footer from '../components/common/Footer.astro';
+import DockedTicker from '../components/common/DockedTicker.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  canonical?: string;
+}
+
+const siteUrl = "https://ultrainstinctcrew.com";
+const defaultCanonical = new URL(Astro.url.pathname, Astro.site || siteUrl).href;
+
+const {
+  title = "Ultra Instinct Crew | League of Legends eSport Organisation & Community",
+  description = "Die Ultra Instinct Crew (UIC) ist deine League of Legends eSport Organisation und Gaming Community aus Deutschland. Erlebe Prime League Action, professionelles LoL Coaching und Events.",
+  image = "/icon512_maskable.png",
+  canonical = defaultCanonical
+} = Astro.props;
+
+const fullImageUrl = image.startsWith('http') ? image : `${siteUrl}${image}`;
+---
+
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content="Ultra Instinct Crew" />
+    <link rel="canonical" href={canonical} />
+
+    <!-- Mobile Web App & Theme -->
+    <meta name="theme-color" content="#06080c" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="UIC" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.json" />
+
+    <!-- Favicons -->
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+
+    <!-- Preload Critical Above-the-Fold Fonts (LCP / FCP Optimization) -->
+    <link rel="preload" href={fontJakarta800} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={fontJakarta400} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={fontSpace700} as="font" type="font/woff2" crossorigin />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={fullImageUrl} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonical} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={fullImageUrl} />
+    <meta name="twitter:site" content="@uic_gaming" />
+
+    <!-- Schema.org SportsOrganization (DSGVO Safe / Inline) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsOrganization",
+        "@id": "https://ultrainstinctcrew.com/#organization",
+        "name": "Ultra Instinct Crew",
+        "alternateName": "UIC",
+        "url": "https://ultrainstinctcrew.com/",
+        "logo": "https://ultrainstinctcrew.com/assets/logo/logo.png",
+        "description": "Deutsche League of Legends eSports Organisation in der Prime League.",
+        "sameAs": [
+          "https://www.twitch.tv/ultrainstinctcrew",
+          "https://www.instagram.com/ultrainstinctcrew",
+          "https://x.com/uic_gaming",
+          "https://www.youtube.com/@UltraInstinctCrew",
+          "https://discord.gg/ultrainstinctcrew"
+        ],
+        "memberOf": {
+          "@type": "SportsOrganization",
+          "name": "Prime League"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <a href="#main-content" class="skip-link">Zum Inhalt springen</a>
+    
+    <Navbar />
+    
+    <main id="main-content">
+      <slot />
+    </main>
+
+    <Footer />
+    
+    <DockedTicker />
+
+    <style is:global>
+      .skip-link {
+        position: absolute;
+        top: -100px;
+        left: var(--space-md);
+        background: var(--text-white);
+        color: var(--bg-void);
+        padding: var(--space-xs) var(--space-md);
+        border-radius: var(--radius-sm);
+        font-weight: 700;
+        z-index: 9999;
+        transition: top var(--transition-fast);
+      }
+      .skip-link:focus {
+        top: var(--space-md);
+      }
+    </style>
+    <script is:inline>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/service-worker.js').catch(() => {});
+        });
+      }
+    </script>
+  </body>
+</html>

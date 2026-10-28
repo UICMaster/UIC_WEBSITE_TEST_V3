@@ -1,0 +1,154 @@
+---
+// src/pages/datenschutzbestimmungen.astro
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout 
+  title="Datenschutzbestimmungen | Ultra Instinct Crew"
+  description="Datenschutzerklärung und Hinweise zur DSGVO-konformen Datenverarbeitung der Ultra Instinct Crew."
+>
+  <div class="legal-page section-pad">
+    <div class="container legal-container">
+      
+      <a href="/" class="back-link">&larr; Zurück zur Startseite</a>
+
+      <div class="section-tag"># RECHTLICHES</div>
+      <h1 class="legal-title text-gradient">DATENSCHUTZ</h1>
+
+      <div class="legal-content card-monochrome">
+        <p class="intro-p">
+          Diese Datenschutzerklärung gibt einen Überblick über die Verarbeitung Ihrer Daten auf unserer Website gemäß der Datenschutz-Grundverordnung (DSGVO).
+        </p>
+
+        <section class="legal-sec">
+          <h2>1. Verantwortliche Stelle</h2>
+          <p>
+            <strong>Ultra Instinct Crew (GbR)</strong><br />
+            Vertreten durch: Matthias Meli & Mahsun Baydak<br />
+            Stieglitzweg 4<br />
+            31582 Nienburg/Weser<br />
+            E-Mail: <a href="mailto:support@ultrainstinctcrew.com">support@ultrainstinctcrew.com</a>
+          </p>
+        </section>
+
+        <section class="legal-sec">
+          <h2>2. Hosting und Infrastruktur</h2>
+          <p>
+            <strong>GitHub Pages:</strong> Unsere Website wird als statische Seite über GitHub Pages (GitHub Inc., 88 Colin P Kelly Jr St, San Francisco, CA 94107, USA) bereitgestellt. Zur Auslieferung der Seite wird Ihre IP-Adresse technisch bedingt an GitHub übertragen und in Server-Log-Dateien verarbeitet. Dies erfolgt auf Grundlage unseres berechtigten Interesses an einer sicheren und stabilen Bereitstellung (Art. 6 Abs. 1 lit. f DSGVO).
+          </p>
+          <p style="margin-top: var(--space-sm);">
+            <strong>IONOS:</strong> Unsere Domain und E-Mail-Dienste werden von der IONOS SE (Montabaur) verwaltet. E-Mails, die Sie an uns senden, werden auf deren Servern in Deutschland gespeichert.
+          </p>
+        </section>
+
+        <section class="legal-sec">
+          <h2>3. Datenerfassung und Dienste</h2>
+          
+          <h3>Lokale Schriftarten (DSGVO-Konform)</h3>
+          <p>
+            Wir nutzen moderne Webfonts zur einheitlichen Darstellung. Um den Schutz Ihrer Privatsphäre zu gewährleisten, sind alle Schriftarten lokal auf unserem Webserver gebündelt und installiert. Es besteht <strong>keine Verbindung zu Servern von Google</strong>.
+          </p>
+          
+          <h3 style="margin-top: var(--space-md);">Riot Games Disclaimer & Datentrennung</h3>
+          <p>
+            Ultra Instinct Crew wird nicht von Riot Games unterstützt und spiegelt nicht die Ansichten oder Meinungen von Riot Games oder anderen Personen wider, die offiziell an der Herstellung oder Verwaltung von League of Legends beteiligt sind. League of Legends und Riot Games sind Marken oder eingetragene Marken von Riot Games, Inc. League of Legends &copy; Riot Games, Inc.
+          </p>
+          <p style="margin-top: var(--space-xs);">
+            <strong>Hinweis zur Datenabfrage & Riot Data Dragon CDN:</strong> Sämtliche Roster-, Rang- und Spielstatistiken werden serverseitig über automatisierte GitHub Actions abgefragt und statisch bereitgestellt. Lediglich zur Darstellung der offiziellen Beschwörer-Symbole (Summoner Icons) lädt Ihr Browser Bilddateien vom öffentlichen Content Delivery Network von Riot Games (<code>ddragon.leagueoflegends.com</code>), wobei technisch bedingt Ihre IP-Adresse übermittelt wird (Art. 6 Abs. 1 lit. f DSGVO).
+          </p>
+
+          <h3 style="margin-top: var(--space-md);">Turnierdaten (PrimeBot)</h3>
+          <p>
+            Zur Darstellung unserer sportlichen Erfolge nutzen wir Daten der Unofficial Prime League API von <a href="https://primebot.me" target="_blank" rel="noopener">primebot.me</a>. Der Abruf dieser Daten erfolgt automatisiert über einen serverseitigen Cronjob. Es findet keine direkte Datenübermittlung Ihres Browsers an primebot.me statt.
+          </p>
+
+          <h3 style="margin-top: var(--space-md);">Twitch Live-Streams (2-Klick-Zustimmung)</h3>
+          <p>
+            Livestreams sind standardmäßig deaktiviert. Erst wenn Sie aktiv auf den Button zum Starten des Streams klicken, wird eine Verbindung zu Twitch (Twitch Interactive, Inc., USA) aufgebaut. Dabei willigen Sie in die Übertragung Ihrer IP-Adresse an Twitch ein (Art. 6 Abs. 1 lit. a DSGVO).
+          </p>
+        </section>
+
+        <section class="legal-sec">
+          <h2>4. Ihre Rechte</h2>
+          <p>
+            Sie haben das Recht auf unentgeltliche Auskunft über Ihre gespeicherten personenbezogenen Daten sowie ein Recht auf Berichtigung, Sperrung oder Löschung. Da wir keine Benutzerprofile, Tracking-Tools oder Werbecookies einsetzen, beschränkt sich dies primär auf Daten aus der direkten E-Mail-Kommunikation. Bitte kontaktieren Sie uns dazu per E-Mail.
+          </p>
+        </section>
+
+        <div class="legal-stand text-mono">
+          Stand: 2026
+        </div>
+      </div>
+
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .legal-container {
+    max-width: 900px;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-xl);
+    font-weight: 600;
+  }
+
+  .back-link:hover {
+    color: var(--text-white);
+  }
+
+  .legal-title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 900;
+    margin-bottom: var(--space-xl);
+  }
+
+  .legal-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+    padding: clamp(1.5rem, 4vw, 3rem);
+  }
+
+  .intro-p {
+    font-size: 1.0625rem;
+    color: var(--text-primary);
+    line-height: 1.6;
+  }
+
+  .legal-sec h2 {
+    font-size: 1.35rem;
+    color: var(--text-white);
+    margin-bottom: var(--space-xs);
+  }
+
+  .legal-sec h3 {
+    font-size: 1.0625rem;
+    color: var(--text-white);
+    margin-bottom: var(--space-xs);
+  }
+
+  .legal-sec p {
+    color: var(--text-secondary);
+    line-height: 1.7;
+    font-size: 0.9375rem;
+  }
+
+  .legal-sec a {
+    color: var(--text-white);
+    text-decoration: underline;
+  }
+
+  .legal-stand {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    border-top: 1px solid var(--border-subtle);
+    padding-top: var(--space-md);
+  }
+</style>

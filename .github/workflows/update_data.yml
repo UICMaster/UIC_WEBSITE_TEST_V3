@@ -1,0 +1,51 @@
+name: Update HUD Telemetry
+
+on:
+  schedule:
+    - cron: '55 * * * *' 
+  workflow_dispatch:      
+
+concurrency:
+  group: telemetry-sync
+  cancel-in-progress: true
+
+permissions:
+  contents: write         
+
+jobs:
+  sync-telemetry:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # Validates the data.json that UIC_ANALYSES pushed into this repo
+      - name: Validate Synchronized Data
+        run: node automation/fetch_stats.js
+
+      # Fetches your independent Prime League stats
+      - name: Fetch Prime Data
+        run: node automation/fetch_prime_stats.js
+
+      # Commits prime_stats.json (and data.json if any edge-case updates occurred)
+      - name: Commit and Push
+        env:
+          TZ: Europe/Berlin
+        run: |
+          git config --global user.name "HUD-Sync-Bot"
+          git config --global user.email "bot@noreply.github.com"
+          
+          git add data/data.json data/prime_stats.json
+          
+          if [[ -n $(git status -s) ]]; then
+            git commit -m "🤖 Telemetry Update: $(date +'%Y-%m-%d %H:%M')"
+            git pull --rebase
+            git push
+          else
+            echo "No changes detected in Riot or Prime data."
+          fi

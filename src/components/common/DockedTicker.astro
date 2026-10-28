@@ -1,0 +1,194 @@
+---
+// src/components/common/DockedTicker.astro
+import { totalTeams, totalAthletes, communityCount, nextMatch } from '../../utils/uicData';
+
+const nextMatchStr = nextMatch.isScheduled
+  ? `${nextMatch.team.toUpperCase()} gegen ${nextMatch.enemyTag || nextMatch.enemy} (${nextMatch.dateFull} Uhr)`
+  : "DEMNÄCHST";
+---
+
+<div class="docked-ticker" role="region" aria-label="Live Ticker">
+  <div class="ticker-track">
+    <!-- Segment 1 -->
+    <div class="ticker-segment">
+      <!-- SCHEDULE CLUSTER -->
+      <span class="cluster-pill cluster-pill-schedule">SPIELPLAN & TERMINE</span>
+      <span class="ticker-highlight">PRIME LEAGUE {nextMatch.teamTierShort}</span>
+      <span class="ticker-sep">&bull;</span>
+      <span class="ticker-match">
+        <span class="match-lbl">NÄCHSTES SPIEL:</span>
+        <strong class="match-teams">{nextMatchStr}</strong>
+      </span>
+      {nextMatch.isScheduled && (
+        <span class={`match-status-badge ${nextMatch.confirmed ? 'is-confirmed' : 'is-unconfirmed'}`}>
+          {nextMatch.confirmedLabel}
+        </span>
+      )}
+      
+      <span class="cluster-divider">|</span>
+
+      <!-- ORGANISATION CLUSTER -->
+      <span class="cluster-pill cluster-pill-org">ORGANISATION</span>
+      <span class="ticker-val">{totalTeams} AKTIVE TEAMS</span>
+      <span class="ticker-sep">&bull;</span>
+      <span class="ticker-val">{totalAthletes} REGISTRIERTE SPIELER</span>
+      <span class="ticker-sep">&bull;</span>
+      <span class="ticker-text">SPIELERBEWERBUNGEN GEÖFFNET</span>
+
+      <span class="cluster-divider">|</span>
+
+      <!-- COMMUNITY CLUSTER -->
+      <span class="cluster-pill cluster-pill-com">GEMEINSCHAFT</span>
+      <span class="ticker-text">DISCORD.GG/ULTRAINSTINCTCREW</span>
+      <span class="ticker-sep">&bull;</span>
+      <span class="ticker-text">{communityCount} MITGLIEDER</span>
+
+      <span class="cluster-divider">|</span>
+    </div>
+
+    <!-- Segment 2 (Duplicate for continuous loop) -->
+    <div class="ticker-segment" aria-hidden="true">
+      <!-- SCHEDULE CLUSTER -->
+      <span class="cluster-pill cluster-pill-schedule">SPIELPLAN & TERMINE</span>
+      <span class="ticker-highlight">PRIME LEAGUE {nextMatch.teamTierShort}</span>
+      <span class="ticker-sep">&bull;</span>
+      <span class="ticker-match">
+        <span class="match-lbl">NÄCHSTES SPIEL:</span>
+        <strong class="match-teams">{nextMatchStr}</strong>
+      </span>
+      {nextMatch.isScheduled && (
+        <span class={`match-status-badge ${nextMatch.confirmed ? 'is-confirmed' : 'is-unconfirmed'}`}>
+          {nextMatch.confirmedLabel}
+        </span>
+      )}
+      
+      <span class="cluster-divider">|</span>
+
+      <!-- ORGANISATION CLUSTER -->
+      <span class="cluster-pill cluster-pill-org">ORGANISATION</span>
+      <span class="ticker-val">{totalTeams} AKTIVE TEAMS</span>
+      <span class="ticker-sep">&bull;</span>
+      <span class="ticker-val">{totalAthletes} REGISTRIERTE SPIELER</span>
+      <span class="ticker-sep">&bull;</span>
+      <span class="ticker-text">SPIELERBEWERBUNGEN GEÖFFNET</span>
+
+      <span class="cluster-divider">|</span>
+
+      <!-- COMMUNITY CLUSTER -->
+      <span class="cluster-pill cluster-pill-com">GEMEINSCHAFT</span>
+      <span class="ticker-text">DISCORD.GG/ULTRAINSTINCTCREW</span>
+      <span class="ticker-sep">&bull;</span>
+      <span class="ticker-text">{communityCount} MITGLIEDER</span>
+
+      <span class="cluster-divider">|</span>
+    </div>
+  </div>
+</div>
+
+<style>
+  .docked-ticker {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 48px;
+    background: rgba(8, 8, 10, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    z-index: 998;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 -6px 24px rgba(0, 0, 0, 0.8);
+    user-select: none;
+  }
+
+  .ticker-track {
+    display: flex;
+    width: max-content;
+    animation: tickerDocked 45s linear infinite;
+  }
+
+  .docked-ticker:hover .ticker-track {
+    animation-play-state: paused;
+  }
+
+  .ticker-segment {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    padding-right: 1.25rem;
+    white-space: nowrap;
+    font-family: var(--font-tech);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+
+  .cluster-pill {
+    font-size: 0.625rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    padding: 3px 8px;
+    border-radius: var(--radius-xs);
+    text-transform: uppercase;
+  }
+
+  .cluster-pill-schedule {
+    background: #ffffff;
+    color: #000000;
+  }
+
+  .cluster-pill-org {
+    background: #181820;
+    color: #e2e8f0;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+  }
+
+  .cluster-pill-com {
+    background: rgba(99, 102, 241, 0.18);
+    color: #a5b4fc;
+    border: 1px solid rgba(99, 102, 241, 0.3);
+  }
+
+  .ticker-highlight {
+    color: #ffffff;
+    font-weight: 800;
+  }
+
+  .match-lbl {
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    margin-right: 4px;
+  }
+
+  .match-teams {
+    color: #ffffff;
+    font-weight: 800;
+  }
+
+  .ticker-val {
+    color: #ffffff;
+    font-weight: 700;
+  }
+
+  .ticker-text {
+    color: var(--text-secondary);
+  }
+
+  .ticker-sep {
+    color: rgba(255, 255, 255, 0.2);
+  }
+
+  .cluster-divider {
+    color: rgba(255, 255, 255, 0.18);
+    font-weight: 800;
+    margin-inline: 0.4rem;
+  }
+
+  @keyframes tickerDocked {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+</style>

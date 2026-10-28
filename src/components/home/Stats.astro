@@ -1,0 +1,809 @@
+---
+// src/components/home/Stats.astro
+import rawPrimeStats from '../../../data/prime_stats.json';
+
+interface Match {
+  begin?: string;
+  confirmed?: boolean;
+  result?: string;
+  match_type?: string;
+  match_day?: number;
+  enemy_team?: {
+    team_tag?: string;
+    name?: string;
+    logo_url?: string;
+    prime_league_link?: string;
+  };
+  prime_league_link?: string;
+}
+
+interface TeamStatsComputed {
+  key: string;
+  name: string;
+  division: string;
+  primeLeagueLink: string | null;
+  playedGames: number;
+  seriesWins: number;
+  seriesLosses: number;
+  draws: number;
+  mapWins: number;
+  mapLosses: number;
+  points: number;
+  winRate: number;
+  form: string[];
+  recentMatches: {
+    resultText: string;
+    score: string;
+    enemy: string;
+    date: string;
+    confirmed: boolean;
+    confirmedLabel: "Bestätigt" | "Unbestätigt";
+    link: string | null;
+  }[];
+  upcomingMatches: {
+    enemy: string;
+    matchDay: number | null;
+    dateFormatted: string;
+    confirmed: boolean;
+    confirmedLabel: "Bestätigt" | "Unbestätigt";
+    link: string | null;
+  }[];
+}
+
+const now = new Date();
+let totalGlobalMatches = 0;
+let totalGlobalWins = 0;
+let totalGlobalDraws = 0;
+let totalGlobalPoints = 0;
+
+const teamsStatsList: TeamStatsComputed[] = Object.entries(rawPrimeStats as Record<string, any>)
+  .filter(([_, team]) => team && team.matches)
+  .map(([key, team]) => {
+    const matches: Match[] = team.matches || [];
+    let mapWins = 0, mapLosses = 0, points = 0, sWins = 0, sLosses = 0;
+    let form: string[] = [];
+    let recentMatches: TeamStatsComputed['recentMatches'] = [];
+    let upcomingMatches: TeamStatsComputed['upcomingMatches'] = [];
+
+    const sortedMatches = [...matches].sort((a, b) => {
+      const dateA = a.begin ? new Date(a.begin).getTime() : 0;
+      const dateB = b.begin ? new Date(b.begin).getTime() : 0;
+      return dateA - dateB;
+    });
+
+    sortedMatches.forEach((m) => {
+      const mDate = m.begin ? new Date(m.begin) : null;
+      if (m.result && mDate && mDate < now) {
+        const parts = m.result.split(':').map(Number);
+        if (parts.length === 2 && !isNaN(parts[0]) && !isNaN(parts[1])) {
+          const [us, them] = parts;
+          mapWins += us;
+          mapLosses += them;
+
+          if (us === 2 && them === 0) points += 3;
+          else if (us === 2 && them === 1) points += 2;
+          else if (us === 1 && them === 1) points += 1;
+          else if (us === 1 && them === 2) points += 1;
+
+          const isWin = us > them;
+          const isDraw = us === them;
+
+          if (isWin) {
+            form.push('W');
+            sWins++;
+          } else if (isDraw) {
+            form.push('D');
+          } else {
+            form.push('L');
+            sLosses++;
+          }
+
+          recentMatches.push({
+            resultText: isWin ? "SIEG" : isDraw ? "UNENTSCHIEDEN" : "NIEDERLAGE",
+            score: `${us} : ${them}`,
+            enemy: m.enemy_team?.team_tag || m.enemy_team?.name || "Gegner",
+            date: mDate.toLocaleDateString('de-DE', { timeZone: 'Europe/Berlin', day: '2-digit', month: '2-digit' }),
+            confirmed: true,
+            confirmedLabel: "Bestätigt",
+            link: m.prime_league_link || null
+          });
+        }
+      }
+
+      if (!m.result) {
+        const isConfirmed = m.confirmed === true;
+        upcomingMatches.push({
+          enemy: m.enemy_team?.team_tag || m.enemy_team?.name || "TBD",
+          matchDay: m.match_day ?? null,
+          dateFormatted: mDate 
+            ? mDate.toLocaleString('de-DE', { timeZone: 'Europe/Berlin', day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' })
+            : "Offen",
+          confirmed: isConfirmed,
+          confirmedLabel: isConfirmed ? "Bestätigt" : "Unbestätigt",
+          link: m.prime_league_link || null
+        });
+      }
+    });
+
+    const draws = form.filter(f => f === 'D').length;
+    const totalSeries = sWins + sLosses + draws;
+    const winRate = totalSeries > 0 ? Math.round(((sWins + (draws * 0.5)) / totalSeries) * 100) : 0;
+
+    totalGlobalMatches += totalSeries;
+    totalGlobalWins += sWins;
+    totalGlobalDraws += draws;
+    totalGlobalPoints += points;
+
+    return {
+      key,
+      name: team.teamDisplay || `UIC ${key.toUpperCase()}`,
+      division: team.tier || team.api_meta?.division || 'Prime League',
+      primeLeagueLink: team.api_meta?.prime_league_link || null,
+      playedGames: totalSeries,
+      seriesWins: sWins,
+      seriesLosses: sLosses,
+      draws,
+      mapWins,
+      mapLosses,
+      points,
+      winRate,
+      form: form.slice(-5),
+      recentMatches: recentMatches.reverse().slice(0, 3),
+      upcomingMatches: upcomingMatches.slice(0, 3)
+    };
+  });
+
+const globalWinRate = totalGlobalMatches > 0 
+  ? Math.round(((totalGlobalWins + (totalGlobalDraws * 0.5)) / totalGlobalMatches) * 100)
+  : 0;
+
+// Sort by points for leaderboard
+const leaderboard = [...teamsStatsList].sort((a, b) => b.points - a.points);
+---
+
+<section id="stats" class="section-pad war-room-section">
+  <div class="container">
+    
+    <div class="section-header">
+      <div class="section-badge-pill">LIGA-TABELLE & BILANZEN</div>
+      <h2 class="section-title">
+        LIGA-TABELLE & <span class="text-gradient">STATISTIKEN</span>
+      </h2>
+      <p class="section-desc">
+        Offizielle Ranglisten, Serienbilanzen und anstehende Spieltage unserer Teams in der Prime League.
+      </p>
+    </div>
+
+    <!-- Telemetry Master Deck -->
+    <div class="war-room-deck">
+      <div class="deck-cell">
+        <span class="d-sub text-mono">GESPIELTE SERIEN</span>
+        <span class="d-big text-mono">{totalGlobalMatches}</span>
+      </div>
+      <div class="deck-sep"></div>
+      <div class="deck-cell">
+        <span class="d-sub text-mono">SIEGQUOTE</span>
+        <span class="d-big text-mono highlight">{globalWinRate}%</span>
+      </div>
+      <div class="deck-sep"></div>
+      <div class="deck-cell">
+        <span class="d-sub text-mono">GESAMTPUNKTE</span>
+        <span class="d-big text-mono">{totalGlobalPoints}</span>
+      </div>
+      <div class="deck-sep"></div>
+      <div class="deck-cell">
+        <span class="d-sub text-mono">ERFASSTE TEAMS</span>
+        <span class="d-big text-mono">{teamsStatsList.length}</span>
+      </div>
+    </div>
+
+    <!-- Tab Arena Control -->
+    <div class="war-room-tabs" role="tablist" aria-label="Liga-Tabelle und Spielpläne">
+      <button id="btn-tab-standings" class="war-tab is-active" role="tab" aria-selected="true" aria-controls="panel-standings" tabindex="0" data-war-target="panel-standings">
+        <span>LIGA-TABELLE</span>
+      </button>
+      <button id="btn-tab-fixtures" class="war-tab" role="tab" aria-selected="false" aria-controls="panel-fixtures" tabindex="-1" data-war-target="panel-fixtures">
+        <span>SPIELPLÄNE & ERGEBNISSE</span>
+      </button>
+    </div>
+
+    <!-- Tab 1: Comprehensive Standings Table -->
+    <div id="panel-standings" class="war-panel is-active" role="tabpanel" aria-labelledby="btn-tab-standings">
+      <div class="table-wrap">
+        <table class="standings-table">
+          <caption class="sr-only">Prime League Rangliste und Serienbilanzen der UIC Teams</caption>
+          <thead>
+            <tr class="text-mono">
+              <th scope="col" class="th-rank">#</th>
+              <th scope="col">TEAM</th>
+              <th scope="col">DIVISION</th>
+              <th scope="col" class="th-center">SERIEN</th>
+              <th scope="col" class="th-center">S / U / N</th>
+              <th scope="col" class="th-center">SPIELE</th>
+              <th scope="col" class="th-center">FORM</th>
+              <th scope="col" class="th-right">PUNKTE</th>
+            </tr>
+          </thead>
+          <tbody>
+            {leaderboard.map((team, idx) => (
+              <tr class="table-row">
+                <td class="td-rank text-mono">
+                  <span class={`rank-badge ${idx < 3 ? 'top-tier' : ''}`}>{String(idx + 1).padStart(2, '0')}</span>
+                </td>
+                <td class="td-team">
+                  <div class="name-with-link">
+                    <span class="team-brand-name">{team.name}</span>
+                    {team.primeLeagueLink && (
+                      <a
+                        href={team.primeLeagueLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="link-forward-arrow"
+                        title={`${team.name} auf Prime League öffnen`}
+                        aria-label={`${team.name} auf Prime League öffnen`}
+                      >
+                        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                      </a>
+                    )}
+                  </div>
+                </td>
+                <td class="td-div text-mono">{team.division}</td>
+                <td class="td-center text-mono">{team.playedGames}</td>
+                <td class="td-center text-mono">{team.seriesWins} / {team.draws} / {team.seriesLosses}</td>
+                <td class="td-center text-mono">{team.mapWins}:{team.mapLosses}</td>
+                <td class="td-center">
+                  <div class="form-strip">
+                    {team.form.map(f => (
+                      <span class={`badge-form ${f === 'W' ? 'win' : f === 'D' ? 'draw' : 'loss'}`}>{f}</span>
+                    ))}
+                  </div>
+                </td>
+                <td class="td-right text-mono td-points">
+                  <span class="pts-glow">{team.points}</span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Tab 2: Individual Team Match Dossiers -->
+    <div id="panel-fixtures" class="war-panel" role="tabpanel" aria-labelledby="btn-tab-fixtures">
+      <template class="deferred-fixtures-tpl">
+      <div class="fixtures-grid">
+        {teamsStatsList.map((team) => (
+          <div class="team-fixture-card">
+            
+            <div class="tf-header">
+              <div>
+                <span class="tf-division text-mono">{team.division}</span>
+                <div class="name-with-link">
+                  <h3 class="tf-name">{team.name}</h3>
+                  {team.primeLeagueLink && (
+                    <a
+                      href={team.primeLeagueLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="link-forward-arrow"
+                      title={`${team.name} auf Prime League öffnen`}
+                      aria-label={`${team.name} auf Prime League öffnen`}
+                    >
+                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </a>
+                  )}
+                </div>
+              </div>
+              <div class="tf-pts text-mono">
+                <span class="pts-val">{team.points}</span>
+                <span class="pts-lbl">PKT</span>
+              </div>
+            </div>
+
+            <!-- Form & Win Rate -->
+            <div class="tf-stat-bar text-mono">
+              <span>SIEGQUOTE: <strong class="text-white">{team.winRate}%</strong></span>
+              <div class="form-strip">
+                {team.form.map(f => (
+                  <span class={`badge-form ${f === 'W' ? 'win' : f === 'D' ? 'draw' : 'loss'}`}>{f}</span>
+                ))}
+              </div>
+            </div>
+
+            <!-- Recent Matches -->
+            <div class="tf-section">
+              <span class="tf-sec-title text-mono">LETZTE ERGEBNISSE</span>
+              {team.recentMatches.length > 0 ? (
+                <ul class="match-mini-list text-mono">
+                  {team.recentMatches.map(rm => (
+                    <li class="match-mini-item">
+                      <span class={`mini-badge ${rm.resultText === 'SIEG' ? 'win' : rm.resultText === 'UNENTSCHIEDEN' ? 'draw' : 'loss'}`}>
+                        {rm.resultText}
+                      </span>
+                      <span class="mini-score">{rm.score}</span>
+                      <span class="mini-enemy name-with-link">
+                        <span>gegen {rm.enemy}</span>
+                        {rm.link && (
+                          <a
+                            href={rm.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="link-forward-arrow"
+                            title="Zum Spielbericht auf Prime League"
+                            aria-label="Zum Spielbericht auf Prime League"
+                          >
+                            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                          </a>
+                        )}
+                      </span>
+                      <span class="mini-date-cluster">
+                        <span class="mini-date">{rm.date}</span>
+                        <span class="match-status-badge is-confirmed">{rm.confirmedLabel}</span>
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p class="text-muted text-mono" style="font-size: 0.75rem;">Keine beendeten Spiele</p>
+              )}
+            </div>
+
+            <!-- Upcoming Fixtures -->
+            <div class="tf-section">
+              <span class="tf-sec-title text-mono">NÄCHSTE SPIELE</span>
+              {team.upcomingMatches.length > 0 ? (
+                <ul class="upcoming-mini-list text-mono">
+                  {team.upcomingMatches.map(up => (
+                    <li class="upcoming-mini-item">
+                      <span class="up-enemy name-with-link">
+                        <span>{up.matchDay ? `ST${up.matchDay}: ` : ''}gegen {up.enemy}</span>
+                        {up.link && (
+                          <a
+                            href={up.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="link-forward-arrow"
+                            title="Zum Match auf Prime League"
+                            aria-label="Zum Match auf Prime League"
+                          >
+                            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                          </a>
+                        )}
+                      </span>
+                      <span class="mini-date-cluster">
+                        <span class="up-time">{up.dateFormatted}</span>
+                        <span class={`match-status-badge ${up.confirmed ? 'is-confirmed' : 'is-unconfirmed'}`}>
+                          {up.confirmedLabel}
+                        </span>
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p class="text-muted text-mono" style="font-size: 0.75rem;">Aktuell keine Termine</p>
+              )}
+            </div>
+
+          </div>
+        ))}
+      </div>
+      </template>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .war-room-section {
+    background-color: #000000;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding-bottom: clamp(6rem, 10vw, 9rem);
+  }
+
+  /* Telemetry Master Deck */
+  .war-room-deck {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: var(--space-xl) var(--space-2xl);
+    background: #0d0d10;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-2xl);
+    flex-wrap: wrap;
+    gap: var(--space-lg);
+  }
+
+  .deck-cell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .d-sub {
+    font-size: 0.6875rem;
+    color: var(--text-muted);
+    letter-spacing: 0.1em;
+    margin-bottom: 4px;
+  }
+
+  .d-big {
+    font-family: var(--font-tech);
+    font-size: 2.25rem;
+    font-weight: 800;
+    color: var(--text-white);
+    line-height: 1;
+  }
+
+  .d-big.highlight {
+    color: #ffffff;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+  }
+
+  .deck-sep {
+    width: 1px;
+    height: 44px;
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  /* War Tabs */
+  .war-room-tabs {
+    display: flex;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-xl);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding-bottom: var(--space-xs);
+  }
+
+  .war-tab {
+    padding: 0.75rem 1.5rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-display);
+    font-size: 0.8125rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+  }
+
+  .war-tab:hover {
+    color: var(--text-white);
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .war-tab.is-active {
+    background: #ffffff;
+    color: #000000;
+    border-color: #ffffff;
+    box-shadow: 0 4px 16px rgba(255, 255, 255, 0.2);
+  }
+
+  /* Panels */
+  .war-panel {
+    display: none;
+    animation: fadeIn var(--transition-fast) forwards;
+  }
+
+  .war-panel.is-active {
+    display: block;
+  }
+
+  /* Standings Table */
+  .table-wrap {
+    padding: 0;
+    overflow-x: auto;
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(10, 12, 16, 0.7);
+  }
+
+  .standings-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+  }
+
+  .standings-table th {
+    padding: var(--space-md) var(--space-lg);
+    font-size: 0.6875rem;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  .standings-table td {
+    padding: var(--space-md) var(--space-lg);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    font-size: 0.875rem;
+  }
+
+  /* No hover background on table row as per user requirement 6.2 */
+
+  .th-rank, .td-rank {
+    width: 60px;
+    text-align: center;
+  }
+
+  .rank-badge {
+    display: inline-block;
+    padding: 2px 6px;
+    border-radius: var(--radius-xs);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+
+  .rank-badge.top-tier {
+    background: var(--text-white);
+    color: var(--bg-void);
+    font-weight: 800;
+  }
+
+  .team-brand-name {
+    font-weight: 800;
+    color: var(--text-white);
+    font-size: 1rem;
+  }
+
+  .td-div {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+
+  .th-center, .td-center {
+    text-align: center;
+  }
+
+  .th-right, .td-right {
+    text-align: right;
+  }
+
+  .td-points {
+    font-size: 1.25rem;
+    font-weight: 900;
+    color: var(--text-white);
+  }
+
+  .pts-glow {
+    text-shadow: 0 0 12px rgba(255, 255, 255, 0.3);
+  }
+
+  .form-strip {
+    display: inline-flex;
+    gap: 4px;
+    align-items: center;
+  }
+
+  .badge-form {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 800;
+    line-height: 1;
+    user-select: none;
+  }
+
+  .badge-form.win {
+    background: #ffffff;
+    color: #000000;
+  }
+
+  .badge-form.loss {
+    background: #dc2626;
+    color: #ffffff;
+  }
+
+  .badge-form.draw {
+    background: #2a2a32;
+    color: #94a3b8;
+  }
+
+  /* Fixtures Grid */
+  .fixtures-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: var(--space-lg);
+  }
+
+  .team-fixture-card {
+    background: #0d0d10;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+    padding: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    transition: border-color var(--transition-fast), transform var(--transition-smooth);
+  }
+
+  .team-fixture-card:hover {
+    border-color: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
+  }
+
+  .tf-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 1px solid var(--border-subtle);
+    padding-bottom: var(--space-xs);
+  }
+
+  .tf-division {
+    display: block;
+    font-size: 0.6875rem;
+    color: var(--text-muted);
+  }
+
+  .tf-name {
+    font-size: 1.25rem;
+    font-weight: 900;
+    color: var(--text-white);
+  }
+
+  .tf-pts {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  .pts-val {
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--text-white);
+    line-height: 1;
+  }
+
+  .pts-lbl {
+    font-size: 0.625rem;
+    color: var(--text-muted);
+  }
+
+  .tf-stat-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    background: rgba(0, 0, 0, 0.3);
+    padding: 6px 10px;
+    border-radius: var(--radius-xs);
+  }
+
+  .tf-sec-title {
+    font-size: 0.625rem;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  .match-mini-list, .upcoming-mini-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .match-mini-item, .upcoming-mini-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    padding: 4px 0;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .match-mini-item:last-child, .upcoming-mini-item:last-child {
+    border-bottom: none;
+  }
+
+  .mini-badge {
+    font-size: 0.625rem;
+    font-weight: 800;
+    padding: 2px 7px;
+    border-radius: 3px;
+    letter-spacing: 0.04em;
+    display: inline-block;
+  }
+
+  .mini-badge.win {
+    background: #ffffff;
+    color: #000000;
+  }
+
+  .mini-badge.loss {
+    background: #dc2626;
+    color: #ffffff;
+  }
+
+  .mini-badge.draw {
+    background: #2a2a32;
+    color: #94a3b8;
+  }
+
+  .mini-score {
+    font-weight: 800;
+    color: var(--text-white);
+  }
+
+  .mini-enemy, .up-enemy {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  .mini-date, .up-time {
+    color: var(--text-muted);
+    font-size: 0.6875rem;
+  }
+
+  .mini-date-cluster {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 768px) {
+    .deck-sep {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  const warTabs = document.querySelectorAll<HTMLButtonElement>('[data-war-target]');
+  const warPanels = document.querySelectorAll<HTMLElement>('.war-panel');
+
+  const activateWarTab = (tab: HTMLButtonElement, focusTab = false) => {
+    const target = tab.getAttribute('data-war-target');
+    if (!target) return;
+
+    warTabs.forEach(t => {
+      const isCurrent = t === tab;
+      t.classList.toggle('is-active', isCurrent);
+      t.setAttribute('aria-selected', isCurrent ? 'true' : 'false');
+      t.setAttribute('tabindex', isCurrent ? '0' : '-1');
+    });
+    warPanels.forEach(p => p.classList.remove('is-active'));
+
+    if (focusTab) tab.focus();
+
+    const activePanel = document.getElementById(target);
+    if (activePanel) {
+      const tpl = activePanel.querySelector<HTMLTemplateElement>('template.deferred-fixtures-tpl');
+      if (tpl) {
+        activePanel.appendChild(tpl.content.cloneNode(true));
+        tpl.remove();
+      }
+      activePanel.classList.add('is-active');
+    }
+  };
+
+  warTabs.forEach((tab, idx) => {
+    tab.addEventListener('click', () => activateWarTab(tab));
+    tab.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+        e.preventDefault();
+        const nextIdx = e.key === 'ArrowRight'
+          ? (idx + 1) % warTabs.length
+          : (idx - 1 + warTabs.length) % warTabs.length;
+        activateWarTab(warTabs[nextIdx], true);
+      }
+    });
+  });
+</script>

@@ -1,0 +1,1355 @@
+{
+  "prime": {
+    "primeLeagueId": "116908",
+    "teamDisplay": "UIC Prime",
+    "tier": "Division 4",
+    "roster": [
+      {
+        "playerId": "0001",
+        "gameName": "UIC Speedy",
+        "tagLine": "EUW",
+        "role": "TOP",
+        "puuid": "utFdCKaaiibZoEViE71KN6yrSDeybEgCZQNRUifEHrBS2xBJo7vNT2p1mMcKD29ltRtJBK_uMc_HLA",
+        "trackStats": true,
+        "discordId": "272748138974937088",
+        "rosterStatus": "starter",
+        "isCaptain": true,
+        "honored": true
+      },
+      {
+        "playerId": "0002",
+        "gameName": "UIC Niki",
+        "tagLine": "AMB",
+        "role": "JGL",
+        "puuid": "Ez_9nQ4D8bmRt3MvojctfUwzTYNLkc37p9777Lk7Bb_87kFOs18Lwny9qZxhbKlewyGu8aRVGOFnQw",
+        "trackStats": true,
+        "discordId": "419797941599862785",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0006",
+        "gameName": "UIC Baumi",
+        "tagLine": "123",
+        "role": "MID",
+        "puuid": "3DMahNPpjlR3RxjkBK09QJ5BL99KyPuxtCRLIH2cZLSbjKalcYBRMelGmKotQVQuNUHd_VVNPnGyuA",
+        "trackStats": true,
+        "discordId": "664131365213700107",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0004",
+        "gameName": "UIC Giani",
+        "tagLine": "999",
+        "role": "BOT",
+        "puuid": "VHfLQIdD1X8L5cExNyJLGQqSWTrNE0LIWOlwHh-nDD7pHec8L9UWD_MQ7UsUm-GsbfpA0RRdhx_llQ",
+        "trackStats": true,
+        "discordId": "285411666638798848",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0005",
+        "gameName": "UIC Baguetto",
+        "tagLine": "R3kt",
+        "role": "SUP",
+        "puuid": "IMbkw-04eJmdPDtonXIbkLczZ2fvUVTsB8sVkYR5tLvYMds8kADmt2ua38EOMTzLl2X79JsYmbulKQ",
+        "trackStats": true,
+        "discordId": "311898583567958017",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      }
+    ]
+  },
+  "hydra": {
+    "primeLeagueId": "212586",
+    "teamDisplay": "UIC Hydra",
+    "tier": "Division 4",
+    "roster": [
+      {
+        "playerId": "0078",
+        "gameName": "UIC Nutty",
+        "tagLine": "Biggu",
+        "role": "TOP",
+        "puuid": "mcvhR5hQhYid4z1eXPJREdNxTp3mIoPV7fiEgHOyggQLpo9J8hmoW0LVrvojvcqDMBEy9t9_Hg_XOg",
+        "trackStats": true,
+        "discordId": "222373796147888133",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0079",
+        "gameName": "UIC Panger",
+        "tagLine": "JGA",
+        "role": "JGL",
+        "puuid": "DPoVp-X16JxIqGuI_WVa2ilnhzjiLlTJM-VvCvDdiDq5ZuTUM6lgYSKoglTSj4Bcg_AYaq3rwR2hTQ",
+        "trackStats": true,
+        "discordId": "343841540411752459",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0080",
+        "gameName": "UIC Lanzus",
+        "tagLine": "AEGIS",
+        "role": "MID",
+        "puuid": "dMMqKcTGDfnKJUKyyVBrV_6A8co1VXwL_mqw8TaRX39a3uGExzeutPnjbslb6wxNyfRQU7AqeLvDAQ",
+        "trackStats": true,
+        "discordId": "622381409981693953",
+        "rosterStatus": "starter",
+        "isCaptain": true,
+        "honored": false
+      },
+      {
+        "playerId": "0081",
+        "gameName": "UIC Voracity",
+        "tagLine": "0711",
+        "role": "BOT",
+        "puuid": "v6kE2kq8JVCm8xLDe6gYxq9VYfd71EKpKNS9K6mFHrdmx2z0_oaPZ0GT2claKkL5rctuF-zJjkpHqw",
+        "trackStats": true,
+        "discordId": "282564643749232640",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0076",
+        "gameName": "UIC PeaPuffer",
+        "tagLine": "PUFFY",
+        "role": "SUP",
+        "puuid": "fbGUOApCfckQft52lWA-J9iR6G5u-DjzSLTlX1ss4UFiNnAUGtlzt8YAqnLkQJQWNWgMn-MeMy48dg",
+        "trackStats": true,
+        "discordId": "611304700779692135",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0082",
+        "gameName": "MakZkovich",
+        "tagLine": "610",
+        "role": "COH",
+        "puuid": "TH4u3HkI9IUjwqftReermMwII8LHyeMFyf3izH0VdyS6pZNlROja9WtF5hWt8sHB7uC8GTsxDTUO8Q",
+        "trackStats": true,
+        "discordId": "558688298701160450",
+        "rosterStatus": "staff",
+        "isCaptain": false,
+        "honored": false
+      }
+    ]
+  },
+  "ascend": {
+    "primeLeagueId": "212852",
+    "teamDisplay": "UIC Ascend",
+    "tier": "Division Starter",
+    "roster": [
+      {
+        "playerId": "0075",
+        "gameName": "UIC Rayando07",
+        "tagLine": "Help",
+        "role": "TOP",
+        "puuid": "6SLO1ln5FlFBoW1mxcFvhIHwxgbUw1RWHogzDEH4irD5uTWxHfa4yCPzJXEoWQOhlLtEPzv9rmNDCQ",
+        "trackStats": true,
+        "discordId": "855126257859821579",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "9999",
+        "gameName": "UIC Davy",
+        "tagLine": "JGL",
+        "role": "JGL",
+        "puuid": "iHGuc5nUsaonKh269ravoxO5BctQxMI6hMxnQkQQ2bU6RsF6LzTuJXsc_Mx8_S2dH7Pq7NTFhmuahQ",
+        "trackStats": true,
+        "discordId": "415606674120900628",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0088",
+        "gameName": "UIC BL4CKPINKFAN",
+        "tagLine": "FLOW",
+        "role": "MID",
+        "puuid": "cXIyOPrtDiD0vd-1MrO3P4FThAGg_eUlNzvtRNC-ZNDDnNQCNsf0DHIsfKfo5zmFsMlrl2NZAzOz9g",
+        "trackStats": true,
+        "discordId": "315184207594782730",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0086",
+        "gameName": "UIC stevie",
+        "tagLine": "LISA",
+        "role": "BOT",
+        "puuid": "pqQtj7lgRv7DYhrwbphtkPXWuFrgGqAWc8HRHbYBTnZln9GSuMZCqDzMc7TcTG3xeFTO6Fu0eFSk1A",
+        "trackStats": true,
+        "discordId": "814199009362313218",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0087",
+        "gameName": "UIC Bardie3",
+        "tagLine": "0711",
+        "role": "SUP",
+        "puuid": "bnev2BnjXI1WXYvVqE3qPhAL2gcTVCY1fqGwZGYvrBMvLjWgM9xdlpHLumh8HNS-3F-ue_gG9WSrNA",
+        "trackStats": true,
+        "discordId": "189346815508742144",
+        "rosterStatus": "starter",
+        "isCaptain": true,
+        "honored": false
+      },
+      {
+        "playerId": "0084",
+        "gameName": "UIC Xaverseltsam",
+        "tagLine": "TTV",
+        "role": "JGL",
+        "puuid": "LVBIOhLQvPNK-le_nqzf9bQ5VRtgH-HvY_RnECyVKMIVE5mdjt1y3qeEyGaB9ybbZHoRVFKzIs8MfQ",
+        "trackStats": true,
+        "discordId": "382549209171230731",
+        "rosterStatus": "substitute",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0071",
+        "gameName": "UIC Qvy",
+        "tagLine": "rusty",
+        "role": "COH",
+        "puuid": "aRCEjx3H8LAtSFGSHOL7XSE00eeck9cQNPGoxsZkEXG5F8A4U7-jzCxpnuyxZaEoAhVTGRvzwtfoUw",
+        "trackStats": true,
+        "discordId": "143055127899537408",
+        "rosterStatus": "staff",
+        "isCaptain": false,
+        "honored": false
+      }
+    ]
+  },
+  "tempest": {
+    "primeLeagueId": "208606",
+    "teamDisplay": "UIC Tempest",
+    "tier": "Division 5",
+    "roster": [
+      {
+        "playerId": "0089",
+        "gameName": "UIC Ballas",
+        "tagLine": "Wisp",
+        "role": "TOP",
+        "puuid": "GLRQZhI8v8ucVR17uyNFLmq8HOK4J3bYLKBiyT-mc58aITOTqex6MwIuqgE6xs8k8EFK8gIJ6PxjdQ",
+        "trackStats": true,
+        "discordId": "241943941572853760",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0090",
+        "gameName": "Kurt Schluss",
+        "tagLine": "1337",
+        "role": "JGL",
+        "puuid": "6RfmT9uzrCQWuk-3jjeuncq20eb1k-p3_qj8gS11yH6XLGSbdusTqCQtVFBUj3Md0tqLZr5ZC7-y_w",
+        "trackStats": true,
+        "discordId": "524997671916666886",
+        "rosterStatus": "starter",
+        "isCaptain": true,
+        "honored": false
+      },
+      {
+        "playerId": "0091",
+        "gameName": "UIC Levin2Go",
+        "tagLine": "ATN",
+        "role": "MID",
+        "puuid": "Sz4reBn72kgI3iCCC_vA44hUbD0RTWKaTyWgWtr21Spjen3nr6-2oE-MVQmAxiC6f7njxCBmTM9_lA",
+        "trackStats": true,
+        "discordId": "399959698062966794",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0092",
+        "gameName": "UIC Lightning",
+        "tagLine": "Uzi",
+        "role": "BOT",
+        "puuid": "tq6ZXMKzVKQ7rUyqNaPtjD8Z68BTGc4QnE9H9Y3j5S6IiZ1FnbtSHLWKEzK9avgDKAe6J0VZG6YJzw",
+        "trackStats": true,
+        "discordId": "449200823071801348",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0093",
+        "gameName": "UIC Phântox",
+        "tagLine": "ATN",
+        "role": "SUP",
+        "puuid": "ZSIkXC650RRjT6RHlb8hgkimAWZlnOnTqD02qHAZ30TSGGekd-kr9l3fDv-sKM17NukA8Jjd3S2oIQ",
+        "trackStats": true,
+        "discordId": "252742177401077761",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0036",
+        "gameName": "UIC Panda",
+        "tagLine": "CSX",
+        "role": "MNG",
+        "puuid": "H63Ow4JXI3KgT05HWg6q24xi0GeTHrtLN-ypclqi10R452ewY7EXHTBw0paEiyLnYsVNGDSvWsW0hw",
+        "trackStats": true,
+        "discordId": "465698775638212610",
+        "rosterStatus": "staff",
+        "isCaptain": false,
+        "honored": false
+      }
+    ]
+  },
+  "dynasty": {
+    "primeLeagueId": "206270",
+    "teamDisplay": "UIC Dynasty",
+    "tier": "Division 4",
+    "roster": [
+      {
+        "playerId": "0053",
+        "gameName": "hi itskostas UIC",
+        "tagLine": "RRRRR",
+        "role": "TOP",
+        "puuid": "SaAWi4HhMDY8GDhdd0cv7VqAd8bTbEDbySmXWZDA2hQbGhjE9MRYiSX6WqqSFKGHo-QXt2H0LqnIqA",
+        "trackStats": true,
+        "discordId": "362998422707372033",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0056",
+        "gameName": "UIC Vaugg",
+        "tagLine": "JNG",
+        "role": "JGL",
+        "puuid": "gJcownmL47BoDKBvGZbcXNibfoM9dEIFU4h58J5qJrnLyuYPbyunhFmAIhbZoQtwoomgjBWU_xY7gg",
+        "trackStats": true,
+        "discordId": "242774606266499072",
+        "rosterStatus": "starter",
+        "isCaptain": true,
+        "honored": false
+      },
+      {
+        "playerId": "0057",
+        "gameName": "UIC Kyzero",
+        "tagLine": "UIC",
+        "role": "MID",
+        "puuid": "7dPFblKoQ6uoLWhDENMYo0rIKMP5ygKiDjZXDMpHCYgvSMnMpHzZkpjbzke_aGYAPsW6oAv5SBxGpg",
+        "trackStats": true,
+        "discordId": "182524313629360129",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0058",
+        "gameName": "UIC ATALANTA",
+        "tagLine": "ADC",
+        "role": "BOT",
+        "puuid": "kffwTXfgXkNkaLE9wk7GNCZtNViI6fmYHpIsb0_tmj9o_k_6gEmKBAY0qT_B8bvvvcU-cZ3mz5ccUw",
+        "trackStats": true,
+        "discordId": "1317200411777568793",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0059",
+        "gameName": "UIC Leeks",
+        "tagLine": "LoL",
+        "role": "SUP",
+        "puuid": "UUNBCHLya2ZV3E9j7y3EKFjrIyWLpm8_g0tKKnvzH71yr92Sp-agu8PdPOUBp1SwkGVMEABqQblyhw",
+        "trackStats": true,
+        "discordId": "303860734503157760",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0061",
+        "gameName": "UIC Alexander",
+        "tagLine": "UIC",
+        "role": "MNG",
+        "puuid": "Flu-MTx4ZbRpZFxt5fiRnhxAJ8pFmVfRvT-xtFwe3nssj2M3UImpf6COo4r_nZEqcypqWQ7M0r6F5w",
+        "trackStats": true,
+        "discordId": "530753578655023126",
+        "rosterStatus": "staff",
+        "isCaptain": false,
+        "honored": false
+      }
+    ]
+  },
+  "eclipse": {
+    "primeLeagueId": "208131",
+    "teamDisplay": "UIC Eclipse",
+    "tier": "Division 6",
+    "roster": [
+      {
+        "playerId": "0121",
+        "gameName": "UIC Undergrinder",
+        "tagLine": "TOP",
+        "role": "TOP",
+        "puuid": "22Yt2epHKYXTTC-1fBKI_kKbLXVcWppEoeb-1ugNbffhNEyfYIvxbuNIzMdLy3h8eX6OokzJHLeKvQ",
+        "trackStats": true,
+        "discordId": "274281672617492482",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0009",
+        "gameName": "UIC NairadAwsm",
+        "tagLine": "UIC",
+        "role": "JGL",
+        "puuid": "-8POGKyZS91LqT3dzydTbDE_YsAtUHIxwvk73_VIFuS0JTXns0Y2spr17z2s5lM9Kv0_OwB9AdtBfQ",
+        "trackStats": true,
+        "discordId": "967835776194859038",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0034",
+        "gameName": "UIC Prellik",
+        "tagLine": "CYS",
+        "role": "MID",
+        "puuid": "fKOByvOyBYcGvcG1VbIDg6bzIbIwrOeh7g06MfvjO2ZQwygs0oRU38SzKEesW3L30zinihHppprPVg",
+        "trackStats": true,
+        "discordId": "201428142898937856",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0011",
+        "gameName": "UIC Pferdemilch",
+        "tagLine": "Milch",
+        "role": "BOT",
+        "puuid": "-kJsyVYyzUNHcwWuSjsrHRWtzcpBHyhR6Wa6qaVCuTBo4LWQHThpPItFTkYAYwY_krAN2l4dFxpf4A",
+        "trackStats": true,
+        "discordId": "336295091515686924",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0008",
+        "gameName": "UIC Stafferl",
+        "tagLine": "FNC",
+        "role": "SUP",
+        "puuid": "BHku01UvPCM0XHTSiZfGdR16RsnGgAd2RvA-B7ZoJbGIOYNFwAjM9e67CqZ2tMF4yW7plzCFT3Akmw",
+        "trackStats": true,
+        "discordId": "262628424135213056",
+        "rosterStatus": "starter",
+        "isCaptain": true,
+        "honored": false
+      }
+    ]
+  },
+  "vakuum": {
+    "primeLeagueId": "207696",
+    "teamDisplay": "UIC Vakuum",
+    "tier": "Division 6",
+    "roster": [
+      {
+        "playerId": "0013",
+        "gameName": "UIC VTennic",
+        "tagLine": "UIC",
+        "role": "TOP",
+        "puuid": "XDJVGN-tDjkNudiyp2O7AmTCaqv8szUIX36aEg7jjn2Pc9Y8JPclNEwnymuVTQdhJnV1U4hrSCOQpA",
+        "trackStats": true,
+        "discordId": "301083474788483072",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0016",
+        "gameName": "UIC Inferno",
+        "tagLine": "CLOWN",
+        "role": "JGL",
+        "puuid": "IVqF-5Nt8UwPfaCeV40raptWcw7btwF_KgpPvzLQVUJKwfei3IA7DW0OxoZj5ISlwDE6_8Uin6Mu6Q",
+        "trackStats": true,
+        "discordId": "313229078838902785",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0015",
+        "gameName": "UIC Kaoxz",
+        "tagLine": "CRNGE",
+        "role": "MID",
+        "puuid": "xwZyH6T9cbGHULJFr60_BpdSX08CY-sHga1RhtV6yrZGyYSVKk-uzvgRBiTxUGMENmRmhl9Uf6cxcg",
+        "trackStats": true,
+        "discordId": "270257228378931201",
+        "rosterStatus": "starter",
+        "isCaptain": true,
+        "honored": false
+      },
+      {
+        "playerId": "0014",
+        "gameName": "UIC Hunter",
+        "tagLine": "UIC",
+        "role": "BOT",
+        "puuid": "zniAKhakLc_ZbCQPb5d0CEHLQzmehZ6pNm6v4I5UtTroCm_NPkw48TN0d72snbpY2r0N3ZZqX4M2sA",
+        "trackStats": true,
+        "discordId": "478557851921416202",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0017",
+        "gameName": "UIC FirstBlo",
+        "tagLine": "Whack",
+        "role": "SUP",
+        "puuid": "WJ02bzqXcozyvzJqKMp8Hc9YRXWyAY7cbCE0f0vQDG11t4YqMRws7eKxiWq2o4X-cRX0kSg4LrtwfQ",
+        "trackStats": true,
+        "discordId": "388457426539511810",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0131",
+        "gameName": "Superior",
+        "tagLine": "1110",
+        "role": "MID",
+        "puuid": "b6cUp8lrrs5p3qSKYgtJ839vkWp8r3wwGKAgVYg2oNP-G7fqeFmVtpbnjYxHQ2x-MByT9JDJNq5ujg",
+        "trackStats": true,
+        "discordId": "171867892915109889",
+        "rosterStatus": "substitute",
+        "isCaptain": false,
+        "honored": false
+      }
+    ]
+  },
+  "spark": {
+    "primeLeagueId": "208694",
+    "teamDisplay": "UIC Spark",
+    "tier": "Division 5",
+    "roster": [
+      {
+        "playerId": "0018",
+        "gameName": "UIC SméagoI",
+        "tagLine": "LOL",
+        "role": "TOP",
+        "puuid": "MIhZO8H-rq2GaRrIt9x2XZbIwTJgziQriLvlMb9cjDnIvFvptoXFDdguMozesWh0TvzqDA0WKxMZ1g",
+        "trackStats": true,
+        "discordId": "361239022573453333",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0019",
+        "gameName": "UIC Kili",
+        "tagLine": "UIC",
+        "role": "JGL",
+        "puuid": "zOHbgIVqGkiLsCAPIQLaTSnM-rUrf-gj7gkUPObrThQcorZcmU9ydCymEC8cw2OszXR00i2M7BatMw",
+        "trackStats": true,
+        "discordId": "175298106819215360",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0020",
+        "gameName": "UIC Pray",
+        "tagLine": "UIC",
+        "role": "MID",
+        "puuid": "1HAALXUz_VmHZWtqgkIBqz3bhzFVArSsZAID4UClE9i3RjlWbPf7HPq-jMgtrDIi7GGATl4ualubkg",
+        "trackStats": true,
+        "discordId": "204315878643335168",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0021",
+        "gameName": "UIC BissiBoy",
+        "tagLine": "UIC",
+        "role": "BOT",
+        "puuid": "t3hEzRtOIFW_KgfR3nD3JhAEIcE5GpJO4AFZ127crI5hmUl3ca5wGr_W4wdUxPOVS3vGHvDfAQvvXg",
+        "trackStats": true,
+        "discordId": "268840232361656321",
+        "rosterStatus": "starter",
+        "isCaptain": true,
+        "honored": false
+      },
+      {
+        "playerId": "0022",
+        "gameName": "UIC Moonlxght",
+        "tagLine": "16396",
+        "role": "SUP",
+        "puuid": "P9KXx1FsPCQmUtO1otcR-ab6gLJ8tLcmUeFk69aN_S0hDT79jZVbgy9QhlQkoxRVeQA7W0rhZAdHYQ",
+        "trackStats": true,
+        "discordId": "614170140833218623",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      }
+    ]
+  },
+  "phoenix": {
+    "primeLeagueId": "212473",
+    "teamDisplay": "UIC Phoenix",
+    "tier": "Division 5",
+    "roster": [
+      {
+        "playerId": "0025",
+        "gameName": "UIC Kamo",
+        "tagLine": "tpt",
+        "role": "TOP",
+        "puuid": "yW-F5PHwT5Md1lHTBUIZEyX8PEwjGJpO6iExN_Qx3No_PSz_4I_iPsU5s1AGdzyrxvmi87QNdizR6w",
+        "trackStats": true,
+        "discordId": "1326534426699501603",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0026",
+        "gameName": "UIC Exi",
+        "tagLine": "QUAK",
+        "role": "JGL",
+        "puuid": "mg7YerOOmSD0EhfX4IixqdbR0rU7qcD89Zc9KfRTfwoIjkBQpYtwjXXaMGLCBZ5ZBtHfjwGXBkC8lQ",
+        "trackStats": true,
+        "discordId": "160387329477836800",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0094",
+        "gameName": "UIC Ace",
+        "tagLine": "ACE",
+        "role": "MID",
+        "puuid": "d3zx4abpiAr9uuLjEnGqZydaS7yg0CNGNnS8ZRwOev7qToSs0VKcy4P2Eni5W4xo_Ilxwxgfje68Ew",
+        "trackStats": true,
+        "discordId": "321375250052939776",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0028",
+        "gameName": "UIC AutumnLeaf",
+        "tagLine": "Moo",
+        "role": "BOT",
+        "puuid": "qCafs_t91bSdBo5ZW7aInNkozki35Eb59Y0Y9s8K5c9qJEb7G9miBOg6Br_wGKfVrbEMX7fN0xLoPg",
+        "trackStats": true,
+        "discordId": "275181227407835136",
+        "rosterStatus": "starter",
+        "isCaptain": true,
+        "honored": false
+      },
+      {
+        "playerId": "0029",
+        "gameName": "UIC Ryu Copeland",
+        "tagLine": "117",
+        "role": "SUP",
+        "puuid": "a6uBpfEwYPL0tjwAFMosTd1rvIBBTwyRGvcvy-9_ZSvtyQVFspGqnqyqcG5EFfkN2v4BfY2F5Chwqw",
+        "trackStats": true,
+        "discordId": "224972299315576842",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0030",
+        "gameName": "UIC Loonz",
+        "tagLine": "Coach",
+        "role": "COH",
+        "puuid": "js0VNDedEVGvjz0p_FlgcVz1lqMqOujYMk_2lUJOcLCmMvJfl9HjVPRR6_eQsz8TNg24GgOP3EgCXQ",
+        "trackStats": true,
+        "discordId": "631826771507150868",
+        "rosterStatus": "staff",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0031",
+        "gameName": "UIC Cerberus",
+        "tagLine": "GOATZ",
+        "role": "MNG",
+        "puuid": "AhQkw7S26k1NFNUPTkU6NS4I6obyWp9Qa9ymGqg4Exsj2oSLuw7kdJO3T4SzLCQYO9EAIB6ifONvGg",
+        "trackStats": true,
+        "discordId": "412681251770728459",
+        "rosterStatus": "staff",
+        "isCaptain": false,
+        "honored": false
+      }
+    ]
+  },
+  "cyber": {
+    "primeLeagueId": "198490",
+    "teamDisplay": "UIC Cyber",
+    "tier": "Division 6",
+    "roster": [
+      {
+        "playerId": "0032",
+        "gameName": "UIC DANY",
+        "tagLine": "RFA40",
+        "role": "TOP",
+        "puuid": "sr7jFQeNuNjFIH8BaAaS71fhf6KEHkMN2sgZ9aBis01TsLFovpWelMh1oKLDjpgdQa14ebq9ClanHg",
+        "trackStats": true,
+        "discordId": "241219619199647744",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0033",
+        "gameName": "UIC Ðărkø",
+        "tagLine": "SAI",
+        "role": "JGL",
+        "puuid": "mESlB2z7lQHlo4ixbdSNVnXGanRKkaV3kTgWBVAKK5K2KFTwZQ5m9QaauHzih-KnrHsdULQR_FAF6w",
+        "trackStats": true,
+        "discordId": "434712861990977538",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0110",
+        "gameName": "xauberdave",
+        "tagLine": "dlmd",
+        "role": "MID",
+        "puuid": "_Fzw8munZSayiskhk4DoEYv6y3bEJkQaTj4MfzChFIB5m77mejL2RZZjdknpqbmvfBfM2RRC9udbRg",
+        "trackStats": true,
+        "discordId": "1296703935427510296",
+        "rosterStatus": "starter",
+        "isCaptain": true,
+        "honored": false
+      },
+      {
+        "playerId": "0035",
+        "gameName": "UIC Pjure",
+        "tagLine": "CYS",
+        "role": "BOT",
+        "puuid": "18YvlQGliML87VkZUo4aeWArbXem-a2WbXT5MeaVJL5Z9jQQMQCLEa36rEsTrDCT5AWlpx1FsCH1HQ",
+        "trackStats": true,
+        "discordId": "175298084727816193",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0111",
+        "gameName": "Pavus",
+        "tagLine": "Zephr",
+        "role": "SUP",
+        "puuid": "Git9KCzlNRLtwhmEviCaYnMfrkMZ3g8Nvq6SmuiN-YpwZ7gu2WnA2u4TGhBMQEmgKmVUlkaqDxRDig",
+        "trackStats": true,
+        "discordId": "376114632399650826",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0112",
+        "gameName": "Askir",
+        "tagLine": "Jhin",
+        "role": "BOT",
+        "puuid": "cNCrXnXZjUKW2o2LEDSqPfKqGvdiLIFlwCsPBgwsjKSuIHkzpAuPzEMah8BZ4fcntfbNOzNaNN09OA",
+        "trackStats": true,
+        "discordId": "127545401204015105",
+        "rosterStatus": "substitute",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0036",
+        "gameName": "UIC Panda",
+        "tagLine": "CSX",
+        "role": "MNG",
+        "puuid": "H63Ow4JXI3KgT05HWg6q24xi0GeTHrtLN-ypclqi10R452ewY7EXHTBw0paEiyLnYsVNGDSvWsW0hw",
+        "trackStats": true,
+        "discordId": "465698775638212610",
+        "rosterStatus": "staff",
+        "isCaptain": false,
+        "honored": false
+      }
+    ]
+  },
+  "raiders": {
+    "primeLeagueId": "211794",
+    "teamDisplay": "UIC Raiders",
+    "tier": "Division 7",
+    "roster": [
+      {
+        "playerId": "0083",
+        "gameName": "UIC Schlnken",
+        "tagLine": "UIC",
+        "role": "TOP",
+        "puuid": "buMxrXYovz5iXBqChDfn-688dK7ufin1PtMCrz5mnNBWmmkxZhR4y4x6clDD71YL4v7L49zs8kt59w",
+        "trackStats": true,
+        "discordId": "250624620573491201",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0096",
+        "gameName": "UIC SoulxEater",
+        "tagLine": "1908",
+        "role": "JGL",
+        "puuid": "h9X-bqxW73VZJySP7oEcwm1n-z_e6NnoUmnH11VBELo8GusuSS7rknCYYXvYuHV216erIoYaV8VF0g",
+        "trackStats": true,
+        "discordId": "404054488287150080",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0095",
+        "gameName": "탈리야",
+        "tagLine": "zzxo",
+        "role": "MID",
+        "puuid": "rPwMH1cmWCOE1rHcZnVtg5nzX9qhvbkKxs5vhpxQeucEGAKctCz6Cu0R7cxGsrotC6TwnON3zgkX8A",
+        "trackStats": true,
+        "discordId": "146378040006410240",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0097",
+        "gameName": "UIC Angie6875",
+        "tagLine": "555",
+        "role": "BOT",
+        "puuid": "zW57odpqVNR-TIH-lD3vLw95lbxD5CPb7rDD69b4UMwOexre-Jd4F7uZJxqlDr8zF8caNI3vXVPJWA",
+        "trackStats": true,
+        "discordId": "487236534924476416",
+        "rosterStatus": "starter",
+        "isCaptain": true,
+        "honored": false
+      },
+      {
+        "playerId": "0098",
+        "gameName": "UIC Lynx",
+        "tagLine": "XIV",
+        "role": "SUP",
+        "puuid": "GHzT-J5cbT-wzR_kUbzQBJa0b-Cuzb4I9IH8XEj-JMWuHh3JbFcfsgTMcmInWLUiduX5JLRI0SUi9Q",
+        "trackStats": true,
+        "discordId": "187645586739167233",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0099",
+        "gameName": "angi2103",
+        "tagLine": "EUW",
+        "role": "MNG",
+        "puuid": "dMKXOQNdYL5R-nUNIMVojEt3FNWWkIoqZIpwy8vlcOi-oFJTGcPqSgbq4-FjeCnENTArp1GgDjNDJQ",
+        "trackStats": true,
+        "discordId": "773255681724776470",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      }
+    ]
+  },
+  "nova": {
+    "primeLeagueId": "203447",
+    "teamDisplay": "UIC Nova",
+    "tier": "Division 6",
+    "roster": [
+      {
+        "playerId": "0043",
+        "gameName": "UIC Kaetaya",
+        "tagLine": "XwX",
+        "role": "TOP",
+        "puuid": "LX-A01UXRDbHY-kSZmhaIi9BN_9FkzwxPGv0I_m5eE8ZNGlHmV1tZlkM052kG-fKuVy1CkTOEJWZ5g",
+        "trackStats": true,
+        "discordId": "263409260287754250",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0044",
+        "gameName": "UIC Muh",
+        "tagLine": "KATZE",
+        "role": "TOP",
+        "puuid": "gM9duXUTV7Kxbf4J0ARmIFUy8cfXoJFJTNpzX8CDtJKv-WnOq70DyqZTYJnzO5EX7EAPoU473A3ZTg",
+        "trackStats": true,
+        "discordId": "1459260929823735952",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0046",
+        "gameName": "UIC Namorii",
+        "tagLine": "Nova",
+        "role": "JGL",
+        "puuid": "Tsc1I8RpPwc2feJytl_PBi3fkCVc-X_Rn2uyH3Cxldu4BN2qYvq0g-E1LUFF8Vc9kIQ1SGeM-sY3tg",
+        "trackStats": true,
+        "discordId": "481464180889747456",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0047",
+        "gameName": "UIC adedier",
+        "tagLine": "EUWE",
+        "role": "MID",
+        "puuid": "EkFB388xZ4X_eouU08c_FA1XNOAXciTxm9XZj5uDzfZ7-9b2CqVNS6lq0sCL4Ghyd_R_QyWwFpMmEw",
+        "trackStats": true,
+        "discordId": "689490415497379928",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0048",
+        "gameName": "UIC GroßATuin",
+        "tagLine": "842",
+        "role": "MID",
+        "puuid": "4HSkNh-Z6SCrl5Cz8XZhw7BRWnW-bXYy2MZlJuuFk_Lk_HMnuuxQhEL1aRhXCdXgBKbkW4XCtBX9cg",
+        "trackStats": true,
+        "discordId": "527835964043689984",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0042",
+        "gameName": "UIC Sadrik",
+        "tagLine": "UIC",
+        "role": "BOT",
+        "puuid": "D9ZUfUWU2V_TVTdZFH_lriDyq9axBLm9Wai3bV89jczLsR1p5cwkHGfxjgQnUv5lrzVPTkB7O-V05g",
+        "trackStats": true,
+        "discordId": "389821500515155970",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0050",
+        "gameName": "UIC Tiki",
+        "tagLine": "pure",
+        "role": "BOT",
+        "puuid": "zGxBPk_aXefkZmpmKXbY_p3aE9ylJoOitGREXHyVDzrvmHluZkviSD7CYVz6xR4yVr3ENnpCzxzyjw",
+        "trackStats": true,
+        "discordId": "162835818300440576",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0085",
+        "gameName": "UIC DemiGodly",
+        "tagLine": "1010",
+        "role": "SUP",
+        "puuid": "aGyRvYdILAEdcB6Sb1vSmlBz5pZuTmu_VATXV0hrsi_SRugDjr7ThdJumjV_ZYAHMb_dCGh8CVaorg",
+        "trackStats": true,
+        "discordId": "341595875413458944",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0052",
+        "gameName": "UIC Excellent C",
+        "tagLine": "1997",
+        "role": "SUP",
+        "puuid": "WHTdGSBOG_sJlq0eBiGQKoTOu5cJYIhRpHa4sOT79NkrRBvf_4kE2u8NOLEHaPQZXx6V3TbRPVSSig",
+        "trackStats": true,
+        "discordId": "544199512445419520",
+        "rosterStatus": "starter",
+        "isCaptain": true,
+        "honored": false
+      }
+    ]
+  },
+  "strawhats": {
+    "primeLeagueId": "211165",
+    "teamDisplay": "UIC Strawhats",
+    "tier": "Division 6",
+    "roster": [
+      {
+        "playerId": "0063",
+        "gameName": "UIC Simply",
+        "tagLine": "666",
+        "role": "TOP",
+        "puuid": "zrEQPH6Bgk8_xKBX0Bt6cGWi7M8NDqgEd-PrxOh6Se5YMAux8ZKwwz7pvsDVIymBujEslj8uICgDVw",
+        "trackStats": true,
+        "discordId": "503183783395065856",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0142",
+        "gameName": "UIC C0RRUS1N",
+        "tagLine": "TWTV",
+        "role": "JGL",
+        "puuid": "lXbp5fjiAxRObgLulzKp-ZRbHnsICf1YrOh160H1uJN0wk8mIF-e_Jv6ZukoAog-p50Zd7amQJ5kGQ",
+        "trackStats": true,
+        "discordId": "1187817416001073167",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0143",
+        "gameName": "UIC Devo",
+        "tagLine": "ACE",
+        "role": "MID",
+        "puuid": "bg4r-6Cvie2wYepVA-blDZ_iWNOk4nGs8arwikXGLUK_kW49r6Ff7dq6kEF-AmuLN41QC1cKGUsQ8Q",
+        "trackStats": true,
+        "discordId": "208554249498394627",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0144",
+        "gameName": "UIC Readem",
+        "tagLine": "SFO",
+        "role": "BOT",
+        "puuid": "V910weYd1xx1WstfUgIsXKvTmtUKMZPPalgSY-IEBSYMH3qEwjBVmortSI55ayNH24uOBEzUBQ0SOw",
+        "trackStats": true,
+        "discordId": "805155889018961971",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0062",
+        "gameName": "UIC Envy",
+        "tagLine": "UIC",
+        "role": "SUP",
+        "puuid": "EVe4VA1ME7GsyunDKbQ2vHarczndDRJIcML-Iq5fs6PtFK5J5OA0hQ-wzLmcQ-5NYU12D3u4ZoX4Tw",
+        "trackStats": true,
+        "discordId": "858153409735688203",
+        "rosterStatus": "starter",
+        "isCaptain": true,
+        "honored": false
+      }
+    ]
+  },
+  "dinonuggets": {
+    "primeLeagueId": "212432",
+    "teamDisplay": "UIC Dinonuggets",
+    "tier": "Division 6",
+    "roster": [
+      {
+        "playerId": "0100",
+        "gameName": "UIC BigSchuetze",
+        "tagLine": "DINO",
+        "role": "TOP",
+        "puuid": "NT6KR6oLpGarcXmwHUD-KANeXgjXxIE78seSC1jMeuYlpl7lAMg1721CLd5QdYs-Yfo3eLlt_gCukw",
+        "trackStats": true,
+        "discordId": "311497927870775297",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0101",
+        "gameName": "UIC CrintyPlay",
+        "tagLine": "UIC",
+        "role": "JGL",
+        "puuid": "VUsRjjo_hWq50oVkfhGpVC-gQIqClYklsg_S_x6RMHiyWfTzgf5HBYvtw5LfuGgRoKBbkf8q_sDX1w",
+        "trackStats": true,
+        "discordId": "1019682077794381974",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0102",
+        "gameName": "UIC SwissBack",
+        "tagLine": "MID",
+        "role": "MID",
+        "puuid": "gvlvxt3HVDIQxmCnKhD6HPex_rSbOUt6x8Egl5BJ4NJDoQ8YgggnDkD_HrjzXcwxMmcOwfhh477Beg",
+        "trackStats": true,
+        "discordId": "304660544906854400",
+        "rosterStatus": "starter",
+        "isCaptain": true,
+        "honored": false
+      },
+      {
+        "playerId": "0103",
+        "gameName": "UIC DontMethWith",
+        "tagLine": "AMB",
+        "role": "BOT",
+        "puuid": "dveSAA38kJkbcg6ktKKR1wCgtde_9pAdu6onxRFNvqbrVLJALzHJ8p7tiohqF9ZaRcicrW_OCgKrXw",
+        "trackStats": true,
+        "discordId": "351797668378312714",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0104",
+        "gameName": "UIC Californium",
+        "tagLine": "098",
+        "role": "SUP",
+        "puuid": "p3QTXlSf8-VaT-J5W9IK_qsIJ2vOTIfbMjvpdgItLxpVF9J4ZVwuldFgXwDTcT66DOxYdUvKvjGZKQ",
+        "trackStats": true,
+        "discordId": "",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      }
+    ]
+  },
+  "community": {
+    "primeLeagueId": "",
+    "teamDisplay": "Community",
+    "tier": "Community",
+    "roster": [
+      {
+        "playerId": "0068",
+        "gameName": "RD Nuokii",
+        "tagLine": "072",
+        "role": "JGL",
+        "puuid": "mbWVi1V9N2wVOx_OIeh5-hU5QJajUvV6ONsqhKI1MLpKY1BoHYOIOueZEPUHbdkMbU6-rXGOFQHsfQ",
+        "trackStats": true,
+        "discordId": "396754223313846291",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0069",
+        "gameName": "RD Slevin",
+        "tagLine": "1612",
+        "role": "MID",
+        "puuid": "txx8cOUcd_Bu0Flce6Ms83UysKuw2v7NyK8neM-zfbvjIErCMH2usbyA8714lwdtzgTr5jNjCU2zzg",
+        "trackStats": true,
+        "discordId": "309078574546288640",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0070",
+        "gameName": "UIC Gallagros",
+        "tagLine": "187",
+        "role": "BOT",
+        "puuid": "iEfL8WZpVUBnc40ohtlqiBSPuPzZ_mxDSLS1VNcxLkTGjs3LLGwy7kgpafXPKjfO3WitczujnK9H6A",
+        "trackStats": true,
+        "discordId": "391932277162246147",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0072",
+        "gameName": "UIC ReCord",
+        "tagLine": "Cedo",
+        "role": "JGL",
+        "puuid": "Zo-RBxtytHgg83hFBcLbBDS_t5nvESN8GnKYKKm5QnOGmtxszKN8nvmk33jtj8_g9YMT6cFK-S_SyQ",
+        "trackStats": true,
+        "discordId": "616875904978649088",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0073",
+        "gameName": "UIC Goku",
+        "tagLine": "UIC",
+        "role": "MID",
+        "puuid": "y7rgNWhzYVSXNkXpKAh5SHuJO5a-t-XuMSFGGXt9BjgyeBhCj1uX6V4u1ilueNZlmoUrcjSG9_QRBQ",
+        "trackStats": true,
+        "discordId": "1014582286286589982",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0074",
+        "gameName": "Kuroko Seirin",
+        "tagLine": "Pass",
+        "role": "BOT",
+        "puuid": "SKxclARQWxiRzKEd4VtPJHTw3jfahqv6-SqOSDxnUUn5bAWCgPjx0MoMnQt64SW_ELtMkPLfSt-2xA",
+        "trackStats": true,
+        "discordId": "396457449982525451",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0045",
+        "gameName": "UIC Rubix Qube",
+        "tagLine": "MÖP",
+        "role": "JGL",
+        "puuid": "USGUZzWuJQvmDIc7quhCmmrHbIftP7Q0ZREzigBWigLq63PIhXqMLcOcHSlCaVUrptEQBpHc6IZ0pA",
+        "trackStats": true,
+        "discordId": "555369566625202198",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0049",
+        "gameName": "RD Boohunter",
+        "tagLine": "Boo",
+        "role": "BOT",
+        "puuid": "4SAXI81012lvY0Kp1_Uq2eaLXurBLNGfK0WEpchaI0AMT34sLt9dzrgFakI0il9F1142oQFwHszkLw",
+        "trackStats": true,
+        "discordId": "301800086906863616",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0051",
+        "gameName": "UIC Kaanto",
+        "tagLine": "Nova",
+        "role": "SUP",
+        "puuid": "uVGgqcmuaXrYi92uXuEEC-2rvlURdQocHnDyf2FltobnHfV20Vz-blNuCm_iM1uIQ3o_EiJ0eEDiBQ",
+        "trackStats": true,
+        "discordId": "345171547956445195",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0055",
+        "gameName": "UIC Rhinoshield",
+        "tagLine": "RIN",
+        "role": "MID",
+        "puuid": "Ygg8zStC1IzHI1RTY-wfEgO7snKNNN1Kkp3vMeM-NxObAWKy3os0IKMw0sl_LJ_qOFIm-vAY04ZX2Q",
+        "trackStats": true,
+        "discordId": "387681244709650442",
+        "rosterStatus": "starter",
+        "isCaptain": true,
+        "honored": false
+      },
+      {
+        "playerId": "0054",
+        "gameName": "Otter",
+        "tagLine": "0812",
+        "role": "JGL",
+        "puuid": "d-BDM8i4o3NEjNlh-SR5xP2NvjDkJjJJzg4bFVmAumrf891uBE3sH6MdUeZ3lqAgIJS6p2CS-Jcs4g",
+        "trackStats": true,
+        "discordId": "245589403173388289",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0007",
+        "gameName": "LNC FrozenHands",
+        "tagLine": "MID",
+        "role": "MID",
+        "puuid": "ll9NNvYriAv6RkM9noZ2emX5IBkNoLwbpFWWlmvH4r5i8Up1rEouEtd6w22zVAxlpWvjZeN0mYJATw",
+        "trackStats": true,
+        "discordId": "672116990369988610",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0003",
+        "gameName": "UIC Shenycrane",
+        "tagLine": "Vugel",
+        "role": "MID",
+        "puuid": "KpMhWF_pSvK_qbQ1zblwoOEDc0MXnXKVoekkbA6k0-VJ_k6D3z3Hy8NNA2zMeboChulkpJ7h2CAX8w",
+        "trackStats": true,
+        "discordId": "398893599959285761",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0065",
+        "gameName": "UIC Keygasza",
+        "tagLine": "1337",
+        "role": "MID",
+        "puuid": "1EDdcCuTZ6DUwlqyKZ0tmivARWi7o6Fnp83B2M_uFZMWT2oJM3zyWYqmd1AkQd1UOi3Wmy4RYXhlhA",
+        "trackStats": true,
+        "discordId": "185448414174117888",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0060",
+        "gameName": "UIC Flare",
+        "tagLine": "JND",
+        "role": "MID",
+        "puuid": "e07SGBUf8sxG2Ixb6Oe8QKAvX_EvlkuMbkhs49atblxK5sI8JPQBJ27EgK0CQZL0LozmU6ZCX-YYJg",
+        "trackStats": true,
+        "discordId": "207167122483314688",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0027",
+        "gameName": "Hayu",
+        "tagLine": "5FDP",
+        "role": "MID",
+        "puuid": "nNZGQpV8CEhJe3kKXEWsIepYo5rtNOdAiVhq_M9L390k7B-rS0tggXzPZc-T_7JhF7D3PvZcsasNHw",
+        "trackStats": true,
+        "discordId": "825381204127645758",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0141",
+        "gameName": "UIC Regentropfen",
+        "tagLine": "H2O",
+        "role": "MID",
+        "puuid": "4cqeT6xao6yC3bHq3gxy1urHRIsTjHUwp9jT3FQ3Ip664FyfJsIoIwdzvHq7-SUBqnWOQGIDbRZ02g",
+        "trackStats": true,
+        "discordId": "359390498051457025",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0122",
+        "gameName": "TwTv PERYZ",
+        "tagLine": "000",
+        "role": "MID",
+        "puuid": "m48WsRfO-RGmJVESSOr8rNtFAOogUH9rQMB5gy-tY52ix0WgXLkvDii0trVhrScTNdj06TIy5Db2OQ",
+        "trackStats": true,
+        "discordId": "717568958299111516",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      },
+      {
+        "playerId": "0077",
+        "gameName": "RD Dragonfly",
+        "tagLine": "UIC",
+        "role": "SUP",
+        "puuid": "WaOUeQNzk_tFNh7Dqb2m8E2Z_VbPsQhuh9j_Lon6i2mWL0B_fBPHlY1qK9he_f-tcXWFY05kJJke4w",
+        "trackStats": true,
+        "discordId": "737144197827526686",
+        "rosterStatus": "starter",
+        "isCaptain": false,
+        "honored": false
+      }
+    ]
+  }
+}

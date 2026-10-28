@@ -1,0 +1,582 @@
+---
+// src/components/home/Hero.astro
+import { totalTeams, totalAthletes, primeTierShort, communityCount, nextMatch, discordInviteUrl } from '../../utils/uicData';
+---
+
+<section id="hero" class="hero-section">
+  <!-- Subtle Background Glare & Line Architecture -->
+  <div class="hero-bg-fx" aria-hidden="true">
+    <div class="hero-glare"></div>
+    <div class="hero-beam"></div>
+    <div class="hero-lines"></div>
+  </div>
+
+  <div class="container hero-container">
+    
+    <!-- Hero Main Stage -->
+    <div class="hero-content">
+      
+      <div class="hero-badge-strip">
+        <span class="hero-badge">PRIME LEAGUE ESPORT</span>
+        <span class="hero-badge-sub text-mono">
+          <span class="hero-live-dot" aria-hidden="true"></span>
+          <span>DEUTSCHLAND</span>
+        </span>
+      </div>
+
+      <h1 class="hero-title">
+        <span class="hero-title-main">ULTRA INSTINCT CREW</span>
+      </h1>
+
+      <p class="hero-desc">
+        Die deutsche League of Legends eSport Organisation. Mit {totalTeams} aktiven Teams und {totalAthletes} Spielern verbinden wir geregeltes Ligaspiel in der Prime League mit einer lebendigen Gemeinschaft für alle Spielstärken.
+      </p>
+
+      <!-- Key Metrics Counter Strip -->
+      <div class="hero-metrics-bar">
+        <div class="metric-item">
+          <span class="metric-val text-mono">{totalTeams}</span>
+          <span class="metric-lbl">TEAMS</span>
+        </div>
+        <div class="metric-sep"></div>
+        <div class="metric-item">
+          <span class="metric-val text-mono">{totalAthletes}</span>
+          <span class="metric-lbl">SPIELER</span>
+        </div>
+        <div class="metric-sep"></div>
+        <div class="metric-item">
+          <span class="metric-val text-mono">{primeTierShort}</span>
+          <span class="metric-lbl">LIGA</span>
+        </div>
+        <div class="metric-sep"></div>
+        <div class="metric-item">
+          <span class="metric-val text-mono">{communityCount}</span>
+          <span class="metric-lbl">GEMEINSCHAFT</span>
+        </div>
+      </div>
+
+      <!-- Hero Actions -->
+      <div class="hero-actions">
+        <a href="#teams" class="btn btn-primary btn-lg">
+          <span>TEAMS ANSEHEN</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+
+        <a href="#stats" class="btn btn-outline btn-lg">
+          <span>SPIELPLAN & TABELLE</span>
+        </a>
+
+        <a href={discordInviteUrl} target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-lg discord-btn">
+          <span>DISCORD SERVER</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M7 7h10v10"/></svg>
+        </a>
+      </div>
+
+    </div>
+
+    <!-- Right Side: Matchup Card -->
+    <div class="hero-matchup-col">
+      <div class="matchup-bento-card">
+        
+        <div>
+          <div class="card-meta">
+            <span class="meta-num text-mono">
+              {nextMatch.matchDay ? `SPIELTAG ${nextMatch.matchDay}` : 'SPIELTAG'}
+            </span>
+            <span class="meta-tag text-mono">PRIME LEAGUE &bull; {nextMatch.teamTier.toUpperCase()}</span>
+            {nextMatch.isScheduled && (
+              <span class={`match-status-badge ${nextMatch.confirmed ? 'is-confirmed' : 'is-unconfirmed'}`}>
+                {nextMatch.confirmedLabel}
+              </span>
+            )}
+          </div>
+
+          <h3 class="card-title name-with-link">
+            <span>NÄCHSTES SPIEL</span>
+            {nextMatch.matchLink && (
+              <a
+                href={nextMatch.matchLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="link-forward-arrow"
+                title="Zum offiziellen Prime League Match"
+                aria-label="Zum offiziellen Prime League Match"
+              >
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+            )}
+          </h3>
+
+          <!-- Clash Strip -->
+          <div class="matchup-clash-strip">
+            <!-- Home Team -->
+            <div class="m-team home">
+              <div class="m-crest-wrap">
+                <img src="/assets/logo/logo.svg" alt="UIC Wappen" class="m-crest" width="36" height="36" />
+              </div>
+              <span class="m-name name-with-link">
+                <span>{nextMatch.team.toUpperCase()}</span>
+                {nextMatch.teamLink && (
+                  <a
+                    href={nextMatch.teamLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="link-forward-arrow"
+                    title={`${nextMatch.team} auf Prime League öffnen`}
+                    aria-label={`${nextMatch.team} auf Prime League öffnen`}
+                  >
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                  </a>
+                )}
+              </span>
+            </div>
+
+            <!-- VS Clash Badge -->
+            <div class="m-clash-badge">
+              <span class="m-vs text-mono">VS</span>
+              <span class="m-time text-mono">{nextMatch.dateFormatted}</span>
+              {nextMatch.isScheduled && (
+                <span class="m-clock text-mono">{nextMatch.timeFormatted} UHR</span>
+              )}
+            </div>
+
+            <!-- Opponent -->
+            <div class="m-team away">
+              <div class="m-crest-wrap m-crest-enemy">
+                <span class="m-enemy-tag text-mono">{nextMatch.enemyTag.slice(0, 3)}</span>
+              </div>
+              <span class="m-name name-with-link">
+                <span>{nextMatch.enemy}</span>
+                {nextMatch.enemyLink && (
+                  <a
+                    href={nextMatch.enemyLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="link-forward-arrow"
+                    title={`${nextMatch.enemy} auf Prime League öffnen`}
+                    aria-label={`${nextMatch.enemy} auf Prime League öffnen`}
+                  >
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                  </a>
+                )}
+              </span>
+            </div>
+          </div>
+
+          <!-- Starters Strip -->
+          <div class="matchup-starters-strip">
+            <span class="starters-label text-mono">AUFGEBOT ({nextMatch.team.toUpperCase()}):</span>
+            <div class="starters-pills">
+              {nextMatch.starters.map((player) => (
+                <span class="starter-chip text-mono">
+                  <strong>{player.role}</strong> {player.name.replace('UIC ', '')}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <a href="#stats" class="btn btn-outline btn-full matchup-cta-btn">
+          <span>TABELLE & SPIELPLAN ANSEHEN</span>
+          <span aria-hidden="true">&rarr;</span>
+        </a>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .hero-section {
+    position: relative;
+    padding-top: clamp(7.5rem, 11vw, 10rem);
+    padding-bottom: clamp(5.5rem, 8vw, 7.5rem);
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    align-items: center;
+    background: #000000;
+    overflow: hidden;
+  }
+
+  /* Subtle Background Glare & Line Effect */
+  .hero-bg-fx {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .hero-glare {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 45% at 24% 20%, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.018) 45%, transparent 75%),
+      radial-gradient(circle at 80% 55%, rgba(255, 255, 255, 0.04) 0%, transparent 55%);
+  }
+
+  .hero-beam {
+    position: absolute;
+    inset: -20%;
+    background:
+      linear-gradient(118deg, transparent 36%, rgba(255, 255, 255, 0.022) 48%, rgba(255, 255, 255, 0.055) 50%, rgba(255, 255, 255, 0.018) 52%, transparent 64%),
+      linear-gradient(118deg, transparent 58%, rgba(255, 255, 255, 0.025) 68%, transparent 74%);
+    filter: blur(12px);
+  }
+
+  .hero-lines {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.026) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.026) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: radial-gradient(ellipse 78% 68% at 50% 42%, #000000 15%, transparent 82%);
+    -webkit-mask-image: radial-gradient(ellipse 78% 68% at 50% 42%, #000000 15%, transparent 82%);
+  }
+
+  .hero-container {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: clamp(2.5rem, 6vw, 5rem);
+    align-items: center;
+  }
+
+  /* Live Status Dot */
+  .hero-live-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #34d399;
+    box-shadow: 0 0 8px rgba(52, 211, 153, 0.8);
+    display: inline-block;
+    animation: liveDotPulse 2.2s ease-in-out infinite;
+  }
+
+  @keyframes liveDotPulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.82); }
+  }
+
+  /* Left Content */
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+
+  .hero-badge-strip {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+  }
+
+  .hero-badge {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #000000;
+    background: #ffffff;
+    padding: 3px 10px;
+    border-radius: var(--radius-xs);
+  }
+
+  .hero-badge-sub {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    padding: 2px 8px;
+    border-radius: var(--radius-xs);
+  }
+
+  /* Clean, Bold, Solid Title (No Hollow Outline) */
+  .hero-title {
+    margin: 0;
+    line-height: 0.95;
+  }
+
+  .hero-title-main {
+    font-family: var(--font-display);
+    font-size: clamp(3.8rem, 8.5vw, 7.5rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    color: #ffffff;
+    display: block;
+    text-transform: uppercase;
+  }
+
+  .hero-desc {
+    font-size: clamp(1.05rem, 1.35vw, 1.25rem);
+    line-height: 1.6;
+    color: var(--text-secondary);
+    max-width: 620px;
+    margin: 0;
+  }
+
+  /* Solid Distinct Raised Metrics Bar */
+  .hero-metrics-bar {
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+    padding: var(--space-md) var(--space-xl);
+    background: #0d0d10;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+    width: fit-content;
+  }
+
+  .metric-item {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .metric-val {
+    font-weight: 800;
+    font-size: 1.4rem;
+    color: #ffffff;
+    line-height: 1.1;
+  }
+
+  .metric-lbl {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+  }
+
+  .metric-sep {
+    width: 1px;
+    height: 30px;
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  /* Hero Actions */
+  .hero-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+  }
+
+  .btn-lg {
+    padding: 0.95rem 2rem;
+    font-size: 0.9375rem;
+    font-weight: 800;
+    letter-spacing: 0.03em;
+    border-radius: var(--radius-full);
+  }
+
+  .discord-btn {
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  /* Matchup Card (Matching Ökosystem Bento Design Layers) */
+  .hero-matchup-col {
+    position: relative;
+  }
+
+  .matchup-bento-card {
+    background: #0d0d10;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
+    padding: var(--space-2xl);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: var(--space-lg);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7);
+    transition: border-color var(--transition-fast), transform var(--transition-smooth);
+  }
+
+  .matchup-bento-card:hover {
+    background: #121216;
+    border-color: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
+  }
+
+  .card-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-xs);
+  }
+
+  .meta-num {
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: #ffffff;
+    background: #141418;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    padding: 2px 7px;
+    border-radius: var(--radius-xs);
+  }
+
+  .meta-tag {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+  }
+
+  .card-title {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(1.25rem, 2vw, 1.65rem);
+    color: #ffffff;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-md);
+    line-height: 1.2;
+  }
+
+  .matchup-clash-strip {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-md);
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-md);
+    padding: var(--space-lg);
+    margin-bottom: var(--space-sm);
+  }
+
+  .m-team {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+    text-align: center;
+  }
+
+  .m-crest-wrap {
+    width: 58px;
+    height: 58px;
+    border-radius: var(--radius-md);
+    background: #141418;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .m-crest-enemy {
+    border-style: dashed;
+  }
+
+  .m-enemy-tag {
+    font-size: 0.9375rem;
+    font-weight: 800;
+    color: var(--text-secondary);
+  }
+
+  .m-name {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 0.9375rem;
+    color: #ffffff;
+  }
+
+  .m-clash-badge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 14px;
+    background: #141418;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-sm);
+  }
+
+  .m-vs {
+    font-size: 0.9375rem;
+    font-weight: 900;
+    color: var(--text-muted);
+    letter-spacing: 0.1em;
+  }
+
+  .m-time {
+    font-size: 0.6875rem;
+    font-weight: 700;
+    color: #ffffff;
+    white-space: nowrap;
+  }
+
+  .m-clock {
+    font-size: 0.625rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    white-space: nowrap;
+  }
+
+  /* Starters Strip (Structured like Ökosystem ladder sub-container) */
+  .matchup-starters-strip {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-sm);
+    padding: var(--space-md);
+    margin-bottom: var(--space-md);
+  }
+
+  .starters-label {
+    font-size: 0.625rem;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+  }
+
+  .starters-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .starter-chip {
+    font-size: 0.6875rem;
+    color: var(--text-secondary);
+    background: #141418;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 3px 8px;
+    border-radius: var(--radius-xs);
+  }
+
+  .starter-chip strong {
+    color: #ffffff;
+    margin-right: 2px;
+  }
+
+  /* Full Width Action button matching Ökosystem button */
+  .matchup-cta-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 0.9rem 1.5rem;
+    font-size: 0.875rem;
+    font-weight: 800;
+    letter-spacing: 0.03em;
+    border-radius: var(--radius-full);
+  }
+
+  @media (max-width: 1024px) {
+    .hero-container {
+      grid-template-columns: 1fr;
+      gap: var(--space-2xl);
+    }
+  }
+</style>

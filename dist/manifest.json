@@ -1,0 +1,26 @@
+{
+  "id": "",
+  "start_url": "/",
+  "name": "Ultra Instinct Crew",
+  "short_name": "UIC",
+  "description": "League of Legends Organisation",
+  "theme_color": "#0b0b0c",
+  "background_color": "#000000",
+  "display": "standalone",
+  "orientation": "any",
+  "lang": "de-de",
+  "icons": [
+    {
+      "src": "/icon512_maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

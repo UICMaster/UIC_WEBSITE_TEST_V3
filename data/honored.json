@@ -1,0 +1,93 @@
+{
+  "0001": {
+    "slug": "speedy",
+    "name": "UIC Speedy",
+    "title": "Kapitän der Ultra Instinct Crew Prime",
+    "inductedAt": "2026-10-28",
+    "phrases": [
+      "Die Faust Gottes",
+      "Spuuudy"
+    ],
+    "bioSections": [
+      {
+        "subtitle": "[Platzhalter: Kapitel 1 – Untertitel, z. B. Die Anfänge]",
+        "title": "[Platzhalter: Überschrift Abschnitt 1]",
+        "paragraphs": [
+          "[Platzhalter: Textabsatz 1.1 – Hintergrund zur Person, wie und wann der Einstieg in die Ultra Instinct Crew erfolgte.]",
+          "[Platzhalter: Textabsatz 1.2 – Erste gemeinsame Saisons und Aufbau des Teams.]"
+        ]
+      },
+      {
+        "subtitle": "[Platzhalter: Kapitel 2 – Untertitel, z. B. Entwicklung & Verantwortung]",
+        "title": "[Platzhalter: Überschrift Abschnitt 2]",
+        "paragraphs": [
+          "[Platzhalter: Textabsatz 2.1 – Persönliche Geschichte, besondere Momente und Aufgaben innerhalb der Gemeinschaft.]"
+        ]
+      }
+    ],
+    "impact": [
+      "Kapitän der Ultra Instinct Crew Prime",
+      "Seele und Schlüsselfigur der Community",
+      "Menschlicher Anker und ein Piller der Vernunft"
+    ],
+    "milestones": [
+      {
+        "date": "[2024 / ]",
+        "label": "[Platzhalter: Station 1 im Werdegang]",
+        "detail": "[Platzhalter: Kurze Beschreibung zum Meilenstein]"
+      },
+      {
+        "date": "[JJJJ / Monat]",
+        "label": "[Platzhalter: Station 2 im Werdegang]",
+        "detail": "[Platzhalter: Kurze Beschreibung zum Meilenstein]"
+      }
+    ],
+    "seasons": [
+      {
+        "season": "[Platzhalter: z. B. Prime League Spring Split 2025]",
+        "team": "UIC Prime",
+        "division": "[Platzhalter: Division]",
+        "note": "[Platzhalter: Ergebnis / Anmerkung zum Split]"
+      }
+    ],
+    "voiceClips": [
+      {
+        "title": "Sprachnachricht / Audio 1 (Beispiel-Datei)",
+        "src": "/assets/audio/ULTRA_INSTINCT_CREW_ORGA_HYMNE_2026_2.mp3",
+        "context": "[Platzhalter: Kontext der Aufnahme]"
+      },
+      {
+        "title": "Sprachnachricht / Audio 2 (Beispiel-Datei)",
+        "src": "/assets/audio/ULTRA_INSTINCT_CREW_ORGA_HYMNE_2026_FAM.mp3",
+        "context": "[Platzhalter: Kontext der Aufnahme]"
+      }
+    ],
+    "videos": [
+      {
+        "title": "[Platzhalter: Titel des Videos]",
+        "src": "/assets/video/ULTRA_INSTINCT_CREW_ORGA_HYMNE_VIDEO_2026.webm",
+        "description": "[Platzhalter: Kurze Beschreibung zum Video]"
+      }
+    ],
+    "images": [
+      {
+        "src": "/assets/profile/0001.png",
+        "title": "[Platzhalter: Bildtitel 1]",
+        "caption": "[Platzhalter: Bildunterschrift / Kontext zur Aufnahme]",
+        "date": "[JJJJ]"
+      },
+      {
+        "src": "/assets/logo/logo.png",
+        "title": "[Platzhalter: Bildtitel 2]",
+        "caption": "[Platzhalter: Bildunterschrift / Kontext zur Aufnahme]",
+        "date": "[JJJJ]"
+      },
+      {
+        "src": "/assets/hoshi/hoshi_turnier_banner.jpg",
+        "title": "[Platzhalter: Bildtitel 3]",
+        "caption": "[Platzhalter: Bildunterschrift / Kontext zur Aufnahme]",
+        "date": "[JJJJ]"
+      }
+    ]
+  }
+}

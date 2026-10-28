@@ -1,0 +1,468 @@
+---
+// src/components/common/Navbar.astro
+---
+
+<header class="floating-nav-wrapper" id="floating-nav-wrapper">
+  <!-- Free Floating Pill Navigation -->
+  <div class="pill-shell">
+    
+    <!-- Left: Brand Mark -->
+    <a href="/#hero" class="brand-link" aria-label="Ultra Instinct Crew Startseite">
+      <img src="/assets/logo/logo.svg" alt="UIC Crest" class="brand-crest" width="30" height="30" />
+      <span class="brand-wordmark">UIC</span>
+    </a>
+
+    <!-- Center: Centered Links -->
+    <nav class="nav-menu desktop-only" aria-label="Hauptnavigation">
+      <ul class="nav-links">
+        <li><a href="/#hero" class="nav-item">Start</a></li>
+        <li><a href="/#about" class="nav-item">Verein</a></li>
+        <li><a href="/#teams" class="nav-item">Teams</a></li>
+        <li><a href="/honored" class="nav-item">Ruhmeshalle</a></li>
+        <li><a href="/#stats" class="nav-item">Tabelle</a></li>
+        <li><a href="/#events" class="nav-item">Termine</a></li>
+        <li><a href="/#stream" class="nav-item">Stream</a></li>
+        <li><a href="/#partners" class="nav-item">Partner</a></li>
+        <li><a href="/#media-vault" class="nav-item">Medien</a></li>
+        <li>
+          <a href="https://teams.spized.com/ultrainstinctcrew" target="_blank" rel="noopener noreferrer" class="nav-item nav-ext">
+            Shop <span class="arrow-ext">↗</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://turnier.ultrainstinctcrew.com/" target="_blank" rel="noopener noreferrer" class="nav-item nav-ext">
+            Turnier <span class="arrow-ext">↗</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Right: Apply Action / Mobile Toggle -->
+    <div class="nav-actions">
+      <a 
+        href="mailto:support@ultrainstinctcrew.com?subject=Bewerbung%20UIC%20Roster&body=Hallo%20UIC%20Team,%0D%0A%0D%0AHiermit%20m%C3%B6chte%20ich%20mich%20f%C3%BCr%20eines%20eurer%20Teams%20bewerben.%0D%0A%0D%0A---%20MEINE%20DATEN%20---%0D%0ASummoner%20Name:%20%0D%0AOp.gg%20Link:%20%0D%0AAktueller%20Rang:%20%0D%0APrim%C3%A4re%20Rolle:%20%0D%0ADiscord%20ID:%20%0D%0A%0D%0A---%20NACHRICHT%20---%0D%0A" 
+        class="btn-pill-apply desktop-only"
+      >
+        BEWIRB DICH
+      </a>
+
+      <button 
+        id="nav-toggle" 
+        class="nav-toggle mobile-only" 
+        aria-label="Navigation umschalten" 
+        aria-expanded="false" 
+        aria-controls="mobile-drawer"
+      >
+        <span class="burger-bar"></span>
+        <span class="burger-bar"></span>
+        <span class="burger-bar"></span>
+      </button>
+    </div>
+
+  </div>
+
+  <!-- Mobile Drawer Menu -->
+  <div id="mobile-drawer" class="mobile-drawer" aria-label="Mobile Navigation">
+    <div class="drawer-header">
+      <div class="drawer-brand">
+        <img src="/assets/logo/logo.svg" alt="UIC Logo" width="28" height="28" />
+        <span class="drawer-title">ULTRA INSTINCT CREW</span>
+      </div>
+      <button id="drawer-close-btn" class="drawer-close" aria-label="Menü schließen">✕</button>
+    </div>
+    
+    <ul class="mobile-nav-links">
+      <li><a href="/#hero" class="mobile-nav-item">Start</a></li>
+      <li><a href="/#about" class="mobile-nav-item">Vereinsstruktur</a></li>
+      <li><a href="/#teams" class="mobile-nav-item">Teams & Aufstellung</a></li>
+      <li><a href="/honored" class="mobile-nav-item">Ruhmeshalle</a></li>
+      <li><a href="/#stats" class="mobile-nav-item">Tabelle & Spielplan</a></li>
+      <li><a href="/#events" class="mobile-nav-item">Termine</a></li>
+      <li><a href="/#stream" class="mobile-nav-item">Live-Übertragung</a></li>
+      <li><a href="/#partners" class="mobile-nav-item">Partner</a></li>
+      <li><a href="/#media-vault" class="mobile-nav-item">Medien & Downloads</a></li>
+      <li>
+        <a href="https://teams.spized.com/ultrainstinctcrew" target="_blank" rel="noopener noreferrer" class="mobile-nav-item">
+          Offizieller Shop ↗
+        </a>
+      </li>
+      <li>
+        <a href="https://turnier.ultrainstinctcrew.com/" target="_blank" rel="noopener noreferrer" class="mobile-nav-item">
+          UIC Turnier ↗
+        </a>
+      </li>
+    </ul>
+
+    <div class="drawer-footer">
+      <a 
+        href="mailto:support@ultrainstinctcrew.com?subject=Bewerbung%20UIC%20Roster" 
+        class="btn btn-primary btn-full"
+      >
+        BEWIRB DICH ALS SPIELER ODER TEAM
+      </a>
+    </div>
+  </div>
+</header>
+
+<style>
+  /* Free Floating Pill - Larger by default, shrinks on scroll down, expands on scroll up */
+  .floating-nav-wrapper {
+    position: fixed;
+    top: 1.6rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    width: max-content;
+    max-width: min(1420px, calc(100vw - 2rem));
+    pointer-events: none;
+    transition: top 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .floating-nav-wrapper.is-compact {
+    top: 1rem;
+  }
+
+  .pill-shell {
+    pointer-events: auto;
+    display: flex;
+    align-items: center;
+    gap: 1.75rem;
+    background: rgba(14, 14, 18, 0.92);
+    backdrop-filter: blur(28px);
+    -webkit-backdrop-filter: blur(28px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: var(--radius-full);
+    padding: 11px 14px 11px 26px;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(255, 255, 255, 0.05);
+    transition:
+      padding 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+      gap 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+      border-color var(--transition-fast),
+      box-shadow var(--transition-fast);
+  }
+
+  .floating-nav-wrapper.is-compact .pill-shell {
+    gap: 1.25rem;
+    padding: 7px 10px 7px 20px;
+  }
+
+  .pill-shell:hover {
+    border-color: rgba(255, 255, 255, 0.28);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85), 0 0 0 1px rgba(255, 255, 255, 0.1);
+  }
+
+  /* Left Brand */
+  .brand-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+    text-decoration: none;
+  }
+
+  .brand-crest {
+    width: 36px;
+    height: 36px;
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.2));
+    transition:
+      width 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+      height 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+      transform var(--transition-fast);
+  }
+
+  .floating-nav-wrapper.is-compact .brand-crest {
+    width: 30px;
+    height: 30px;
+  }
+
+  .brand-link:hover .brand-crest {
+    transform: scale(1.08);
+  }
+
+  .brand-wordmark {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.38rem;
+    letter-spacing: 0.04em;
+    color: var(--text-white);
+    transition: font-size 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .floating-nav-wrapper.is-compact .brand-wordmark {
+    font-size: 1.2rem;
+  }
+
+  /* Center Nav Links */
+  .nav-menu {
+    display: flex;
+    align-items: center;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    gap: 6px;
+    margin: 0;
+    padding: 0;
+    transition: gap 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .floating-nav-wrapper.is-compact .nav-links {
+    gap: 2px;
+  }
+
+  .nav-item {
+    display: block;
+    padding: 0.6rem 1.05rem;
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+    border-radius: var(--radius-full);
+    transition:
+      padding 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+      font-size 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+      color var(--transition-fast),
+      background var(--transition-fast);
+    white-space: nowrap;
+    text-decoration: none;
+  }
+
+  .floating-nav-wrapper.is-compact .nav-item {
+    padding: 0.45rem 0.85rem;
+    font-size: 0.8125rem;
+  }
+
+  .nav-item:hover {
+    color: var(--text-white);
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .nav-ext {
+    color: var(--text-muted);
+  }
+
+  .arrow-ext {
+    font-size: 0.7em;
+    opacity: 0.7;
+  }
+
+  /* Right Action */
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+  }
+
+  .btn-pill-apply {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    color: #000000;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 0.8125rem;
+    letter-spacing: 0.05em;
+    padding: 0.72rem 1.65rem;
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    box-shadow: 0 4px 14px rgba(255, 255, 255, 0.2);
+    transition:
+      padding 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+      font-size 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+      background var(--transition-fast),
+      transform var(--transition-fast),
+      box-shadow var(--transition-fast);
+  }
+
+  .floating-nav-wrapper.is-compact .btn-pill-apply {
+    font-size: 0.75rem;
+    padding: 0.55rem 1.35rem;
+  }
+
+  .btn-pill-apply:hover {
+    background: #f4f4f5;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(255, 255, 255, 0.3);
+  }
+
+  /* Mobile Toggle */
+  .nav-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 36px;
+    height: 36px;
+    padding: 7px;
+    border-radius: var(--radius-full);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.05);
+    cursor: pointer;
+  }
+
+  .burger-bar {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: var(--text-white);
+    border-radius: 2px;
+    transition: transform var(--transition-fast), opacity var(--transition-fast);
+  }
+
+  /* Mobile Drawer */
+  .mobile-drawer {
+    display: none;
+    position: fixed;
+    top: -1.5rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(-100%);
+    width: 100vw;
+    height: 100vh;
+    background: rgba(8, 8, 10, 0.98);
+    backdrop-filter: blur(28px);
+    z-index: 1001;
+    flex-direction: column;
+    padding: var(--space-xl) var(--container-pad);
+    transition: transform var(--transition-smooth);
+    overflow-y: auto;
+    pointer-events: auto;
+  }
+
+  .mobile-drawer.is-active {
+    transform: translateX(-50%) translateY(0);
+    display: flex;
+  }
+
+  .drawer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: var(--space-md);
+    margin-bottom: var(--space-lg);
+  }
+
+  .drawer-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .drawer-title {
+    font-family: var(--font-display);
+    font-size: 0.875rem;
+    font-weight: 800;
+    color: var(--text-white);
+  }
+
+  .drawer-close {
+    background: none;
+    border: none;
+    color: var(--text-white);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 4px 8px;
+  }
+
+  .mobile-nav-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: var(--space-2xl);
+  }
+
+  .mobile-nav-item {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--text-secondary);
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    text-decoration: none;
+  }
+
+  .mobile-nav-item:hover {
+    color: var(--text-white);
+  }
+
+  .drawer-footer {
+    margin-top: auto;
+    padding-top: var(--space-lg);
+  }
+
+  @media (max-width: 1100px) {
+    .desktop-only {
+      display: none !important;
+    }
+
+    .mobile-only {
+      display: flex;
+    }
+
+    .pill-shell {
+      padding: 6px 10px 6px 14px;
+    }
+  }
+</style>
+
+<script>
+  const navWrapper = document.getElementById('floating-nav-wrapper');
+  const toggleBtn = document.getElementById('nav-toggle');
+  const drawer = document.getElementById('mobile-drawer');
+  const closeBtn = document.getElementById('drawer-close-btn');
+
+  // Scroll-direction aware sizing: shrinks on scroll down, expands on scroll up or near top
+  if (navWrapper) {
+    let lastScrollY = window.scrollY;
+
+    window.addEventListener(
+      'scroll',
+      () => {
+        const currentY = window.scrollY;
+        if (currentY <= 36) {
+          navWrapper.classList.remove('is-compact');
+        } else if (currentY > lastScrollY + 4) {
+          navWrapper.classList.add('is-compact');
+        } else if (currentY < lastScrollY - 4) {
+          navWrapper.classList.remove('is-compact');
+        }
+        lastScrollY = currentY;
+      },
+      { passive: true }
+    );
+  }
+
+  if (toggleBtn && drawer) {
+    const openMenu = () => {
+      drawer.classList.add('is-active');
+      toggleBtn.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+      closeBtn?.focus();
+    };
+
+    const closeMenu = () => {
+      if (!drawer.classList.contains('is-active')) return;
+      drawer.classList.remove('is-active');
+      toggleBtn.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+      toggleBtn.focus();
+    };
+
+    toggleBtn.addEventListener('click', openMenu);
+    if (closeBtn) closeBtn.addEventListener('click', closeMenu);
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && drawer.classList.contains('is-active')) {
+        closeMenu();
+      }
+    });
+
+    drawer.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', closeMenu);
+    });
+  }
+</script>

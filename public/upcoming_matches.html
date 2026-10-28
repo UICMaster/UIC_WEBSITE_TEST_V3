@@ -1,0 +1,1381 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ULTRA INSTINCT CREW - OBS Broadcast Backdrop & Live Ticker</title>
+<style>
+  :root {
+    --cyan: #00E5FF;
+    --blue: #4D7CFE;
+    --purple: #8A2BE2;
+    --magenta: #D900FF;
+    --deep-blue: #0A0F1A;
+    --dark-bg: rgba(7, 10, 16, 0.95);
+    --bg-obsidian: #06090F;
+    
+    --text-main: #FFFFFF;
+    --text-muted: #8E8E9F;
+    
+    --ticker-height: 70px; 
+  }
+  
+  * { box-sizing: border-box; }
+  
+  html, body {
+    margin: 0; padding: 0; width: 100vw; height: 100vh;
+    overflow: hidden; 
+    background-color: var(--bg-obsidian);
+    font-family: 'Rajdhani', sans-serif;
+    color: var(--text-main);
+    user-select: none;
+  }
+
+  /* ==========================================================================
+     1. ANIMATED ESPORTS BACKGROUND (DIAGONAL 45-DEGREE GEOMETRY)
+     ========================================================================== */
+  #esports-bg {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    overflow: hidden;
+    background: radial-gradient(ellipse at 45% 52%, #0C1220 0%, #070A10 62%, #05070B 100%);
+  }
+
+  /* Subtle corner ambient glow spots */
+  .ambient-glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.22;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+  }
+  .ambient-glow.tl {
+    width: 48vw; height: 48vw;
+    top: -20vw; left: -18vw;
+    background: linear-gradient(135deg, var(--cyan), var(--blue));
+    animation: pulseGlow 9s ease-in-out infinite alternate;
+  }
+  .ambient-glow.br {
+    width: 50vw; height: 50vw;
+    bottom: -22vw; right: -18vw;
+    background: linear-gradient(135deg, var(--blue), var(--purple));
+    animation: pulseGlow 11s ease-in-out infinite alternate-reverse;
+  }
+
+  @keyframes pulseGlow {
+    0% { opacity: 0.14; transform: scale(0.94); }
+    100% { opacity: 0.26; transform: scale(1.06); }
+  }
+
+  /* Subtle Tech Grid restricted to outer edges */
+  .bg-tech-grid {
+    position: absolute;
+    inset: 0;
+    background-image: 
+      linear-gradient(to right, rgba(0, 229, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(138, 43, 226, 0.03) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(circle at 45% 52%, transparent 35%, black 95%);
+    -webkit-mask-image: radial-gradient(circle at 45% 52%, transparent 35%, black 95%);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* ==========================================================================
+     DIAGONAL KINETIC MARQUEE RIBBONS (-45 DEG "ULTRA INSTINCT CREW")
+     ========================================================================== */
+  #kinetic-ribbons {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+    transition: opacity 0.4s ease;
+  }
+
+  body.hide-kinetic #kinetic-ribbons {
+    opacity: 0;
+  }
+
+  .diagonal-marquee-lane {
+    position: absolute;
+    width: 260vw;
+    display: flex;
+    align-items: center;
+    transform: rotate(-45deg);
+    transform-origin: center center;
+    white-space: nowrap;
+    pointer-events: none;
+  }
+
+  .diagonal-marquee-lane.lane-1 {
+    top: 15%;
+    left: -95%;
+    opacity: 0.04;
+  }
+
+  .diagonal-marquee-lane.lane-2 {
+    top: 82%;
+    left: -65%;
+    opacity: 0.04;
+  }
+
+  .diagonal-marquee-track {
+    display: flex;
+    width: max-content;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 900;
+    font-size: 64px;
+    letter-spacing: 12px;
+    text-transform: uppercase;
+    color: transparent;
+    -webkit-text-stroke: 1.5px rgba(0, 229, 255, 0.75);
+    animation: scrollDiagText 60s linear infinite;
+  }
+
+  .diagonal-marquee-lane.lane-2 .diagonal-marquee-track {
+    -webkit-text-stroke: 1.5px rgba(138, 43, 226, 0.85);
+    animation-direction: reverse;
+    animation-duration: 70s;
+  }
+
+  .diagonal-marquee-track span {
+    padding: 0 40px;
+  }
+
+  .diagonal-marquee-track .solid-accent {
+    color: rgba(255, 255, 255, 0.28);
+    -webkit-text-stroke: 0;
+  }
+
+  @keyframes scrollDiagText {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* ==========================================================================
+     FULL-SCREEN SVG VECTOR LAYER (NOTCHED 45-DEG GEOMETRY)
+     ========================================================================== */
+  .bg-svg-layer {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+    transition: opacity 0.4s ease;
+  }
+
+  body.wings-subtle .bg-svg-layer {
+    opacity: 0.48;
+  }
+
+  .diag-float-slow {
+    animation: slideDiagSlow 10s ease-in-out infinite alternate;
+  }
+  .diag-float-med {
+    animation: slideDiagMed 6.5s ease-in-out infinite alternate;
+  }
+  .diag-float-fast {
+    animation: slideDiagFast 4.8s ease-in-out infinite alternate;
+  }
+
+  @keyframes slideDiagSlow {
+    0% { transform: translate(-16px, 16px); }
+    100% { transform: translate(16px, -16px); }
+  }
+  @keyframes slideDiagMed {
+    0% { transform: translate(24px, -24px); }
+    100% { transform: translate(-24px, 24px); }
+  }
+  @keyframes slideDiagFast {
+    0% { transform: translate(-34px, 34px); }
+    100% { transform: translate(34px, -34px); }
+  }
+
+  /* Canvas for dynamic 45-degree glowing light streaks & cyber dust */
+  #streak-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 3;
+  }
+
+  /* ==========================================================================
+     2. PRODUCTION STAGE FRAMES (CLEAN CHAT AREA & OPTIONAL CAM FRAMES)
+        100% FREE OF ANY PLACEHOLDER TEXT OR LABELS
+     ========================================================================== */
+  #broadcast-stage {
+    position: fixed;
+    top: calc(var(--ticker-height) + 34px);
+    bottom: 36px;
+    left: 44px;
+    right: 44px;
+    z-index: 10;
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    gap: 32px;
+    pointer-events: none;
+    transition: top 0.35s ease, bottom 0.35s ease;
+  }
+
+  /* Adjust stage vertical bounds if ticker is at the bottom or hidden */
+  body.ticker-bottom #broadcast-stage {
+    top: 36px;
+    bottom: calc(var(--ticker-height) + 34px);
+  }
+  body.ticker-hidden #broadcast-stage {
+    top: 36px;
+    bottom: 36px;
+  }
+
+  /* Left/Center Content Area (for Cams or Open Backdrop) */
+  #cam-stage-area {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+    height: 100%;
+  }
+
+  /* Hide cam frames when in "chat-only" or "none" layout */
+  #broadcast-stage.layout-chat-only #cam-stage-area,
+  #broadcast-stage.layout-none #cam-stage-area {
+    opacity: 0;
+  }
+
+  /* Sleek Cyber Frame Box (shared visual aesthetic for Cam & Chat frames) */
+  .cyber-frame {
+    position: relative;
+    background: linear-gradient(160deg, rgba(10, 15, 26, 0.72) 0%, rgba(6, 9, 15, 0.84) 100%);
+    border: 1px solid rgba(0, 229, 255, 0.32);
+    box-shadow: 
+      0 20px 50px rgba(0, 0, 0, 0.75),
+      0 0 25px rgba(0, 229, 255, 0.08),
+      inset 0 0 35px rgba(0, 229, 255, 0.03);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    clip-path: polygon(
+      18px 0, 
+      100% 0, 
+      100% calc(100% - 18px), 
+      calc(100% - 18px) 100%, 
+      0 100%, 
+      0 18px
+    );
+  }
+
+  /* Top Cyan Accent Bar on Frames */
+  .cyber-frame::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 18px;
+    width: 95px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--cyan), transparent);
+    box-shadow: 0 0 12px var(--cyan);
+  }
+
+  /* Bottom-Right Purple Accent Bar on Frames */
+  .cyber-frame::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 18px;
+    width: 95px;
+    height: 3px;
+    background: linear-gradient(270deg, var(--purple), transparent);
+    box-shadow: 0 0 12px var(--purple);
+  }
+
+  /* Subtle angled corner notch highlight */
+  .frame-corner-accent {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .frame-corner-accent::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 36px;
+    height: 36px;
+    border-top: 2px solid var(--cyan);
+    border-right: 2px solid var(--cyan);
+    opacity: 0.75;
+  }
+  .frame-corner-accent::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 36px;
+    height: 36px;
+    border-bottom: 2px solid var(--purple);
+    border-left: 2px solid var(--purple);
+    opacity: 0.75;
+  }
+
+  /* Cam Frame Sizing depending on selected mode */
+  .cam-frame {
+    display: none;
+    aspect-ratio: 16 / 9;
+  }
+
+  /* 1x Cam + Chat */
+  #broadcast-stage.layout-cam-1 .cam-frame.cam-1 {
+    display: block;
+    width: 100%;
+    max-height: 100%;
+  }
+
+  /* 2x Cams + Chat */
+  #broadcast-stage.layout-cam-2 .cam-frame.cam-1,
+  #broadcast-stage.layout-cam-2 .cam-frame.cam-2 {
+    display: block;
+    width: 48.5%;
+    max-height: 100%;
+  }
+
+  /* Dedicated Default Chat Area on the Right */
+  #chat-frame {
+    width: 350px;
+    height: 100%;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    transition: opacity 0.35s ease, transform 0.35s ease;
+  }
+
+  /* Subtle top accent line inside the chat frame */
+  .chat-top-trim {
+    height: 6px;
+    width: 100%;
+    background: linear-gradient(90deg, rgba(0, 229, 255, 0.35) 0%, rgba(138, 43, 226, 0.35) 100%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  }
+
+  body.hide-chat #chat-frame,
+  #broadcast-stage.layout-none #chat-frame {
+    display: none;
+  }
+
+  /* ==========================================================================
+     3. TOP-MOUNTED TICKER & ACCOUNT HEADER ("ULTRA INSTINCT CREW")
+        TICKER TRACK & JS LOGIC ARE 100% UNCHANGED
+     ========================================================================== */
+  #ticker-container {
+    position: fixed;
+    top: 0;
+    bottom: auto;
+    left: 0;
+    width: 100vw;
+    height: var(--ticker-height);
+    background: var(--dark-bg);
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    border-bottom: 3px solid var(--cyan);
+    border-top: none;
+    box-shadow: 0 6px 28px rgba(0, 229, 255, 0.18);
+    z-index: 30;
+    transition: transform 0.35s ease;
+  }
+
+  /* Optional Bottom Position via Radio Button */
+  body.ticker-bottom #ticker-container {
+    top: auto;
+    bottom: 0;
+    border-bottom: none;
+    border-top: 3px solid var(--cyan);
+    box-shadow: 0 -5px 25px rgba(0, 229, 255, 0.15);
+  }
+
+  /* Optional Hidden State */
+  body.ticker-hidden #ticker-container {
+    transform: translateY(-110%);
+  }
+  body.ticker-bottom.ticker-hidden #ticker-container {
+    transform: translateY(110%);
+  }
+
+  #ticker-container::before {
+    content: ''; position: absolute; top: 0; left: -100%; width: 300%; height: 100%;
+    background: repeating-linear-gradient(
+      45deg, transparent, transparent 150px,
+      rgba(0, 229, 255, 0.03) 150px, rgba(0, 229, 255, 0.03) 170px,
+      transparent 170px, transparent 250px,
+      rgba(138, 43, 226, 0.04) 250px, rgba(138, 43, 226, 0.04) 280px
+    );
+    animation: slideBeams 20s linear infinite;
+    z-index: 0; pointer-events: none;
+  }
+
+  @keyframes slideBeams {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(1000px); }
+  }
+
+  /* ================================
+     BRANDING BLOCK (Links - Unchanged)
+     ================================ */
+  .ticker-brand {
+    position: relative; z-index: 10; height: 100%;
+    display: flex; align-items: center; padding: 0 40px 0 25px;
+    background: linear-gradient(135deg, var(--deep-blue) 0%, #150A2A 100%);
+    clip-path: polygon(0 0, 100% 0, calc(100% - 25px) 100%, 0% 100%);
+    border-right: 4px solid var(--purple);
+  }
+  
+  .ticker-brand::after {
+    content: ''; position: absolute; right: 0; top: 0; bottom: 0; width: 4px;
+    background: var(--purple); box-shadow: -2px 0 10px var(--purple);
+  }
+  
+  .brand-logo { 
+    font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: 26px; 
+    letter-spacing: 3px; color: var(--text-main);
+    text-shadow: 0 0 10px rgba(255,255,255,0.3);
+  }
+  
+  .live-dot {
+    width: 10px; height: 10px; border-radius: 50%; background: var(--cyan);
+    box-shadow: 0 0 12px var(--cyan), 0 0 20px var(--cyan);
+    margin-left: 20px; animation: blink 1.2s infinite ease-in-out;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.85); }
+  }
+
+  /* ================================
+     RIGHT ACCOUNT WING ("ULTRA INSTINCT CREW")
+     ================================ */
+  .ticker-crew-wing {
+    position: relative;
+    z-index: 10;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 0 28px 0 44px;
+    background: linear-gradient(225deg, var(--deep-blue) 0%, #150A2A 100%);
+    clip-path: polygon(25px 0, 100% 0, 100% 100%, 0% 100%);
+    border-left: 4px solid var(--purple);
+  }
+
+  .ticker-crew-wing::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: var(--purple);
+    box-shadow: 2px 0 10px var(--purple);
+  }
+
+  .crew-wing-diamond {
+    width: 9px;
+    height: 9px;
+    background: var(--cyan);
+    transform: rotate(45deg);
+    box-shadow: 0 0 10px var(--cyan);
+    flex-shrink: 0;
+  }
+
+  .crew-wing-name {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 800;
+    font-size: 16px;
+    letter-spacing: 3.5px;
+    color: var(--text-main);
+    white-space: nowrap;
+    text-shadow: 0 0 12px rgba(0, 229, 255, 0.3);
+  }
+
+  body.hide-crew-wing .ticker-crew-wing {
+    display: none;
+  }
+
+  /* ================================
+     SCROLLING TRACK (Unchanged)
+     ================================ */
+  .ticker-viewport {
+    flex: 1; height: 100%; overflow: hidden; position: relative; z-index: 1;
+    mask-image: linear-gradient(to right, transparent, black 3%, black 97%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 3%, black 97%, transparent);
+  }
+
+  .ticker-track {
+    display: flex; height: 100%; width: max-content; will-change: transform;
+  }
+
+  @keyframes scrollTicker {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* ================================
+     MATCH ITEM COMPONENT (Unchanged)
+     ================================ */
+  .match-item {
+    display: flex; align-items: center; height: 100%; padding: 0 35px;
+    position: relative; white-space: nowrap; gap: 15px;
+  }
+
+  /* Schräger Trennstrich zwischen den Matches */
+  .match-item::after {
+    content: ''; position: absolute; right: 0; top: 25%; height: 50%; width: 2px;
+    background: rgba(255, 255, 255, 0.1); transform: skewX(-20deg);
+  }
+
+  .m-time-badge {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 4px 14px;
+    clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0% 100%);
+    border-left: 3px solid var(--purple);
+    font-family: 'Orbitron', sans-serif; font-size: 14px; font-weight: 700;
+    letter-spacing: 1px; color: var(--text-muted);
+  }
+  .m-time-badge.heute { 
+    border-left-color: var(--cyan); color: var(--cyan); background: rgba(0, 229, 255, 0.05); 
+  }
+
+  .m-team { display: flex; align-items: center; gap: 12px; }
+  .m-logo { width: 36px; height: 36px; object-fit: contain; filter: drop-shadow(0 0 5px rgba(255,255,255,0.1)); }
+  .m-name { font-family: 'Orbitron', sans-serif; font-size: 17px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; }
+
+  .m-vs { 
+    font-size: 16px; font-weight: 900; color: var(--purple); 
+    margin: 0 8px; font-style: italic; font-family: 'Orbitron', sans-serif; 
+  }
+
+  .system-message {
+    padding: 0 30px; font-family: 'Orbitron', sans-serif;
+    color: var(--cyan); display: flex; align-items: center; height: 100%; letter-spacing: 2px;
+  }
+
+  /* ==========================================================================
+     4. OBS INTERACT CONTROL PANEL (RADIO BUTTONS ONLY - NO DROPDOWNS!)
+        AUTO-HIDES AFTER 3 SECONDS OF INACTIVITY
+     ========================================================================== */
+  #obs-controls {
+    position: fixed;
+    top: calc(var(--ticker-height) + 18px);
+    left: 24px;
+    z-index: 200;
+    background: rgba(10, 15, 26, 0.96);
+    border: 1px solid rgba(0, 229, 255, 0.45);
+    border-left: 4px solid var(--cyan);
+    border-radius: 8px;
+    padding: 16px 18px;
+    width: 360px;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.85), 0 0 25px rgba(0, 229, 255, 0.15);
+    backdrop-filter: blur(14px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    font-family: 'Rajdhani', sans-serif;
+  }
+
+  body.ticker-bottom #obs-controls,
+  body.ticker-hidden #obs-controls {
+    top: 24px;
+  }
+
+  #obs-controls.idle-hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-8px);
+  }
+
+  .ctrl-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    color: var(--cyan);
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .ctrl-badge {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 11px;
+    color: var(--text-muted);
+    background: rgba(255, 255, 255, 0.08);
+    padding: 2px 8px;
+    border-radius: 4px;
+  }
+
+  .ctrl-section {
+    margin-bottom: 12px;
+  }
+
+  .ctrl-section-title {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #94A3B8;
+    margin-bottom: 6px;
+  }
+
+  /* Radio Button Pill Grid (Works natively in OBS Browser Source Interact!) */
+  .radio-pill-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+  }
+
+  .radio-pill-grid.cols-3 {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .radio-pill {
+    position: relative;
+    cursor: pointer;
+    display: flex;
+  }
+
+  .radio-pill input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .radio-pill span {
+    width: 100%;
+    text-align: center;
+    padding: 7px 10px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: #CBD5E1;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 5px;
+    transition: all 0.18s ease;
+  }
+
+  .radio-pill:hover span {
+    border-color: rgba(0, 229, 255, 0.45);
+    color: #FFFFFF;
+  }
+
+  .radio-pill input[type="radio"]:checked + span {
+    background: linear-gradient(135deg, rgba(0, 229, 255, 0.22), rgba(138, 43, 226, 0.28));
+    border-color: var(--cyan);
+    color: #FFFFFF;
+    box-shadow: 0 0 12px rgba(0, 229, 255, 0.25);
+  }
+
+  .ctrl-toggles {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .ctrl-check-label {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: #E2E8F0;
+    cursor: pointer;
+  }
+
+  .ctrl-check-label input {
+    accent-color: var(--cyan);
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+<!-- ======================================================================
+     1. ANIMATED ESPORTS BACKGROUND (DIAGONAL 45-DEGREE GEOMETRY)
+     ====================================================================== -->
+<div id="esports-bg">
+  <div class="ambient-glow tl"></div>
+  <div class="ambient-glow br"></div>
+  <div class="bg-tech-grid"></div>
+
+  <!-- Subtle -45deg Kinetic Typography Ribbons ("ULTRA INSTINCT CREW") -->
+  <div id="kinetic-ribbons">
+    <div class="diagonal-marquee-lane lane-1">
+      <div class="diagonal-marquee-track">
+        <span>ULTRA INSTINCT CREW</span><span class="solid-accent">UIC</span>
+        <span>ULTRA INSTINCT CREW</span><span class="solid-accent">UIC</span>
+        <span>ULTRA INSTINCT CREW</span><span class="solid-accent">UIC</span>
+        <span>ULTRA INSTINCT CREW</span><span class="solid-accent">UIC</span>
+      </div>
+    </div>
+    <div class="diagonal-marquee-lane lane-2">
+      <div class="diagonal-marquee-track">
+        <span>ULTRA INSTINCT CREW</span><span class="solid-accent">UIC</span>
+        <span>ULTRA INSTINCT CREW</span><span class="solid-accent">UIC</span>
+        <span>ULTRA INSTINCT CREW</span><span class="solid-accent">UIC</span>
+        <span>ULTRA INSTINCT CREW</span><span class="solid-accent">UIC</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Crisp Vector Geometric Shapes with Stepped/Notched Edges (-45 deg) -->
+  <svg class="bg-svg-layer" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="grad-ribbon-tl" x1="0%" y1="100%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#3FE8FF" />
+        <stop offset="52%" stop-color="#4B80F5" />
+        <stop offset="100%" stop-color="#7C4DFF" />
+      </linearGradient>
+
+      <linearGradient id="grad-ribbon-br" x1="0%" y1="100%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#38E4FF" />
+        <stop offset="48%" stop-color="#4A7BF7" />
+        <stop offset="100%" stop-color="#9438FF" />
+      </linearGradient>
+
+      <linearGradient id="grad-cyan-solid" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#60F0FF" />
+        <stop offset="100%" stop-color="#2BB6E8" />
+      </linearGradient>
+
+      <linearGradient id="grad-purple-strip" x1="0%" y1="100%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#3B82F6" stop-opacity="0" />
+        <stop offset="35%" stop-color="#6366F1" stop-opacity="0.9" />
+        <stop offset="100%" stop-color="#A855F7" stop-opacity="1" />
+      </linearGradient>
+
+      <linearGradient id="grad-cyan-strip" x1="0%" y1="100%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#38E4FF" stop-opacity="1" />
+        <stop offset="70%" stop-color="#5B73F8" stop-opacity="0.9" />
+        <stop offset="100%" stop-color="#7C4DFF" stop-opacity="0" />
+      </linearGradient>
+
+      <linearGradient id="grad-dark-band" x1="0%" y1="100%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#121A29" stop-opacity="0.6" />
+        <stop offset="50%" stop-color="#0B101B" stop-opacity="0.35" />
+        <stop offset="100%" stop-color="#121A29" stop-opacity="0.6" />
+      </linearGradient>
+    </defs>
+
+    <!-- Dark Diagonal Background Architectural Bands (-45 deg) -->
+    <g class="diag-float-slow">
+      <polygon points="-250,620 620,-250 760,-250 -250,760" fill="url(#grad-dark-band)" />
+      <polygon points="-100,1180 1180,-100 1350,-100 70,1180" fill="url(#grad-dark-band)" />
+      <polygon points="320,1180 1600,-100 1710,-100 430,1180" fill="url(#grad-dark-band)" opacity="0.5" />
+      <polygon points="680,1180 1960,-100 2120,-100 840,1180" fill="url(#grad-dark-band)" />
+      <polygon points="1160,1180 2180,160 2320,160 1300,1180" fill="url(#grad-dark-band)" />
+    </g>
+
+    <!-- Top-Left Geometric Cyber Cluster -->
+    <g class="diag-float-slow">
+      <polygon points="-60,-60 220,-60 -60,220" fill="url(#grad-cyan-solid)" />
+    </g>
+
+    <g class="diag-float-med">
+      <polygon points="
+        -120,760 
+        185,455 
+        205,455 
+        345,315 
+        345,295 
+        470,170 
+        495,170 
+        720,-55 
+        900,-55 
+        485,360 
+        460,360 
+        320,500 
+        320,522 
+        110,732 
+        90,732 
+        -120,942
+      " fill="url(#grad-ribbon-tl)" />
+    </g>
+
+    <g class="diag-float-fast">
+      <polygon points="285,125 465,-55 492,-55 312,125" fill="#9A42FF" />
+      <polygon points="285,125 312,125 298,139 285,139" fill="#6366F1" />
+      <polygon points="185,805 465,525 495,525 200,820 185,820" fill="url(#grad-cyan-strip)" />
+      <polygon points="410,1100 560,950 588,950 438,1100" fill="url(#grad-purple-strip)" />
+    </g>
+
+    <!-- Bottom-Right Geometric Cyber Cluster -->
+    <g class="diag-float-slow">
+      <polygon points="1980,860 1980,1140 1700,1140" fill="url(#grad-cyan-solid)" />
+    </g>
+
+    <g class="diag-float-med">
+      <polygon points="
+        1040,1140 
+        1510,670 
+        1535,670 
+        1680,525 
+        1680,500 
+        1845,335 
+        1845,310 
+        2040,115 
+        2040,320 
+        1915,445 
+        1890,445 
+        1725,610 
+        1725,635 
+        1600,760 
+        1570,760 
+        1250,1080 
+        1250,1105 
+        1215,1140
+      " fill="url(#grad-ribbon-br)" />
+    </g>
+
+    <g class="diag-float-fast">
+      <polygon points="1260,310 1465,105 1492,105 1287,310" fill="url(#grad-purple-strip)" />
+      <polygon points="1445,550 1740,255 1740,290 1475,550" fill="url(#grad-ribbon-tl)" />
+      <polygon points="1810,765 2010,565 2028,583 1828,783" fill="#9D4EDD" />
+    </g>
+  </svg>
+
+  <!-- Dynamic Canvas for 45-deg Glowing Laser Streaks & Cyber Particles -->
+  <canvas id="streak-canvas"></canvas>
+</div>
+
+<!-- ======================================================================
+     2. PRODUCTION STAGE FRAMES (CHAT AREA BY DEFAULT + OPTIONAL CAM FRAMES)
+        ZERO TEXT / ZERO PLACEHOLDERS ON OVERLAY
+     ====================================================================== -->
+<div id="broadcast-stage" class="layout-chat-only">
+  <!-- Left/Center Area for Optional Clean 16:9 Cam Frames -->
+  <div id="cam-stage-area">
+    <div class="cyber-frame cam-frame cam-1">
+      <div class="frame-corner-accent"></div>
+    </div>
+    <div class="cyber-frame cam-frame cam-2">
+      <div class="frame-corner-accent"></div>
+    </div>
+  </div>
+
+  <!-- Right-Side Default Chat Area (Clean Cyber Frame, No Labels) -->
+  <div id="chat-frame" class="cyber-frame">
+    <div class="chat-top-trim"></div>
+    <div class="frame-corner-accent"></div>
+  </div>
+</div>
+
+<!-- ======================================================================
+     3. TOP TICKER & ACCOUNT HEADER BAR (100% UNCHANGED TICKER TRACK)
+     ====================================================================== -->
+<div id="ticker-container">
+  <div class="ticker-brand">
+    <span class="brand-logo">UIC</span>
+    <div class="live-dot"></div>
+  </div>
+  
+  <div class="ticker-viewport">
+    <div class="ticker-track" id="ticker-track">
+      <div class="system-message">LADE DATA LAKE...</div>
+    </div>
+  </div>
+
+  <!-- Clean Account Wing on the right side of the Top Ticker -->
+  <div class="ticker-crew-wing">
+    <span class="crew-wing-diamond"></span>
+    <span class="crew-wing-name">ULTRA INSTINCT CREW</span>
+  </div>
+</div>
+
+<!-- ======================================================================
+     4. OBS INTERACT CONTROL PANEL (RADIO BUTTONS ONLY - NO DROPDOWNS)
+     ====================================================================== -->
+<div id="obs-controls">
+  <div class="ctrl-header">
+    <span>ULTRA INSTINCT CREW</span>
+    <span class="ctrl-badge">Auto-Hide</span>
+  </div>
+
+  <!-- Radio Group 1: Stage Layout -->
+  <div class="ctrl-section">
+    <span class="ctrl-section-title">Szenen-Rahmen (Layout)</span>
+    <div class="radio-pill-grid">
+      <label class="radio-pill">
+        <input type="radio" name="stage-layout" value="chat-only" checked>
+        <span>Nur Chat (Standard)</span>
+      </label>
+      <label class="radio-pill">
+        <input type="radio" name="stage-layout" value="cam-1">
+        <span>1x Rahmen + Chat</span>
+      </label>
+      <label class="radio-pill">
+        <input type="radio" name="stage-layout" value="cam-2">
+        <span>2x Rahmen + Chat</span>
+      </label>
+      <label class="radio-pill">
+        <input type="radio" name="stage-layout" value="none">
+        <span>Nur Hintergrund</span>
+      </label>
+    </div>
+  </div>
+
+  <!-- Radio Group 2: Ticker Position -->
+  <div class="ctrl-section">
+    <span class="ctrl-section-title">Ticker-Position</span>
+    <div class="radio-pill-grid cols-3">
+      <label class="radio-pill">
+        <input type="radio" name="ticker-pos" value="top" checked>
+        <span>Oben</span>
+      </label>
+      <label class="radio-pill">
+        <input type="radio" name="ticker-pos" value="bottom">
+        <span>Unten</span>
+      </label>
+      <label class="radio-pill">
+        <input type="radio" name="ticker-pos" value="off">
+        <span>Aus</span>
+      </label>
+    </div>
+  </div>
+
+  <!-- Radio Group 3: Corner Geometry Intensity -->
+  <div class="ctrl-section">
+    <span class="ctrl-section-title">45° Eck-Design Intensität</span>
+    <div class="radio-pill-grid">
+      <label class="radio-pill">
+        <input type="radio" name="wings-intensity" value="full" checked>
+        <span>Standard (Kräftig)</span>
+      </label>
+      <label class="radio-pill">
+        <input type="radio" name="wings-intensity" value="subtle">
+        <span>Dezent</span>
+      </label>
+    </div>
+  </div>
+
+  <!-- Quick Checkboxes -->
+  <div class="ctrl-toggles">
+    <label class="ctrl-check-label">
+      <input type="checkbox" id="toggle-chat-box" checked>
+      Chat-Bereich rechts anzeigen
+    </label>
+    <label class="ctrl-check-label">
+      <input type="checkbox" id="toggle-crew-wing" checked>
+      „ULTRA INSTINCT CREW“ im Ticker-Header
+    </label>
+    <label class="ctrl-check-label">
+      <input type="checkbox" id="toggle-kinetic" checked>
+      Diagonale Hintergrund-Schrift (45°)
+    </label>
+  </div>
+</div>
+
+<!-- ======================================================================
+     5. BACKGROUND PARTICLES & OBS RADIO CONTROLS SCRIPT
+     ====================================================================== -->
+<script>
+(function() {
+  /* ----------------------------------------------------------------------
+     A. DIAGONAL 45-DEGREE LASER STREAKS & CYBER PARTICLES (CANVAS)
+     ---------------------------------------------------------------------- */
+  var canvas = document.getElementById("streak-canvas");
+  var ctx = canvas.getContext("2d");
+  var width = window.innerWidth;
+  var height = window.innerHeight;
+
+  function resizeCanvas() {
+    width = window.innerWidth;
+    height = window.innerHeight;
+    canvas.width = width;
+    canvas.height = height;
+  }
+  window.addEventListener("resize", resizeCanvas);
+  resizeCanvas();
+
+  var streaks = [];
+  var sparks = [];
+  var STREAK_COUNT = 15;
+  var SPARK_COUNT = 36;
+
+  var palette = [
+    { c1: "#00E5FF", c2: "#3A7BD5" },
+    { c1: "#38C8FF", c2: "#8A2BE2" },
+    { c1: "#8A2BE2", c2: "#D900FF" },
+    { c1: "#00E5FF", c2: "#FFFFFF" }
+  ];
+
+  function createStreak() {
+    var col = palette[Math.floor(Math.random() * palette.length)];
+    var len = 50 + Math.random() * 145;
+    var speed = 1.1 + Math.random() * 2.8;
+    var dir = Math.random() > 0.35 ? 1 : -1;
+    return {
+      x: Math.random() * width,
+      y: Math.random() * height,
+      len: len,
+      speed: speed * dir,
+      thickness: 1.4 + Math.random() * 2.2,
+      alpha: 0.22 + Math.random() * 0.55,
+      c1: col.c1,
+      c2: col.c2
+    };
+  }
+
+  function createSpark() {
+    return {
+      x: Math.random() * width,
+      y: Math.random() * height,
+      r: 0.8 + Math.random() * 1.7,
+      vx: (Math.random() - 0.5) * 0.35,
+      vy: (Math.random() - 0.5) * 0.35,
+      alpha: 0.12 + Math.random() * 0.45,
+      pulse: Math.random() * Math.PI * 2,
+      color: Math.random() > 0.5 ? "#00E5FF" : "#9D4EDD"
+    };
+  }
+
+  for (var i = 0; i < STREAK_COUNT; i++) streaks.push(createStreak());
+  for (var j = 0; j < SPARK_COUNT; j++) sparks.push(createSpark());
+
+  var INV_SQRT2 = 0.70710678;
+
+  function renderBackgroundParticles() {
+    ctx.clearRect(0, 0, width, height);
+
+    for (var j = 0; j < sparks.length; j++) {
+      var sp = sparks[j];
+      sp.x += sp.vx;
+      sp.y += sp.vy;
+      sp.pulse += 0.025;
+
+      if (sp.x < 0) sp.x = width;
+      if (sp.x > width) sp.x = 0;
+      if (sp.y < 0) sp.y = height;
+      if (sp.y > height) sp.y = 0;
+
+      var curAlpha = sp.alpha * (0.6 + 0.4 * Math.sin(sp.pulse));
+      ctx.save();
+      ctx.globalAlpha = curAlpha;
+      ctx.fillStyle = sp.color;
+      ctx.shadowColor = sp.color;
+      ctx.shadowBlur = 8;
+      ctx.beginPath();
+      ctx.arc(sp.x, sp.y, sp.r, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+    }
+
+    for (var i = 0; i < streaks.length; i++) {
+      var s = streaks[i];
+      s.x += s.speed * INV_SQRT2;
+      s.y -= s.speed * INV_SQRT2;
+
+      var margin = 200;
+      if (s.x > width + margin || s.y < -margin) {
+        s.x = Math.random() * (width * 0.8) - 100;
+        s.y = height + Math.random() * 150;
+      } else if (s.x < -margin || s.y > height + margin) {
+        s.x = Math.random() * width + 100;
+        s.y = -Math.random() * 150;
+      }
+
+      var x2 = s.x - s.len * INV_SQRT2;
+      var y2 = s.y + s.len * INV_SQRT2;
+
+      var grad = ctx.createLinearGradient(x2, y2, s.x, s.y);
+      grad.addColorStop(0, "rgba(0, 229, 255, 0)");
+      grad.addColorStop(0.5, s.c2);
+      grad.addColorStop(1, s.c1);
+
+      ctx.save();
+      ctx.globalAlpha = s.alpha;
+      ctx.strokeStyle = grad;
+      ctx.lineWidth = s.thickness;
+      ctx.lineCap = "round";
+      ctx.shadowColor = s.c1;
+      ctx.shadowBlur = 12;
+
+      ctx.beginPath();
+      ctx.moveTo(x2, y2);
+      ctx.lineTo(s.x, s.y);
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    requestAnimationFrame(renderBackgroundParticles);
+  }
+
+  requestAnimationFrame(renderBackgroundParticles);
+
+  /* ----------------------------------------------------------------------
+     B. OBS INTERACT RADIO BUTTONS & TOGGLES
+     ---------------------------------------------------------------------- */
+  var obsControls = document.getElementById("obs-controls");
+  var broadcastStage = document.getElementById("broadcast-stage");
+  var toggleChatBox = document.getElementById("toggle-chat-box");
+  var toggleCrewWing = document.getElementById("toggle-crew-wing");
+  var toggleKinetic = document.getElementById("toggle-kinetic");
+
+  function setStageLayout(mode) {
+    broadcastStage.className = "layout-" + mode;
+  }
+
+  function setTickerPosition(pos) {
+    document.body.classList.remove("ticker-bottom", "ticker-hidden");
+    if (pos === "bottom") {
+      document.body.classList.add("ticker-bottom");
+    } else if (pos === "off") {
+      document.body.classList.add("ticker-hidden");
+    }
+  }
+
+  // Bind Stage Layout Radio Buttons
+  var layoutRadios = document.querySelectorAll('input[name="stage-layout"]');
+  for (var i = 0; i < layoutRadios.length; i++) {
+    layoutRadios[i].addEventListener("change", function(e) {
+      if (e.target.checked) setStageLayout(e.target.value);
+    });
+  }
+
+  // Bind Ticker Position Radio Buttons
+  var tickerRadios = document.querySelectorAll('input[name="ticker-pos"]');
+  for (var j = 0; j < tickerRadios.length; j++) {
+    tickerRadios[j].addEventListener("change", function(e) {
+      if (e.target.checked) setTickerPosition(e.target.value);
+    });
+  }
+
+  // Bind Corner Wings Intensity Radio Buttons
+  var wingRadios = document.querySelectorAll('input[name="wings-intensity"]');
+  for (var k = 0; k < wingRadios.length; k++) {
+    wingRadios[k].addEventListener("change", function(e) {
+      if (e.target.checked) {
+        document.body.classList.toggle("wings-subtle", e.target.value === "subtle");
+      }
+    });
+  }
+
+  // Bind Checkboxes
+  toggleChatBox.addEventListener("change", function() {
+    document.body.classList.toggle("hide-chat", !toggleChatBox.checked);
+  });
+
+  toggleCrewWing.addEventListener("change", function() {
+    document.body.classList.toggle("hide-crew-wing", !toggleCrewWing.checked);
+  });
+
+  toggleKinetic.addEventListener("change", function() {
+    document.body.classList.toggle("hide-kinetic", !toggleKinetic.checked);
+  });
+
+  // URL Parameter Overrides (optional convenience for OBS scenes)
+  var params = new URLSearchParams(window.location.search);
+  if (params.get("layout")) {
+    var lVal = params.get("layout");
+    setStageLayout(lVal);
+    var lRadio = document.querySelector('input[name="stage-layout"][value="' + lVal + '"]');
+    if (lRadio) lRadio.checked = true;
+  }
+  if (params.get("ticker")) {
+    var tVal = params.get("ticker");
+    setTickerPosition(tVal);
+    var tRadio = document.querySelector('input[name="ticker-pos"][value="' + tVal + '"]');
+    if (tRadio) tRadio.checked = true;
+  }
+  if (params.get("chat") === "0") {
+    toggleChatBox.checked = false;
+    document.body.classList.add("hide-chat");
+  }
+
+  // Auto-hide control panel after 3 seconds of mouse inactivity
+  var hideTimeout = null;
+  function wakeControls() {
+    obsControls.classList.remove("idle-hidden");
+    if (hideTimeout) clearTimeout(hideTimeout);
+    hideTimeout = setTimeout(function() {
+      obsControls.classList.add("idle-hidden");
+    }, 3000);
+  }
+
+  window.addEventListener("mousemove", wakeControls);
+  window.addEventListener("mousedown", wakeControls);
+  wakeControls();
+})();
+</script>
+
+<!-- ======================================================================
+     6. ORIGINAL UIC TICKER LOGIC (100% UNCHANGED)
+     ====================================================================== -->
+<script>
+(function() {
+  var tickerTrack = document.getElementById("ticker-track");
+  var esc = function(s) {
+    if (s === null || s === undefined) s = "";
+    return String(s).replace(/[&<>"']/g, function(c) {
+      return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];
+    });
+  };
+
+  // Neues Placeholder Logo: Neutraler geometrischer Cyber-Knotenpunkt anstelle des Fehler-Schilds
+  var fallbackLogo = "data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='rgba(255,255,255,0.02)' stroke='rgba(255,255,255,0.2)' stroke-width='1'%3E%3Cpolygon points='12 2 22 8 22 16 12 22 2 16 2 8'/%3E%3Ccircle cx='12' cy='12' r='4'/%3E%3Cline x1='12' y1='2' x2='12' y2='8'/%3E%3Cline x1='12' y1='16' x2='12' y2='22'/%3E%3Cline x1='2' y1='8' x2='7.5' y2='11'/%3E%3Cline x1='16.5' y1='13' x2='22' y2='16'/%3E%3Cline x1='2' y1='16' x2='7.5' y2='13'/%3E%3Cline x1='16.5' y1='11' x2='22' y2='8'/%3E%3C/svg%3E";
+
+  var lastDataHash = "";
+  var TICKER_SPEED_PX_PER_SEC = 65; 
+
+  function formatRelativeTime(iso) {
+    if (!iso) return { label: "TBD", isToday: false };
+    var d = new Date(iso);
+    var now = new Date();
+    var timeStr = new Intl.DateTimeFormat("de-DE",{timeZone:"Europe/Berlin",hour:"2-digit",minute:"2-digit"}).format(d) + " UHR";
+    
+    var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    var matchDay = new Date(d.getFullYear(), d.getMonth(), d.getDate());
+    var diffDays = Math.round((matchDay - today) / (1000 * 60 * 60 * 24));
+
+    var dayStr = "";
+    var isToday = false;
+    
+    if (diffDays === 0) { dayStr = "HEUTE"; isToday = true; }
+    else if (diffDays === 1) { dayStr = "MORGEN"; }
+    else { dayStr = new Intl.DateTimeFormat("de-DE",{timeZone:"Europe/Berlin",day:"2-digit",month:"2-digit"}).format(d); }
+
+    return { label: dayStr + " " + timeStr, isToday: isToday };
+  }
+
+  function generateMatchHTML(m) {
+    var time = formatRelativeTime(m.startsAt);
+    var uLogo = m.uicLogo ? esc(m.uicLogo) : fallbackLogo;
+    var eLogo = m.opponentLogo ? esc(m.opponentLogo) : fallbackLogo;
+    var badgeClass = time.isToday ? "m-time-badge heute" : "m-time-badge";
+    var statusText = m.confirmed ? " (Bestätigt)" : " (Unbestätigt)";
+
+    return '' +
+      '<div class="match-item">' +
+        '<div class="' + badgeClass + '">' + time.label + statusText + '</div>' +
+        '<div class="m-team">' +
+          '<img class="m-logo" src="' + uLogo + '" onerror="this.src=\'' + fallbackLogo + '\';">' +
+          '<span class="m-name">' + esc(m.uicTeamName) + '</span>' +
+        '</div>' +
+        '<span class="m-vs">VS</span>' +
+        '<div class="m-team">' +
+          '<span class="m-name">' + esc(m.opponentName) + '</span>' +
+          '<img class="m-logo" src="' + eLogo + '" onerror="this.src=\'' + fallbackLogo + '\';">' +
+        '</div>' +
+      '</div>';
+  }
+
+  function load() {
+    var fetchUrl = "data/prime_stats.json?t=" + new Date().getTime();
+
+    fetch(fetchUrl, {cache: "no-store"})
+      .then(function(r) {
+        if (!r.ok) throw new Error("JSON 404");
+        return r.json();
+      })
+      .then(function(data) {
+        var upcomingMatches = [];
+        var now = new Date();
+
+        for (var teamKey in data) {
+          if (!data.hasOwnProperty(teamKey)) continue;
+          if (teamKey.toLowerCase() === "community") continue;
+          
+          var teamData = data[teamKey];
+          if (!teamData.api_meta || !teamData.matches || !Array.isArray(teamData.matches)) continue;
+
+          for (var i = 0; i < teamData.matches.length; i++) {
+            var m = teamData.matches[i];
+            var mDate = m.begin ? new Date(m.begin) : null;
+            
+            // Alle kommenden Matches (Bestätigt & Unbestätigt), Datum in Zukunft
+            if ((!m.result) && (!mDate || mDate > now)) {
+              
+              var teamDisplayName = teamData.teamDisplay ? teamData.teamDisplay : "UIC " + teamKey.toUpperCase();
+              var uicLogoStr = (teamData.api_meta && teamData.api_meta.logo_url) ? teamData.api_meta.logo_url : "";
+              var enemyLogoStr = (m.enemy_team && m.enemy_team.logo_url) ? m.enemy_team.logo_url : "";
+              var enemyNameStr = "TBD";
+              
+              if (m.enemy_team) {
+                enemyNameStr = m.enemy_team.name ? m.enemy_team.name : (m.enemy_team.team_tag ? m.enemy_team.team_tag : "TBD");
+              }
+
+              upcomingMatches.push({
+                startsAt: m.begin,
+                confirmed: m.confirmed === true,
+                uicTeamName: teamDisplayName,
+                uicLogo: uicLogoStr,
+                opponentLogo: enemyLogoStr,
+                opponentName: enemyNameStr
+              });
+            }
+          }
+        }
+
+        upcomingMatches.sort(function(a, b) {
+          if (!a.startsAt) return 1;
+          if (!b.startsAt) return -1;
+          return new Date(a.startsAt) - new Date(b.startsAt);
+        });
+
+        // Limitieren auf 15 Einträge für Ticker-Performance
+        var list = upcomingMatches.slice(0, 15);
+
+        var currentHash = JSON.stringify(list);
+        if (currentHash === lastDataHash) return; 
+        lastDataHash = currentHash;
+
+        if (list.length === 0) {
+          tickerTrack.style.animation = "none";
+          tickerTrack.innerHTML = '<div class="system-message">KEINE BESTÄTIGTEN MATCHES GEPLANT // STANDBY</div>';
+          return;
+        }
+
+        var displayList = list.slice(0);
+        while (displayList.length < 6) {
+          displayList = displayList.concat(list);
+        }
+
+        var blockHTML = displayList.map(generateMatchHTML).join("");
+        tickerTrack.innerHTML = blockHTML + blockHTML;
+
+        tickerTrack.style.animation = "none";
+        
+        requestAnimationFrame(function() {
+          var totalWidth = tickerTrack.scrollWidth;
+          var duration = totalWidth / TICKER_SPEED_PX_PER_SEC;
+          tickerTrack.style.animation = "scrollTicker " + duration + "s linear infinite";
+        });
+
+      })
+      .catch(function(e) {
+        console.error("OBS Ticker Fetch Error:", e);
+        tickerTrack.style.animation = "none";
+        tickerTrack.innerHTML = '<div class="system-message" style="color:#ff2a2a;">VERBINDUNGSFEHLER ZUM DATA LAKE</div>';
+      });
+  }
+
+  load();
+  setInterval(load, 120000); 
+})();
+</script>
+</body>
+</html>

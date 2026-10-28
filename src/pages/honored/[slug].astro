@@ -1,0 +1,1494 @@
+---
+// src/pages/honored/[slug].astro
+import Layout from '../../layouts/Layout.astro';
+import { honoredPlayers, type HonoredPlayerDossier } from '../../utils/honoredData';
+
+export function getStaticPaths() {
+  return honoredPlayers.map((player) => ({
+    params: { slug: player.slug },
+    props: { player }
+  }));
+}
+
+interface Props {
+  player: HonoredPlayerDossier;
+}
+
+const { player } = Astro.props;
+const firstVoice = player.voiceClips[0] || null;
+const firstVideo = player.videos[0] || null;
+---
+
+<Layout
+  title={`${player.name} – Ruhmeshalle | Ultra Instinct Crew`}
+  description={`Ruhmeshalle der Ultra Instinct Crew: Werdegang, Biografie, Sprachaufnahmen und gespielte Splits von ${player.name}.`}
+>
+  <div class="hall-page section-pad">
+    <div class="container hall-container">
+
+      <!-- Top Navigation Bar -->
+      <nav class="hall-topbar" aria-label="Ruhmeshalle Navigation">
+        <div class="topbar-left">
+          <a href="/#teams" class="nav-chip text-mono">&larr; ZURÜCK ZU DEN TEAMS</a>
+          <a href="/honored" class="nav-chip text-mono">ALLE MITGLIEDER DER RUHMESHALLE</a>
+        </div>
+
+        <div class="topbar-right text-mono">
+          <span class="serial-lbl">#{player.playerId}</span>
+          <span class="sep">&bull;</span>
+          <span>
+            AUFGENOMMEN AM <time datetime={player.inductedAtRaw}>{player.inductedAtFormatted}</time>
+          </span>
+        </div>
+      </nav>
+
+      <!-- =====================================================================
+           1. HERO PROFILE CARD (Portrait Left | Identity & Phrases Right)
+           ===================================================================== -->
+      <section class="hero-profile-card" aria-label="Persönliches Profil">
+        <!-- Left: Clean Edge-to-Edge Portrait (matching main page aesthetic) -->
+        <div class="hero-portrait-stage">
+          <div class="portrait-badges text-mono">
+            <span class="crown-badge">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5"><path d="M2 4l3 12h14l3-12-6 7-4-7-4 7-6-7zm3 16h14"/></svg>
+              <span>RUHMESHALLE</span>
+            </span>
+          </div>
+
+          <img
+            src={player.photoSrc}
+            alt={`Porträt von ${player.name}`}
+            class="portrait-img"
+            width="360"
+            height="400"
+            decoding="async"
+            onerror="this.src='/assets/profile/profile_placeholder.png'"
+          />
+          <div class="portrait-shade"></div>
+        </div>
+
+        <!-- Right: Identity, Timestamp & Phrases -->
+        <div class="hero-identity-body">
+          <div class="identity-top">
+            <div class="meta-pills-row text-mono">
+              <span class="meta-pill">
+                AUFNAHME: <time datetime={player.inductedAtRaw}>{player.inductedAtFormatted}</time>
+              </span>
+
+              {player.primeLeagueUserUrl && (
+                <a
+                  href={player.primeLeagueUserUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="meta-pill meta-pill-link"
+                  title="Offizielles Prime League Profil öffnen"
+                >
+                  <span>PRIME LEAGUE: {player.primeLeagueAccountName || `#${player.primeLeagueUserId}`}</span>
+                  <span aria-hidden="true">↗</span>
+                </a>
+              )}
+            </div>
+
+            <h1 class="person-name">{player.name}</h1>
+            <p class="person-title">{player.title}</p>
+          </div>
+
+          <!-- Phrases / Quotes -->
+          <div class="phrases-section">
+            <span class="block-label text-mono">SPRÜCHE & ZITATE</span>
+            {player.phrases.length > 0 ? (
+              <div class="phrases-grid">
+                {player.phrases.map((phrase) => (
+                  <blockquote class="phrase-card">
+                    <p>„{phrase}“</p>
+                  </blockquote>
+                ))}
+              </div>
+            ) : (
+              <p class="placeholder-text">[Platzhalter: Keine Sprüche hinterlegt]</p>
+            )}
+          </div>
+        </div>
+      </section>
+
+      <!-- =====================================================================
+           2. STANDALONE SLIM & WIDE GLASSMORPHISM AUDIO PLAYER (Outside the box)
+           ===================================================================== -->
+      <section class="standalone-audio-bar" aria-label="Audio-Player für Sprachaufnahmen">
+        {firstVoice ? (
+          <>
+            <audio id="gad-audio" preload="none" src={firstVoice.src}></audio>
+
+            <!-- Left: Transport Controls & Active Track Info -->
+            <div class="sab-left">
+              <div class="sab-controls">
+                <button
+                  type="button"
+                  id="gad-prev-btn"
+                  class="sab-icon-btn"
+                  aria-label="Vorherige Aufnahme"
+                  title="Vorherige Aufnahme"
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
+                </button>
+
+                <button
+                  type="button"
+                  id="gad-play-btn"
+                  class="sab-play-btn"
+                  aria-label="Abspielen oder Pausieren"
+                >
+                  <svg id="gad-icon-play" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                  <svg id="gad-icon-pause" class="hidden" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                </button>
+
+                <button
+                  type="button"
+                  id="gad-next-btn"
+                  class="sab-icon-btn"
+                  aria-label="Nächste Aufnahme"
+                  title="Nächste Aufnahme"
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
+                </button>
+              </div>
+
+              <div class="sab-track-meta">
+                <div class="sab-title-row">
+                  <span class="sab-eq" id="gad-visualizer" aria-hidden="true">
+                    <span class="eq-b"></span><span class="eq-b"></span><span class="eq-b"></span><span class="eq-b"></span>
+                  </span>
+                  <span id="gad-current-title" class="sab-title">{firstVoice.title}</span>
+                </div>
+                <span id="gad-current-ctx" class="sab-ctx text-mono">{firstVoice.context || 'Sprachaufnahme'}</span>
+              </div>
+            </div>
+
+            <!-- Center: Wide Scrubbing Bar & Timecode -->
+            <div class="sab-center">
+              <span id="gad-time-cur" class="sab-time text-mono">0:00</span>
+              <div
+                id="gad-scrub"
+                class="sab-scrub"
+                role="slider"
+                tabindex="0"
+                aria-label="Audio-Fortschritt"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                aria-valuenow="0"
+              >
+                <div id="gad-scrub-fill" class="sab-scrub-fill"></div>
+              </div>
+              <span id="gad-time-dur" class="sab-time text-mono">0:00</span>
+            </div>
+
+            <!-- Right: Track Selector Pills & Mute -->
+            <div class="sab-right">
+              {player.voiceClips.length > 1 && (
+                <div class="sab-pills" role="list" aria-label="Sprachaufnahmen auswählen">
+                  {player.voiceClips.map((vc, idx) => (
+                    <button
+                      type="button"
+                      class={`sab-pill text-mono gad-track-item ${idx === 0 ? 'is-active' : ''}`}
+                      data-track-index={idx}
+                      data-voice-src={vc.src}
+                      data-voice-title={vc.title}
+                      data-voice-ctx={vc.context || 'Sprachaufnahme'}
+                    >
+                      #{idx + 1}
+                    </button>
+                  ))}
+                </div>
+              )}
+
+              <button
+                type="button"
+                id="gad-mute-btn"
+                class="sab-icon-btn"
+                aria-label="Stummschalten"
+                title="Ton ein/aus"
+              >
+                <svg id="gad-icon-vol" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+                <svg id="gad-icon-muted" class="hidden" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+              </button>
+            </div>
+          </>
+        ) : (
+          <div class="sab-empty text-mono">
+            [Platzhalter: Keine Audiodateien hinterlegt]
+          </div>
+        )}
+      </section>
+
+      <!-- =====================================================================
+           3. WIDE BIOGRAPHY (With Titles, Subtitles & Chapters) + IMPACT & WERDEGANG
+           ===================================================================== -->
+      <section class="bio-and-impact-grid" aria-label="Biografie, Einfluss und Werdegang">
+        <!-- Wide Biography Card (Left) -->
+        <article class="bento-card bio-card">
+          <div class="card-head">
+            <span class="block-label text-mono">ÜBER DIE PERSON</span>
+            <h2 class="card-title">BIOGRAFIE & HINTERGRUND</h2>
+          </div>
+
+          {player.bioLead && (
+            <p class="bio-lead">{player.bioLead}</p>
+          )}
+
+          <div class="bio-chapters">
+            {player.bioSections.map((section) => (
+              <div class="bio-chapter">
+                {section.subtitle && (
+                  <span class="chapter-subtitle text-mono">{section.subtitle}</span>
+                )}
+                <h3 class="chapter-title">{section.title}</h3>
+                <div class="chapter-paragraphs">
+                  {section.paragraphs.map((p) => (
+                    <p>{p}</p>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </article>
+
+        <!-- Impact & Milestones Stack (Right) -->
+        <div class="side-stack">
+          <!-- Impact on the Organisation -->
+          <div class="bento-card">
+            <div class="card-head">
+              <span class="block-label text-mono">EINFLUSS AUF DIE ORGANISATION</span>
+              <h3 class="card-subtitle">BEITRAG FÜR VEREIN & COMMUNITY</h3>
+            </div>
+
+            <ul class="impact-list">
+              {player.impact.map((point, idx) => (
+                <li class="impact-item">
+                  <span class="impact-num text-mono">{String(idx + 1).padStart(2, '0')}</span>
+                  <span>{point}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <!-- Milestones (Werdegang) -->
+          {player.milestones.length > 0 && (
+            <div class="bento-card">
+              <div class="card-head">
+                <span class="block-label text-mono">WERDEGANG</span>
+                <h3 class="card-subtitle">STATIONEN & MEILENSTEINE</h3>
+              </div>
+
+              <div class="milestones-list">
+                {player.milestones.map((ms) => (
+                  <div class="ms-row">
+                    <span class="ms-date text-mono">{ms.date}</span>
+                    <div class="ms-body">
+                      <strong class="ms-label">{ms.label}</strong>
+                      {ms.detail && <p class="ms-detail">{ms.detail}</p>}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      </section>
+
+      <!-- =====================================================================
+           4. 50/50 SPLIT: PRIME LEAGUE SPLITS ROADMAP (LEFT) & VIDEO AREA (RIGHT)
+           ===================================================================== -->
+      <section class="split-two-col" aria-label="Gespielte Splits und Video-Bereich">
+        <!-- Left Half: Splits Roadmap -->
+        <div class="bento-card">
+          <div class="card-head-flex">
+            <div>
+              <span class="block-label text-mono">ROADMAP & EINSÄTZE</span>
+              <h2 class="card-title">GESPIELTE PRIME LEAGUE SPLITS</h2>
+            </div>
+
+            {player.primeLeagueUserUrl && (
+              <a
+                href={player.primeLeagueUserUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="ext-pill text-mono"
+              >
+                <span>Prime League Akte</span>
+                <span aria-hidden="true">↗</span>
+              </a>
+            )}
+          </div>
+
+          <div class="roadmap-list">
+            {player.seasons.map((s, idx) => (
+              <div class="roadmap-item">
+                <div class="rm-rail">
+                  <span class="rm-idx text-mono">{String(idx + 1).padStart(2, '0')}</span>
+                  {idx < player.seasons.length - 1 && <span class="rm-line"></span>}
+                </div>
+
+                <div class="rm-card">
+                  <div class="rm-top text-mono">
+                    <span class="rm-season">{s.season}</span>
+                    <span class={`rm-badge ${s.source === 'api' ? 'is-api' : ''}`}>
+                      {s.source === 'api' ? 'API-SYNC' : 'CHRONIK'}
+                    </span>
+                  </div>
+
+                  <div class="rm-team-row">
+                    <div class="name-with-link">
+                      <h3 class="rm-team">{s.team}</h3>
+                      {s.teamLink && (
+                        <a
+                          href={s.teamLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          class="link-forward-arrow"
+                          title={`${s.team} auf Prime League öffnen`}
+                          aria-label={`${s.team} auf Prime League öffnen`}
+                        >
+                          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </a>
+                      )}
+                    </div>
+                    {s.division && <span class="rm-div text-mono">{s.division}</span>}
+                  </div>
+
+                  {s.note && <p class="rm-note">{s.note}</p>}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Right Half: Video Area -->
+        <div class="bento-card">
+          <div class="card-head">
+            <span class="block-label text-mono">BEWEGTBILD & HIGHLIGHTS</span>
+            <h2 class="card-title">VIDEO-BEREICH</h2>
+          </div>
+
+          {firstVideo ? (
+            <div class="video-stack">
+              <div class="video-frame">
+                <video
+                  id="hall-video-el"
+                  controls
+                  preload="metadata"
+                  poster={firstVideo.poster}
+                  class="video-el"
+                  src={firstVideo.src}
+                >
+                  Dein Browser unterstützt das Video-Element nicht.
+                </video>
+              </div>
+
+              <div class="video-info-box">
+                <h3 id="hall-video-title" class="video-title">{firstVideo.title}</h3>
+                <p id="hall-video-desc" class="video-desc">{firstVideo.description || ''}</p>
+              </div>
+
+              {player.videos.length > 1 && (
+                <div class="video-pills">
+                  {player.videos.map((vid, idx) => (
+                    <button
+                      type="button"
+                      class={`cinema-pill text-mono ${idx === 0 ? 'is-active' : ''}`}
+                      data-vid-index={idx}
+                      data-vid-src={vid.src}
+                      data-vid-title={vid.title}
+                      data-vid-desc={vid.description || ''}
+                    >
+                      #{idx + 1} {vid.title}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+          ) : (
+            <p class="placeholder-text">[Platzhalter: Kein Video in data/honored.json hinterlegt]</p>
+          )}
+        </div>
+      </section>
+
+      <!-- =====================================================================
+           5. IMAGES & GALLERY SECTION (Bilder & Eindrücke)
+           ===================================================================== -->
+      <section class="bento-card gallery-section" aria-label="Bilder und Galerie">
+        <div class="card-head-flex">
+          <div>
+            <span class="block-label text-mono">ARCHIV & IMPRESSIONEN</span>
+            <h2 class="card-title">BILDER & MOMENTE</h2>
+          </div>
+          <span class="gallery-count text-mono">{player.images.length} AUFNAHMEN</span>
+        </div>
+
+        {player.images.length > 0 ? (
+          <div class="gallery-grid">
+            {player.images.map((img) => (
+              <figure class="gallery-item">
+                <div class="gallery-img-wrap">
+                  <img
+                    src={img.src}
+                    alt={img.title || img.caption || `Bild von ${player.name}`}
+                    class="gallery-img"
+                    loading="lazy"
+                    decoding="async"
+                    onerror="this.src='/assets/profile/profile_placeholder.png'"
+                  />
+                  {img.date && <span class="gallery-date text-mono">{img.date}</span>}
+                </div>
+                {(img.title || img.caption) && (
+                  <figcaption class="gallery-caption">
+                    {img.title && <strong class="gallery-item-title">{img.title}</strong>}
+                    {img.caption && <p class="gallery-item-desc">{img.caption}</p>}
+                  </figcaption>
+                )}
+              </figure>
+            ))}
+          </div>
+        ) : (
+          <p class="placeholder-text">[Platzhalter: Keine Bilder in data/honored.json hinterlegt]</p>
+        )}
+      </section>
+
+    </div>
+  </div>
+</Layout>
+
+<script>
+  // Standalone Slim Glassmorphism Audio Bar Controller
+  const audio = document.getElementById('gad-audio') as HTMLAudioElement | null;
+  const playBtn = document.getElementById('gad-play-btn');
+  const prevBtn = document.getElementById('gad-prev-btn');
+  const nextBtn = document.getElementById('gad-next-btn');
+  const muteBtn = document.getElementById('gad-mute-btn');
+  const iconPlay = document.getElementById('gad-icon-play');
+  const iconPause = document.getElementById('gad-icon-pause');
+  const iconVol = document.getElementById('gad-icon-vol');
+  const iconMuted = document.getElementById('gad-icon-muted');
+  const visualizer = document.getElementById('gad-visualizer');
+  const curTitle = document.getElementById('gad-current-title');
+  const curCtx = document.getElementById('gad-current-ctx');
+  const timeCur = document.getElementById('gad-time-cur');
+  const timeDur = document.getElementById('gad-time-dur');
+  const scrub = document.getElementById('gad-scrub');
+  const scrubFill = document.getElementById('gad-scrub-fill');
+  const trackItems = Array.from(document.querySelectorAll('.gad-track-item'));
+
+  let currentTrackIdx = 0;
+
+  function formatTime(sec: number): string {
+    if (!isFinite(sec) || sec < 0) return '0:00';
+    const m = Math.floor(sec / 60);
+    const s = Math.floor(sec % 60);
+    return `${m}:${s < 10 ? '0' : ''}${s}`;
+  }
+
+  function loadTrack(idx: number, autoPlay = true) {
+    if (!audio || trackItems.length === 0) return;
+    currentTrackIdx = (idx + trackItems.length) % trackItems.length;
+    const target = trackItems[currentTrackIdx];
+    trackItems.forEach((btn, i) => btn.classList.toggle('is-active', i === currentTrackIdx));
+
+    const src = target.getAttribute('data-voice-src');
+    const title = target.getAttribute('data-voice-title');
+    const ctx = target.getAttribute('data-voice-ctx');
+
+    if (src) audio.src = src;
+    if (curTitle && title) curTitle.textContent = title;
+    if (curCtx) curCtx.textContent = ctx || '';
+    if (scrubFill) scrubFill.style.width = '0%';
+
+    if (autoPlay) {
+      audio.play().catch(() => {});
+    }
+  }
+
+  if (audio && playBtn) {
+    const syncState = () => {
+      const playing = !audio.paused;
+      iconPlay?.classList.toggle('hidden', playing);
+      iconPause?.classList.toggle('hidden', !playing);
+      visualizer?.classList.toggle('is-playing', playing);
+    };
+
+    playBtn.addEventListener('click', () => {
+      if (audio.paused) {
+        audio.play().catch(() => {});
+      } else {
+        audio.pause();
+      }
+    });
+
+    prevBtn?.addEventListener('click', () => loadTrack(currentTrackIdx - 1, true));
+    nextBtn?.addEventListener('click', () => loadTrack(currentTrackIdx + 1, true));
+
+    muteBtn?.addEventListener('click', () => {
+      audio.muted = !audio.muted;
+      iconVol?.classList.toggle('hidden', audio.muted);
+      iconMuted?.classList.toggle('hidden', !audio.muted);
+    });
+
+    audio.addEventListener('play', syncState);
+    audio.addEventListener('pause', syncState);
+    audio.addEventListener('ended', () => {
+      syncState();
+      if (trackItems.length > 1) {
+        loadTrack(currentTrackIdx + 1, true);
+      }
+    });
+
+    audio.addEventListener('timeupdate', () => {
+      const c = audio.currentTime || 0;
+      const d = audio.duration || 0;
+      if (timeCur) timeCur.textContent = formatTime(c);
+      if (timeDur && d > 0) timeDur.textContent = formatTime(d);
+      if (scrubFill && d > 0) {
+        const pct = Math.min(100, Math.round((c / d) * 100));
+        scrubFill.style.width = `${pct}%`;
+        scrub?.setAttribute('aria-valuenow', String(pct));
+      }
+    });
+
+    audio.addEventListener('loadedmetadata', () => {
+      if (timeDur) timeDur.textContent = formatTime(audio.duration || 0);
+    });
+
+    scrub?.addEventListener('click', (e) => {
+      const rect = scrub.getBoundingClientRect();
+      const ratio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+      if (audio.duration) {
+        audio.currentTime = ratio * audio.duration;
+      }
+    });
+
+    scrub?.addEventListener('keydown', (e) => {
+      if (!audio.duration) return;
+      if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        audio.currentTime = Math.min(audio.duration, audio.currentTime + 5);
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        audio.currentTime = Math.max(0, audio.currentTime - 5);
+      }
+    });
+
+    trackItems.forEach((btn, idx) => {
+      btn.addEventListener('click', () => loadTrack(idx, true));
+    });
+  }
+
+  // Video Switcher
+  const videoEl = document.getElementById('hall-video-el') as HTMLVideoElement | null;
+  const videoTitle = document.getElementById('hall-video-title');
+  const videoDesc = document.getElementById('hall-video-desc');
+  const videoPills = Array.from(document.querySelectorAll('.cinema-pill'));
+
+  if (videoEl && videoPills.length > 0) {
+    videoPills.forEach((pill) => {
+      pill.addEventListener('click', () => {
+        videoPills.forEach((p) => p.classList.remove('is-active'));
+        pill.classList.add('is-active');
+        const src = pill.getAttribute('data-vid-src');
+        const title = pill.getAttribute('data-vid-title');
+        const desc = pill.getAttribute('data-vid-desc');
+        if (src) {
+          videoEl.src = src;
+          videoEl.load();
+        }
+        if (videoTitle && title) videoTitle.textContent = title;
+        if (videoDesc) videoDesc.textContent = desc || '';
+      });
+    });
+  }
+</script>
+
+<style>
+  .hall-page {
+    padding-top: 8.5rem;
+    padding-bottom: 7rem;
+    min-height: 100vh;
+    background-color: #000000;
+  }
+
+  .hall-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+  }
+
+  /* Top Navigation Bar */
+  .hall-topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+  }
+
+  .topbar-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .nav-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: var(--text-secondary);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    background: #0d0d10;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-sm);
+    transition: all var(--transition-fast);
+  }
+
+  .nav-chip:hover {
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+
+  .topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    background: #0d0d10;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-sm);
+  }
+
+  .serial-lbl {
+    color: #ffffff;
+    font-weight: 800;
+  }
+
+  .topbar-right time {
+    color: #ffffff;
+    font-weight: 700;
+  }
+
+  /* =====================================================================
+     1. HERO PROFILE CARD (Clean Main-Page Aesthetic)
+     ===================================================================== */
+  .hero-profile-card {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    background: #0d0d10;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+
+  .hero-portrait-stage {
+    position: relative;
+    min-height: 360px;
+    background: #070709;
+    overflow: hidden;
+  }
+
+  .portrait-badges {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    z-index: 4;
+  }
+
+  /* Gold used only where it matters: the Crown badge */
+  .crown-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.6875rem;
+    font-weight: 800;
+    color: #fbbf24;
+    background: rgba(10, 10, 14, 0.82);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(245, 158, 11, 0.4);
+    padding: 4px 10px;
+    border-radius: var(--radius-xs);
+    letter-spacing: 0.06em;
+  }
+
+  .portrait-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  .portrait-shade {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 40%;
+    background: linear-gradient(180deg, transparent 0%, #0d0d10 100%);
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .hero-identity-body {
+    padding: var(--space-2xl);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: var(--space-xl);
+  }
+
+  .identity-top {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .meta-pills-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+
+  .meta-pill {
+    font-size: 0.6875rem;
+    color: var(--text-secondary);
+    background: #141418;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 4px 10px;
+    border-radius: var(--radius-xs);
+  }
+
+  .meta-pill time {
+    color: #ffffff;
+    font-weight: 700;
+  }
+
+  .meta-pill-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+    color: #ffffff;
+    transition: border-color var(--transition-fast);
+  }
+
+  .meta-pill-link:hover {
+    border-color: rgba(255, 255, 255, 0.35);
+  }
+
+  .person-name {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 3.8vw, 3rem);
+    font-weight: 900;
+    color: #ffffff;
+    letter-spacing: -0.02em;
+    line-height: 1.08;
+  }
+
+  .person-title {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
+
+  .block-label {
+    display: block;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+    margin-bottom: 6px;
+  }
+
+  .phrases-section {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .phrases-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: var(--space-md);
+  }
+
+  .phrase-card {
+    margin: 0;
+    padding: 12px 16px;
+    background: #121216;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-left: 2px solid #fbbf24;
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+    font-style: italic;
+    font-size: 0.92rem;
+    line-height: 1.5;
+  }
+
+  /* =====================================================================
+     2. STANDALONE SLIM & WIDE GLASSMORPHISM AUDIO BAR (Outside the box)
+     ===================================================================== */
+  .standalone-audio-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-xl);
+    padding: 14px 22px;
+    background: rgba(18, 18, 24, 0.72);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: var(--radius-md);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  }
+
+  .sab-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-width: 240px;
+  }
+
+  .sab-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .sab-icon-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-xs);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: var(--text-secondary);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+  }
+
+  .sab-icon-btn:hover {
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .sab-play-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #ffffff;
+    color: #000000;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: transform var(--transition-fast), background var(--transition-fast);
+  }
+
+  .sab-play-btn:hover {
+    background: #fbbf24;
+    transform: scale(1.05);
+  }
+
+  .sab-track-meta {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  .sab-title-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .sab-eq {
+    display: inline-flex;
+    align-items: flex-end;
+    gap: 2px;
+    height: 12px;
+  }
+
+  .eq-b {
+    width: 2px;
+    height: 35%;
+    background: var(--text-muted);
+    border-radius: 1px;
+  }
+
+  .sab-eq.is-playing .eq-b {
+    background: #fbbf24;
+    animation: eqPulse 0.7s ease-in-out infinite alternate;
+  }
+  .sab-eq.is-playing .eq-b:nth-child(2) { animation-duration: 0.5s; }
+  .sab-eq.is-playing .eq-b:nth-child(3) { animation-duration: 0.85s; }
+
+  @keyframes eqPulse {
+    0% { height: 25%; }
+    100% { height: 100%; }
+  }
+
+  .sab-title {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: #ffffff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .sab-ctx {
+    font-size: 0.6875rem;
+    color: var(--text-muted);
+  }
+
+  .sab-center {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .sab-time {
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+    min-width: 34px;
+  }
+
+  .sab-scrub {
+    flex: 1;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 999px;
+    overflow: hidden;
+    cursor: pointer;
+  }
+
+  .sab-scrub-fill {
+    width: 0%;
+    height: 100%;
+    background: #fbbf24;
+    border-radius: 999px;
+    transition: width 0.1s linear;
+  }
+
+  .sab-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .sab-pills {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .sab-pill {
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 5px 10px;
+    border-radius: var(--radius-xs);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+  }
+
+  .sab-pill:hover,
+  .sab-pill.is-active {
+    background: #ffffff;
+    color: #000000;
+    border-color: #ffffff;
+  }
+
+  /* =====================================================================
+     3. WIDE BIOGRAPHY (With Subtitles & Titles) + IMPACT & WERDEGANG
+     ===================================================================== */
+  .bio-and-impact-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 0.85fr;
+    gap: var(--space-xl);
+    align-items: start;
+  }
+
+  .bento-card {
+    background: #0d0d10;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
+    padding: var(--space-2xl);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+
+  .card-head {
+    padding-bottom: var(--space-md);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .card-head-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    flex-wrap: wrap;
+    padding-bottom: var(--space-md);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .card-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.35rem, 2.2vw, 1.65rem);
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: -0.01em;
+  }
+
+  .card-subtitle {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: #ffffff;
+  }
+
+  .bio-lead {
+    font-size: 1.05rem;
+    color: #ffffff;
+    line-height: 1.7;
+    font-weight: 500;
+    padding-bottom: var(--space-md);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .bio-chapters {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+  }
+
+  .bio-chapter {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .chapter-subtitle {
+    font-size: 0.6875rem;
+    color: #fbbf24;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+  }
+
+  .chapter-title {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: #ffffff;
+  }
+
+  .chapter-paragraphs {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    color: var(--text-secondary);
+    font-size: 0.96rem;
+    line-height: 1.75;
+  }
+
+  .side-stack {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+  }
+
+  .impact-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .impact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 14px;
+    background: #121216;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: var(--radius-sm);
+    color: var(--text-secondary);
+    font-size: 0.92rem;
+    line-height: 1.5;
+  }
+
+  .impact-num {
+    font-size: 0.72rem;
+    font-weight: 800;
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.08);
+    padding: 2px 7px;
+    border-radius: var(--radius-xs);
+    flex-shrink: 0;
+  }
+
+  .milestones-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .ms-row {
+    display: flex;
+    gap: 14px;
+    padding: 12px 14px;
+    background: #121216;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: var(--radius-sm);
+  }
+
+  .ms-date {
+    font-size: 0.72rem;
+    font-weight: 800;
+    color: #fbbf24;
+    white-space: nowrap;
+  }
+
+  .ms-label {
+    display: block;
+    font-size: 0.92rem;
+    color: #ffffff;
+  }
+
+  .ms-detail {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    margin-top: 2px;
+  }
+
+  /* =====================================================================
+     4. 50/50 SPLIT: ROADMAP & VIDEO
+     ===================================================================== */
+  .split-two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+    align-items: stretch;
+  }
+
+  .ext-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    background: #141418;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    padding: 5px 10px;
+    border-radius: var(--radius-xs);
+    text-decoration: none;
+    transition: all var(--transition-fast);
+  }
+
+  .ext-pill:hover {
+    border-color: rgba(255, 255, 255, 0.35);
+    color: #ffffff;
+  }
+
+  .roadmap-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .roadmap-item {
+    display: flex;
+    gap: 14px;
+  }
+
+  .rm-rail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .rm-idx {
+    width: 28px;
+    height: 28px;
+    border-radius: var(--radius-xs);
+    background: #141418;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    color: #ffffff;
+    font-size: 0.72rem;
+    font-weight: 800;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .rm-line {
+    width: 1px;
+    flex: 1;
+    background: rgba(255, 255, 255, 0.1);
+    margin-top: 6px;
+  }
+
+  .rm-card {
+    flex: 1;
+    background: #121216;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-sm);
+    padding: var(--space-md);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .rm-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.72rem;
+  }
+
+  .rm-season {
+    color: var(--text-secondary);
+    font-weight: 700;
+  }
+
+  .rm-badge {
+    font-size: 0.625rem;
+    font-weight: 800;
+    padding: 2px 7px;
+    border-radius: var(--radius-xs);
+    color: var(--text-muted);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .rm-badge.is-api {
+    color: #34d399;
+    background: rgba(16, 185, 129, 0.12);
+    border-color: rgba(16, 185, 129, 0.35);
+  }
+
+  .rm-team-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .rm-team {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: #ffffff;
+  }
+
+  .rm-div {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+  }
+
+  .rm-note {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+
+  /* Video Area */
+  .video-stack {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .video-frame {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #050507;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+
+  .video-el {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background: #000000;
+  }
+
+  .video-info-box {
+    background: #121216;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-sm);
+    padding: var(--space-md);
+  }
+
+  .video-title {
+    font-size: 1rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: 4px;
+  }
+
+  .video-desc {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+  }
+
+  .video-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .cinema-pill {
+    font-size: 0.75rem;
+    padding: 6px 12px;
+    border-radius: var(--radius-xs);
+    background: #121216;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+  }
+
+  .cinema-pill.is-active,
+  .cinema-pill:hover {
+    background: #ffffff;
+    color: #000000;
+    border-color: #ffffff;
+  }
+
+  /* =====================================================================
+     5. IMAGES & GALLERY SECTION
+     ===================================================================== */
+  .gallery-count {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    background: #141418;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 4px 10px;
+    border-radius: var(--radius-xs);
+  }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--space-lg);
+  }
+
+  .gallery-item {
+    margin: 0;
+    background: #121216;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: border-color var(--transition-fast), transform var(--transition-smooth);
+  }
+
+  .gallery-item:hover {
+    border-color: rgba(255, 255, 255, 0.28);
+    transform: translateY(-2px);
+  }
+
+  .gallery-img-wrap {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    background: #070709;
+    overflow: hidden;
+  }
+
+  .gallery-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-smooth);
+  }
+
+  .gallery-item:hover .gallery-img {
+    transform: scale(1.04);
+  }
+
+  .gallery-date {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    color: #ffffff;
+    background: rgba(0, 0, 0, 0.72);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    padding: 2px 8px;
+    border-radius: var(--radius-xs);
+  }
+
+  .gallery-caption {
+    padding: var(--space-md);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .gallery-item-title {
+    font-size: 0.9375rem;
+    font-weight: 800;
+    color: #ffffff;
+  }
+
+  .gallery-item-desc {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  .placeholder-text,
+  .sab-empty {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+  }
+
+  .hidden {
+    display: none !important;
+  }
+
+  @media (max-width: 960px) {
+    .hero-profile-card,
+    .bio-and-impact-grid,
+    .split-two-col {
+      grid-template-columns: 1fr;
+    }
+
+    .standalone-audio-bar {
+      flex-direction: column;
+      align-items: stretch;
+      gap: var(--space-md);
+    }
+  }
+</style>

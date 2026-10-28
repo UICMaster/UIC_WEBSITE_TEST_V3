@@ -1,0 +1,396 @@
+---
+// src/components/home/About.astro
+import { totalTeams, communityCount, discordInviteUrl } from '../../utils/uicData';
+---
+
+<section id="about" class="section-pad about-section">
+  <div class="container">
+    
+    <div class="section-header">
+      <div class="section-badge-pill">VEREINSSTRUKTUR</div>
+      <h2 class="section-title">
+        STRUKTUR & <span class="text-gradient">ORGANISATION</span>
+      </h2>
+      <p class="section-desc">
+        Bei uns finden Spieler feste Teams, geregelten Ligabetrieb in der Prime League und eine verlässliche Gemeinschaft. Vom Einstieg bis zum leistungsorientierten Wettbewerb begleiten wir unsere Spieler langfristig.
+      </p>
+    </div>
+
+    <!-- Clean Modern Agency Bento Matrix -->
+    <div class="bento-grid">
+      
+      <!-- Bento 1: Prime League Ladder Trajectory (Span 8) -->
+      <div class="bento-card bento-span-8">
+        <div class="card-meta">
+          <span class="meta-num">01</span>
+          <span class="meta-tag">LIGA & WETTKAMPF</span>
+        </div>
+        
+        <h3 class="card-title">LIGABETRIEB IN DER PRIME LEAGUE</h3>
+        <p class="card-body">
+          Erfolg im eSport verlangt Verlässlichkeit und klare Abläufe. Wir bieten {totalTeams} eigenständigen Teams feste Trainingszeiten, organisatorische Unterstützung bei den Spieltagen und eine kontinuierliche Förderung durch alle Spielklassen der Prime League.
+        </p>
+
+        <!-- Division Progression Strip -->
+        <div class="ladder-strip">
+          <div class="ladder-step">
+            <span class="step-label">EINSTIEG</span>
+            <span class="step-tier">STARTER DIVISION</span>
+          </div>
+          <div class="ladder-arrow">&rarr;</div>
+          <div class="ladder-step">
+            <span class="step-label">AUFBAU</span>
+            <span class="step-tier">DIVISION 5 &bull; 6</span>
+          </div>
+          <div class="ladder-arrow">&rarr;</div>
+          <div class="ladder-step is-active">
+            <span class="step-label">WETTKAMPF</span>
+            <span class="step-tier">DIVISION 4</span>
+          </div>
+          <div class="ladder-arrow">&rarr;</div>
+          <div class="ladder-step step-target">
+            <span class="step-label">ZIEL</span>
+            <span class="step-tier">DIVISION 3 &bull; HÖHER</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bento 2: Community & Menschlichkeit (Span 4) -->
+      <div class="bento-card bento-span-4">
+        <div class="card-meta">
+          <span class="meta-num">02</span>
+          <span class="meta-tag">GEMEINSCHAFT</span>
+        </div>
+
+        <h3 class="card-title">{communityCount} SPIELER UND FANS</h3>
+        <p class="card-body">
+          Unsere Gemeinschaft bildet das verlässliche Fundament unseres Vereins. Neben den Ligaspielen organisieren wir vereinsinterne Turniere, gemeinsame Abende im Sprachkanal und pflegen einen respektvollen Umgang miteinander.
+        </p>
+
+        <div class="community-stats-row">
+          <div class="c-stat-box">
+            <span class="c-stat-val">{communityCount}</span>
+            <span class="c-stat-lbl">MITGLIEDER</span>
+          </div>
+          <div class="c-stat-box">
+            <span class="c-stat-val">TÄGLICH</span>
+            <span class="c-stat-lbl">GEMEINSAMES TRAINING</span>
+          </div>
+        </div>
+
+        <a href={discordInviteUrl} target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-full">
+          GEMEINSCHAFT BEITRETEN &rarr;
+        </a>
+      </div>
+
+      <!-- Bento 3: Talentschmiede & Coaching (Span 4) -->
+      <div class="bento-card bento-span-4">
+        <div class="card-meta">
+          <span class="meta-num">03</span>
+          <span class="meta-tag">AUSBILDUNG</span>
+        </div>
+
+        <h3 class="card-title">TRAINING & SPIELERFÖRDERUNG</h3>
+        <p class="card-body">
+          Regelmäßige Spielanalysen, individuelle Rückmeldungen erfahrener Spieler und gezielte Vorbereitung auf anstehende Spieltage stärken jedes Team nachhaltig.
+        </p>
+
+        <ul class="coaching-points">
+          <li><span>&bull;</span> Individuelle Rückmeldungen zu Rollen und Champions</li>
+          <li><span>&bull;</span> Analysen von Spielzügen, Kartenkontrolle und Drafts</li>
+          <li><span>&bull;</span> Absprache im Team und strategische Entscheidungen</li>
+        </ul>
+      </div>
+
+      <!-- Bento 4: Content & Broadcast Studio (Span 8) -->
+      <div class="bento-card bento-span-8">
+        <div class="card-meta">
+          <span class="meta-num">04</span>
+          <span class="meta-tag">ÜBERTRAGUNG & TURNIERE</span>
+        </div>
+
+        <div class="broadcast-layout">
+          <div>
+            <h3 class="card-title">SPIELTAGS-ÜBERTRAGUNG & VEREINSTURNIERE</h3>
+            <p class="card-body">
+              Wir übertragen wichtige Ligaspiele mit eigenem Kommentar live auf Twitch, veranstalten regelmäßige Vereinsturniere und fassen die Höhepunkte der Saison zusammen.
+            </p>
+            <div class="broadcast-tags">
+              <span class="b-tag">LIVE-KOMMENTAR</span>
+              <span class="b-tag">VEREINSTURNIERE</span>
+              <span class="b-tag">SPIELANALYSEN</span>
+              <span class="b-tag">SPIELER-INTERVIEWS</span>
+            </div>
+          </div>
+
+          <div class="broadcast-metric-box">
+            <div class="b-metric-item">
+              <span class="b-val">1080p</span>
+              <span class="b-lbl">BILDQUALITÄT</span>
+            </div>
+            <div class="b-metric-item">
+              <span class="b-val">LIVE</span>
+              <span class="b-lbl">SPIELTAGE MIT KOMMENTAR</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .about-section {
+    background-color: #000000;
+    position: relative;
+  }
+
+  /* Bento Grid */
+  .bento-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: var(--space-lg);
+  }
+
+  .bento-span-8 {
+    grid-column: span 8;
+  }
+
+  .bento-span-4 {
+    grid-column: span 4;
+  }
+
+  .bento-card {
+    background: #0d0d10;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
+    padding: var(--space-2xl);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: border-color var(--transition-fast), transform var(--transition-smooth);
+  }
+
+  .bento-card:hover {
+    background: #121216;
+    border-color: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
+  }
+
+  .card-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-md);
+  }
+
+  .meta-num {
+    font-family: var(--font-tech);
+    font-size: 0.8125rem;
+    font-weight: 800;
+    color: var(--text-white);
+  }
+
+  .meta-tag {
+    font-family: var(--font-tech);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+  }
+
+  .card-title {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(1.25rem, 2vw, 1.65rem);
+    color: var(--text-white);
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-sm);
+    line-height: 1.2;
+  }
+
+  .card-body {
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-xl);
+  }
+
+  /* Ladder Strip */
+  .ladder-strip {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-md);
+    padding: var(--space-md);
+    overflow-x: auto;
+  }
+
+  .ladder-step {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: var(--space-xs);
+    border-radius: var(--radius-xs);
+    background: rgba(255, 255, 255, 0.02);
+    min-width: 100px;
+  }
+
+  .ladder-step.is-active {
+    background: #ffffff;
+    color: #000000;
+  }
+
+  .ladder-step.is-active .step-label {
+    color: rgba(0, 0, 0, 0.7);
+  }
+
+  .ladder-step.is-active .step-tier {
+    color: #000000;
+  }
+
+  .step-label {
+    font-family: var(--font-tech);
+    font-size: 0.625rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: 0.06em;
+  }
+
+  .step-tier {
+    font-family: var(--font-tech);
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: var(--text-white);
+  }
+
+  .ladder-arrow {
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 0.875rem;
+  }
+
+  /* Community Stats */
+  .community-stats-row {
+    display: flex;
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+  }
+
+  .c-stat-box {
+    flex: 1;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-sm);
+    padding: var(--space-md);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .c-stat-val {
+    font-family: var(--font-tech);
+    font-weight: 800;
+    font-size: 1.25rem;
+    color: #ffffff;
+  }
+
+  .c-stat-lbl {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+  }
+
+  /* Coaching Points */
+  .coaching-points {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+  }
+
+  .coaching-points li {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .coaching-points li span {
+    color: rgba(255, 255, 255, 0.4);
+  }
+
+  /* Broadcast Studio */
+  .broadcast-layout {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: var(--space-xl);
+    align-items: center;
+  }
+
+  .broadcast-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .b-tag {
+    font-family: var(--font-tech);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: var(--text-secondary);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 4px 10px;
+    border-radius: var(--radius-xs);
+  }
+
+  .broadcast-metric-box {
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-md);
+    padding: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .b-metric-item {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .b-val {
+    font-family: var(--font-tech);
+    font-weight: 800;
+    font-size: 1.35rem;
+    color: #ffffff;
+  }
+
+  .b-lbl {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+  }
+
+  /* Responsive */
+  @media (max-width: 992px) {
+    .bento-span-8, .bento-span-4 {
+      grid-column: span 12;
+    }
+
+    .broadcast-layout {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

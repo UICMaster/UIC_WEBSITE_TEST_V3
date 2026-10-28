@@ -1,0 +1,35 @@
+name: Update Discord Events
+on:
+  schedule:
+    - cron: '50 * * * *'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run Sync Script
+        env:
+          DISCORD_TOKEN: ${{ secrets.EVENT_MANAGER_WEBSITE_TOKEN }}
+          GUILD_ID: ${{ secrets.GUILD_ID }}
+        run: node automation/sync_events.js
+
+      - name: Commit & Push changes
+        run: |
+          git config --global user.name 'UIC Bot'
+          git config --global user.email 'bot@ultrainstinctcrew.com'
+          git add data/events.json
+          if [[ -n $(git status -s) ]]; then
+            git commit -m "chore: auto-update discord events"
+            git pull --rebase
+            git push
+          fi

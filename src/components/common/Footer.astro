@@ -1,0 +1,232 @@
+---
+// src/components/common/Footer.astro
+import { discordInviteUrl } from '../../utils/uicData';
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <!-- Col 1: Brand & Disclaimers -->
+      <div class="footer-col brand-col">
+        <div class="footer-brand">
+          <img src="/assets/logo/logo.svg" alt="UIC Logo" width="32" height="32" class="footer-logo" />
+          <span class="footer-brand-title">ULTRA INSTINCT CREW</span>
+        </div>
+        <p class="brand-tagline">
+          League of Legends eSport Organisation in der Prime League.
+        </p>
+
+        <div class="legal-disclaimers">
+          <div class="disclaimer-item">
+            <span class="disclaimer-label">Riot Games Disclaimer</span>
+            <p>
+              Ultra Instinct Crew wird nicht von Riot Games unterstützt und spiegelt nicht die Ansichten oder Meinungen von Riot Games oder anderen Personen wider, die offiziell an der Herstellung oder Verwaltung von League of Legends beteiligt sind. League of Legends und Riot Games sind Marken oder eingetragene Marken von Riot Games, Inc.
+            </p>
+          </div>
+          <div class="disclaimer-item">
+            <span class="disclaimer-label">Prime League Daten</span>
+            <p>
+              Zur Darstellung unserer sportlichen Erfolge nutzen wir Daten der inoffiziellen Prime League Schnittstelle (primebot.me).
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Col 2: Navigation -->
+      <div class="footer-col">
+        <h4 class="footer-heading">NAVIGATION</h4>
+        <ul class="footer-nav">
+          <li><a href="/#hero">Startseite</a></li>
+          <li><a href="/#about">Vereinsstruktur</a></li>
+          <li><a href="/#teams">Teams & Aufstellung</a></li>
+          <li><a href="/honored">Ruhmeshalle</a></li>
+          <li><a href="/#stats">Tabelle & Spielplan</a></li>
+          <li><a href="/#events">Termine & Kalender</a></li>
+          <li><a href="/#stream">Live-Übertragung</a></li>
+          <li><a href="/#partners">Partner</a></li>
+          <li><a href="/#media-vault">Medien & Downloads</a></li>
+          <li><a href="https://teams.spized.com/ultrainstinctcrew" target="_blank" rel="noopener noreferrer">Offizieller Shop ↗</a></li>
+          <li><a href="https://turnier.ultrainstinctcrew.com/" target="_blank" rel="noopener noreferrer">UIC Turnier ↗</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 3: Legal & Support -->
+      <div class="footer-col">
+        <h4 class="footer-heading">RECHTLICHES</h4>
+        <ul class="footer-nav">
+          <li><a href="/impressum">Impressum</a></li>
+          <li><a href="/datenschutzbestimmungen">Datenschutzbestimmungen</a></li>
+          <li><a href="mailto:support@ultrainstinctcrew.com">Kontakt & Support</a></li>
+        </ul>
+
+        <h4 class="footer-heading" style="margin-top: var(--space-xl);">GEMEINSCHAFT</h4>
+        <div class="social-pills">
+          <a href={discordInviteUrl} target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-social">
+            DISCORD
+          </a>
+          <a href="https://x.com/uic_gaming" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-social">
+            TWITTER / X
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="footer-bottom">
+      <p class="copyright">
+        &copy; 2018 - {currentYear} Ultra Instinct Crew. Alle Rechte vorbehalten.
+      </p>
+      <div class="footer-meta">
+        <span class="tech-pill">DEUTSCHER ESPORT</span>
+        <span class="tech-pill">DSGVO-KONFORM</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background-color: var(--bg-surface);
+    border-top: 1px solid var(--border-subtle);
+    padding-top: var(--space-4xl);
+    padding-bottom: var(--space-2xl);
+    position: relative;
+    z-index: 1;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: clamp(2rem, 5vw, 4rem);
+    margin-bottom: var(--space-3xl);
+  }
+
+  .footer-brand {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-sm);
+  }
+
+  .footer-logo {
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.15));
+  }
+
+  .footer-brand-title {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.125rem;
+    letter-spacing: 0.05em;
+    color: var(--text-white);
+  }
+
+  .brand-tagline {
+    color: var(--text-secondary);
+    font-size: 0.9375rem;
+    max-width: 480px;
+    margin-bottom: var(--space-xl);
+  }
+
+  .legal-disclaimers {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    max-width: 540px;
+  }
+
+  .disclaimer-item {
+    padding-left: var(--space-sm);
+    border-left: 2px solid var(--border-medium);
+  }
+
+  .disclaimer-label {
+    display: block;
+    font-family: var(--font-tech);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 2px;
+  }
+
+  .disclaimer-item p {
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  .footer-heading {
+    font-family: var(--font-tech);
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--text-white);
+    margin-bottom: var(--space-md);
+  }
+
+  .footer-nav {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+  }
+
+  .footer-nav a {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    transition: color var(--transition-fast);
+  }
+
+  .footer-nav a:hover {
+    color: var(--text-white);
+  }
+
+  .social-pills {
+    display: flex;
+    gap: var(--space-xs);
+    flex-wrap: wrap;
+  }
+
+  .btn-social {
+    padding: 0.5rem 1rem;
+    font-size: 0.75rem;
+  }
+
+  /* Bottom bar */
+  .footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: var(--space-xl);
+    border-top: 1px solid var(--border-subtle);
+    flex-wrap: wrap;
+    gap: var(--space-md);
+  }
+
+  .copyright {
+    color: var(--text-muted);
+    font-size: 0.8125rem;
+  }
+
+  .footer-meta {
+    display: flex;
+    gap: var(--space-xs);
+  }
+
+  .tech-pill {
+    font-family: var(--font-tech);
+    font-size: 0.6875rem;
+    color: var(--text-muted);
+    background-color: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border-subtle);
+    padding: 2px 8px;
+    border-radius: var(--radius-sm);
+  }
+
+  @media (max-width: 900px) {
+    .footer-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-2xl);
+    }
+  }
+</style>

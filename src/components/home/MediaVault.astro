@@ -1,0 +1,523 @@
+---
+// src/components/home/MediaVault.astro
+import { totalTeams, totalAthletes, discordInviteUrl } from '../../utils/uicData';
+---
+
+<section id="media-vault" class="section-pad media-vault-section">
+  <div class="container">
+    
+    <div class="section-header">
+      <div class="section-badge-pill">MEDIEN & DOWNLOADS</div>
+      <h2 class="section-title">
+        MEDIEN & <span class="text-gradient">VORLAGEN</span>
+      </h2>
+      <p class="section-desc">
+        Offizielle Vereinslogos, Farbcodes und Streaming-Vorlagen der Ultra Instinct Crew für Übertragungen, Partner und Vereinsmitglieder.
+      </p>
+    </div>
+
+    <!-- Core Asset Downloads Grid -->
+    <div class="assets-grid">
+      
+      <!-- Asset 1: Vector Logo Master -->
+      <div class="asset-card">
+        <div class="asset-meta-row text-mono">
+          <span class="meta-type">VEKTOR-LOGO</span>
+          <span class="meta-spec">SVG &bull; VEKTOR</span>
+        </div>
+        <div class="asset-preview-box">
+          <img src="/assets/logo/logo.svg" alt="UIC Wappen" class="preview-crest" width="56" height="56" />
+        </div>
+        <div class="asset-info-block">
+          <h3 class="asset-name">UIC VEREINSLOGO</h3>
+          <p class="asset-desc">Verlustfreies Vektor-Wappen für Webseiten, Druck und Grafikerstellung.</p>
+          <a href="/assets/logo/logo.svg" download class="btn btn-outline btn-sm asset-action">
+            HERUNTERLADEN ↓
+          </a>
+        </div>
+      </div>
+
+      <!-- Asset 2: OBS Broadcast Overlay -->
+      <div class="asset-card">
+        <div class="asset-meta-row text-mono">
+          <span class="meta-type">STREAM-VORLAGE</span>
+          <span class="meta-spec">1920x1080 OBS</span>
+        </div>
+        <div class="asset-preview-box">
+          <svg class="asset-svg-icon" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="2" y="3" width="20" height="14" rx="2"/>
+            <path d="M7 17v4M17 17v4M10 21h4"/>
+            <circle cx="12" cy="10" r="3" fill="rgba(255,255,255,0.12)"/>
+          </svg>
+        </div>
+        <div class="asset-info-block">
+          <h3 class="asset-name">OBS SPIELTAGS-OVERLAY</h3>
+          <p class="asset-desc">Grafikhintergrund für Spieltage und Spielpläne in 1080p Auflösung.</p>
+          <a href="/upcoming_matches.html" target="_blank" class="btn btn-outline btn-sm asset-action">
+            LIVE ÖFFNEN ↗
+          </a>
+        </div>
+      </div>
+
+      <!-- Asset 3: Social & Stream Kit -->
+      <div class="asset-card">
+        <div class="asset-meta-row text-mono">
+          <span class="meta-type">KANALVORLAGEN</span>
+          <span class="meta-spec">TWITCH & SOCIAL</span>
+        </div>
+        <div class="asset-preview-box">
+          <svg class="asset-svg-icon" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+            <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+            <line x1="12" y1="22.08" x2="12" y2="12"/>
+          </svg>
+        </div>
+        <div class="asset-info-block">
+          <h3 class="asset-name">BANNER & PANELS</h3>
+          <p class="asset-desc">Grafikvorlagen für Twitch-Panels (320x160), Twitter/X Banner (1500x500) und Discord.</p>
+          <a href="/assets/logo/logo.png" download class="btn btn-outline btn-sm asset-action">
+            PAKET HERUNTERLADEN ↓
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Brand Identity Chips -->
+    <div class="brandkit-matrix">
+      
+      <!-- Brand Matrix Column 1: Core Colors -->
+      <div class="brandkit-card">
+        <div class="bkit-header">
+          <span class="bkit-tag text-mono">FARBSYSTEM</span>
+          <span class="bkit-sub text-mono">GRAUSTUFEN-PALETTE</span>
+        </div>
+        <div class="chips-stack">
+          <div class="color-chip">
+            <div class="chip-dot" style="background: #000000; border: 1px solid rgba(255,255,255,0.3);"></div>
+            <div class="chip-text">
+              <span class="chip-title">Tiefschwarz</span>
+              <span class="chip-val text-mono">#000000</span>
+            </div>
+          </div>
+          <div class="color-chip">
+            <div class="chip-dot" style="background: #0A0D14; border: 1px solid rgba(255,255,255,0.2);"></div>
+            <div class="chip-text">
+              <span class="chip-title">Dunkle Fläche</span>
+              <span class="chip-val text-mono">#0A0D14</span>
+            </div>
+          </div>
+          <div class="color-chip">
+            <div class="chip-dot" style="background: #94A3B8;"></div>
+            <div class="chip-text">
+              <span class="chip-title">Hellgrauer Text</span>
+              <span class="chip-val text-mono">#94A3B8</span>
+            </div>
+          </div>
+          <div class="color-chip">
+            <div class="chip-dot" style="background: #FFFFFF;"></div>
+            <div class="chip-text">
+              <span class="chip-title">Reines Weiß</span>
+              <span class="chip-val text-mono">#FFFFFF</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Brand Matrix Column 2: Typography Specifications -->
+      <div class="brandkit-card">
+        <div class="bkit-header">
+          <span class="bkit-tag text-mono">TYPOGRAFIE</span>
+          <span class="bkit-sub text-mono">LOKAL & DATENSCHUTZKONFORM</span>
+        </div>
+        <div class="chips-stack">
+          <div class="spec-chip">
+            <span class="spec-role text-mono">ÜBERSCHRIFTEN & AKZENTE</span>
+            <span class="spec-font" style="font-family: var(--font-display); font-weight: 800;">PLUS JAKARTA SANS (800)</span>
+          </div>
+          <div class="spec-chip">
+            <span class="spec-role text-mono">FLIESSTEXT & MENÜS</span>
+            <span class="spec-font" style="font-family: var(--font-body); font-weight: 500;">PLUS JAKARTA SANS</span>
+          </div>
+          <div class="spec-chip">
+            <span class="spec-role text-mono">ZAHLEN & TABELLEN</span>
+            <span class="spec-font text-mono" style="font-weight: 700;">SPACE GROTESK</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Brand Matrix Column 3: Media Dimensions & Asset Sizes -->
+      <div class="brandkit-card">
+        <div class="bkit-header">
+          <span class="bkit-tag text-mono">MEDIA-FORMATE</span>
+          <span class="bkit-sub text-mono">OFFIZIELLE MASSE</span>
+        </div>
+        <div class="chips-stack">
+          <div class="format-chip">
+            <span class="format-label">Stream-Hintergrund</span>
+            <span class="format-dim text-mono">1920 &times; 1080 PX</span>
+          </div>
+          <div class="format-chip">
+            <span class="format-label">Twitter / X Banner</span>
+            <span class="format-dim text-mono">1500 &times; 500 PX</span>
+          </div>
+          <div class="format-chip">
+            <span class="format-label">Twitch Infoboxen</span>
+            <span class="format-dim text-mono">320 &times; 160 PX</span>
+          </div>
+          <div class="format-chip">
+            <span class="format-label">Discord Serverbanner</span>
+            <span class="format-dim text-mono">960 &times; 540 PX</span>
+          </div>
+          <div class="format-chip">
+            <span class="format-label">Profilbild & Wappen</span>
+            <span class="format-dim text-mono">512 &times; 512 PX</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 9. Statement CTA Box -->
+    <div id="join" class="statement-cta-section">
+      <div class="cta-content-inner">
+        <div class="cta-badge-pill">MITGLIEDSCHAFT & BEWERBUNG</div>
+        
+        <h2 class="cta-statement-title">
+          WERDE TEIL DER <span class="title-fill">ULTRA INSTINCT CREW</span>
+        </h2>
+        
+        <p class="cta-statement-desc">
+          Wir suchen engagierte Spieler, feste Teams, Teamleiter und Helfer für unsere Organisation. Schließe dich {totalAthletes} Spielern in {totalTeams} aktiven Teams in der Prime League an.
+        </p>
+        
+        <div class="cta-actions-cluster">
+          <a 
+            href="mailto:support@ultrainstinctcrew.com?subject=Bewerbung%20UIC%20Roster&body=Hallo%20UIC%20Team,%0D%0A%0D%0AHiermit%20m%C3%B6chte%20ich%20mich%20f%C3%BCr%20eines%20eurer%20Teams%20bewerben.%0D%0A%0D%0A---%20MEINE%20DATEN%20---%0D%0ASummoner%20Name:%20%0D%0AOp.gg%20Link:%20%0D%0AAktueller%20Rang:%20%0D%0APrim%C3%A4re%20Rolle:%20%0D%0ADiscord%20ID:%20%0D%0A%0D%0A---%20NACHRICHT%20---%0D%0A" 
+            class="btn btn-primary btn-cta-main"
+          >
+            <span>JETZT BEWERBEN</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          
+          <a 
+            href={discordInviteUrl} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="btn btn-outline btn-cta-sub"
+          >
+            <span>DISCORD SERVER ↗</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .media-vault-section {
+    background-color: #000000;
+    position: relative;
+  }
+
+  /* Core Assets Grid */
+  .assets-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--space-xl);
+    margin-bottom: var(--space-2xl);
+  }
+
+  .asset-card {
+    background: #0d0d10;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+    padding: var(--space-xl);
+    display: flex;
+    flex-direction: column;
+    transition: border-color var(--transition-fast), transform var(--transition-smooth);
+  }
+
+  .asset-card:hover {
+    background: #111115;
+    border-color: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
+  }
+
+  .asset-meta-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.6875rem;
+    color: var(--text-muted);
+    margin-bottom: var(--space-md);
+  }
+
+  .meta-type {
+    font-weight: 700;
+    letter-spacing: 0.08em;
+  }
+
+  .asset-preview-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 120px;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-md);
+  }
+
+  .preview-crest {
+    filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.25));
+  }
+
+  .asset-svg-icon {
+    color: var(--text-secondary);
+  }
+
+  .asset-info-block {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  .asset-name {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.15rem;
+    color: #ffffff;
+    margin-bottom: 4px;
+  }
+
+  .asset-desc {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin-bottom: var(--space-lg);
+    flex: 1;
+  }
+
+  .asset-action {
+    width: 100%;
+    justify-content: center;
+    border-radius: var(--radius-full);
+  }
+
+  /* Brandkit Matrix (Rich Chips) */
+  .brandkit-matrix {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--space-xl);
+    margin-bottom: var(--space-3xl);
+  }
+
+  .brandkit-card {
+    background: #0d0d10;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+    padding: var(--space-xl);
+  }
+
+  .bkit-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-bottom: var(--space-md);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    margin-bottom: var(--space-md);
+  }
+
+  .bkit-tag {
+    font-weight: 800;
+    font-size: 0.8125rem;
+    color: #ffffff;
+    letter-spacing: 0.06em;
+  }
+
+  .bkit-sub {
+    font-size: 0.625rem;
+    color: var(--text-muted);
+  }
+
+  .chips-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .color-chip {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 12px;
+    background: #141418;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-sm);
+  }
+
+  .chip-dot {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .chip-text {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  .chip-title {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .chip-val {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-muted);
+  }
+
+  .spec-chip {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 10px 12px;
+    background: #141418;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-sm);
+  }
+
+  .spec-role {
+    font-size: 0.625rem;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+  }
+
+  .spec-font {
+    font-size: 0.9375rem;
+    color: #ffffff;
+  }
+
+  .format-chip {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    background: #141418;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-sm);
+  }
+
+  .format-label {
+    font-size: 0.8125rem;
+    color: var(--text-primary);
+  }
+
+  .format-dim {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-muted);
+  }
+
+  /* 9. High-Impact Statement CTA Box (With Sleek Glare Detail) */
+  .statement-cta-section {
+    position: relative;
+    overflow: hidden;
+    background: radial-gradient(ellipse 70% 45% at 50% 0%, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 70%), #0d0d10;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: var(--radius-lg);
+    padding: clamp(3.5rem, 7vw, 6rem) clamp(1.5rem, 4vw, 4rem);
+    text-align: center;
+    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.8);
+  }
+
+  .statement-cta-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 20%;
+    right: 20%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+    pointer-events: none;
+  }
+
+  .cta-content-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 780px;
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cta-badge-pill {
+    display: inline-block;
+    font-family: var(--font-tech);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    background: #ffffff;
+    color: #000000;
+    padding: 3px 12px;
+    border-radius: var(--radius-xs);
+    margin-bottom: var(--space-md);
+  }
+
+  .cta-statement-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 5.5vw, 4.5rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: #ffffff;
+    text-transform: uppercase;
+    margin-bottom: var(--space-md);
+  }
+
+  .title-fill {
+    background: linear-gradient(180deg, #ffffff 40%, #71717a 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .cta-statement-desc {
+    font-size: clamp(1rem, 1.3vw, 1.25rem);
+    line-height: 1.6;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-xl);
+  }
+
+  .cta-actions-cluster {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .btn-cta-main {
+    padding: 1rem 2.25rem;
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    border-radius: var(--radius-full);
+    box-shadow: 0 4px 24px rgba(255, 255, 255, 0.25);
+  }
+
+  .btn-cta-sub {
+    padding: 1rem 2rem;
+    font-size: 0.9375rem;
+    font-weight: 700;
+    border-radius: var(--radius-full);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+</style>

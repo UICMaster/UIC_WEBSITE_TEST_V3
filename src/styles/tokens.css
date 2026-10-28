@@ -1,0 +1,71 @@
+/**
+ * UIC Design System - Sharp Monochrome Tokens
+ * Clean, bold, solid darkish surfaces, sharp lines, tactile raised areas.
+ * Zero cursive flourishes, pure bold typographic strength.
+ */
+
+:root {
+  /* Solid Pure Dark & Carbon Obsidian Surfaces (No muddy fades) */
+  --bg-void: #000000;
+  --bg-surface: #08080a;
+  --bg-surface-elevated: #0f0f13;
+  --bg-card: #0d0d10;
+  --bg-card-hover: #141418;
+  --bg-card-active: #18181f;
+  --bg-glass: rgba(10, 10, 13, 0.92);
+
+  /* Sharp Hairline Borders (Crisp, tactile, greyscale) */
+  --border-subtle: rgba(255, 255, 255, 0.09);
+  --border-medium: rgba(255, 255, 255, 0.18);
+  --border-strong: rgba(255, 255, 255, 0.35);
+  --border-active: #ffffff;
+
+  /* Typographic Contrast (Pure black/white & calibrated greys) */
+  --text-white: #ffffff;
+  --text-primary: #f4f4f5;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
+  --text-dim: #3f3f46;
+  --text-ghost: rgba(255, 255, 255, 0.03);
+
+  /* Functional Status (Crisp & Understated) */
+  --state-win: #10b981;
+  --state-win-bg: rgba(16, 185, 129, 0.12);
+  --state-loss: #f43f5e;
+  --state-loss-bg: rgba(244, 63, 94, 0.12);
+  --state-draw: #f59e0b;
+  --state-draw-bg: rgba(245, 158, 11, 0.12);
+
+  /* Clean, Bold, Razor-Sharp Typography (Plus Jakarta Sans - NO Cursive/Eccentric Fonts) */
+  --font-display: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'Space Grotesk', monospace;
+  --font-tech: var(--font-mono);
+
+  /* Spacing Scale */
+  --space-2xs: 0.25rem;
+  --space-xs: 0.5rem;
+  --space-sm: 0.75rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 5rem;
+  --space-4xl: 7.5rem;
+
+  /* Wide Viewport Container */
+  --container-max: 1680px;
+  --container-pad: clamp(1.25rem, 4vw, 3.5rem);
+
+  /* Sharp & Modern Radii */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  /* Transitions */
+  --transition-fast: 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-smooth: 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}

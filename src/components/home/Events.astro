@@ -1,0 +1,283 @@
+---
+// src/components/home/Events.astro
+import rawEvents from '../../../data/events.json';
+import { discordInviteUrl, matchLookupByUrl } from '../../utils/uicData';
+
+interface DiscordEvent {
+  id: string;
+  name: string;
+  description?: string;
+  type?: string;
+  highlight?: boolean;
+  start: string;
+  end?: string;
+  location?: string;
+  image?: string;
+  competitors?: string[];
+  streamUrl?: string;
+}
+
+const now = new Date();
+const events: DiscordEvent[] = ((rawEvents as DiscordEvent[]) || []).filter((e) => {
+  const endOrStart = e.end ? new Date(e.end) : new Date(e.start);
+  return isNaN(endOrStart.getTime()) || endOrStart >= now;
+});
+---
+
+<section id="events" class="section-pad events-section">
+  <div class="container">
+    
+    <div class="section-header">
+      <div class="section-badge-pill">TERMINE & KALENDER</div>
+      <h2 class="section-title">
+        GEPLANTE <span class="text-gradient">TERMINE</span>
+      </h2>
+      <p class="section-desc">
+        Kommende Prime League Spieltage, Turniere und Vereinstreffen direkt aus unserem Terminkalender.
+      </p>
+    </div>
+
+    {events.length > 0 ? (
+      <div class="events-grid">
+        {events.map((event) => {
+          const startDate = new Date(event.start);
+          const month = startDate.toLocaleString('de-DE', { timeZone: 'Europe/Berlin', month: 'short' }).toUpperCase();
+          const day = startDate.toLocaleString('de-DE', { timeZone: 'Europe/Berlin', day: 'numeric' });
+          const time = startDate.toLocaleTimeString('de-DE', { timeZone: 'Europe/Berlin', hour: '2-digit', minute: '2-digit' });
+          const isMatch = event.type === 'ESPORTS MATCH' || event.name.toLowerCase().includes('vs');
+          const matchedPrimeInfo = event.location ? matchLookupByUrl[event.location] : undefined;
+          const isConfirmed = matchedPrimeInfo ? matchedPrimeInfo.confirmed : !isMatch;
+          const confirmedLabel = isConfirmed ? 'Bestätigt' : 'Unbestätigt';
+
+          return (
+            <article class={`event-bento-card ${event.highlight ? 'is-highlighted' : ''}`}>
+              <!-- Top Meta Strip: Modern Date Chip & Colored Badge -->
+              <div class="event-meta-strip">
+                <div class="event-date-cluster">
+                  <div class="event-date-chip text-mono">
+                    <span class="event-day-val">{day}. {month}</span>
+                    <span class="event-sep">&bull;</span>
+                    <span class="event-time-val">{time} UHR</span>
+                  </div>
+                  <span class={`match-status-badge ${isConfirmed ? 'is-confirmed' : 'is-unconfirmed'}`}>
+                    {confirmedLabel}
+                  </span>
+                </div>
+                <span class={`type-badge text-mono ${isMatch ? 'match-badge' : 'community-badge'}`}>
+                  {isMatch ? 'LIGASPIEL' : 'VEREINSTREFFEN'}
+                </span>
+              </div>
+
+              <!-- Title & Desc -->
+              <div class="event-content">
+                <div class="name-with-link">
+                  <h3 class="event-title">{event.name}</h3>
+                  {event.location && (
+                    <a
+                      href={event.location}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="link-forward-arrow"
+                      title={isMatch ? 'Zum Ligaspiel öffnen' : 'Zum Termin öffnen'}
+                      aria-label={isMatch ? 'Zum Ligaspiel öffnen' : 'Zum Termin öffnen'}
+                    >
+                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </a>
+                  )}
+                </div>
+                {event.description && (
+                  <p class="event-desc">{event.description}</p>
+                )}
+              </div>
+
+              <!-- Footer Buttons -->
+              <div class="event-footer">
+                {event.location ? (
+                  <a 
+                    href={event.location} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    class="btn btn-outline btn-sm"
+                  >
+                    <span>{isMatch ? 'ZUM LIGASPIEL' : 'ZUM TERMIN'}</span>
+                    <span aria-hidden="true">↗</span>
+                  </a>
+                ) : null}
+
+                {event.streamUrl && (
+                  <a 
+                    href={event.streamUrl} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    class="btn btn-primary btn-sm"
+                  >
+                    <span>ZUR ÜBERTRAGUNG</span>
+                    <span aria-hidden="true">&rarr;</span>
+                  </a>
+                )}
+              </div>
+            </article>
+          );
+        })}
+      </div>
+    ) : (
+      <div class="empty-events">
+        <p class="empty-title">Aktuell sind keine offiziellen Termine eingetragen.</p>
+        <p class="empty-desc">Besuche unseren Discord Server, um über anstehende Spiele, Trainingseinheiten und Ankündigungen informiert zu bleiben.</p>
+        <a href={discordInviteUrl} target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+          ZUM DISCORD SERVER
+        </a>
+      </div>
+    )}
+
+  </div>
+</section>
+
+<style>
+  .events-section {
+    background-color: #000000;
+  }
+
+  .events-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: var(--space-lg);
+  }
+
+  /* Event Bento Card (Matching Ökosystem container) */
+  .event-bento-card {
+    background: #0d0d10;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: var(--space-md);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.5);
+    transition: border-color var(--transition-fast), transform var(--transition-smooth);
+  }
+
+  .event-bento-card:hover {
+    background: #121216;
+    border-color: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
+  }
+
+  .event-bento-card.is-highlighted {
+    border-color: rgba(255, 255, 255, 0.35);
+    box-shadow: 0 12px 32px rgba(255, 255, 255, 0.08);
+  }
+
+  .event-meta-strip {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+  }
+
+  .event-date-cluster {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .event-date-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #141418;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: var(--radius-xs);
+    padding: 3px 10px;
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
+
+  .event-day-val {
+    color: #ffffff;
+    font-weight: 800;
+  }
+
+  .event-sep {
+    color: rgba(255, 255, 255, 0.25);
+  }
+
+  .event-time-val {
+    color: var(--text-muted);
+  }
+
+  .type-badge {
+    display: inline-block;
+    font-size: 0.625rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    padding: 3px 8px;
+    border-radius: var(--radius-xs);
+  }
+
+  .match-badge {
+    color: #34d399;
+    background: rgba(16, 185, 129, 0.12);
+    border: 1px solid rgba(16, 185, 129, 0.25);
+  }
+
+  .community-badge {
+    color: var(--text-secondary);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .event-content {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .event-title {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.15rem;
+    color: #ffffff;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+  }
+
+  .event-desc {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  .event-footer {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    margin-top: auto;
+    padding-top: var(--space-xs);
+  }
+
+  /* Empty State */
+  .empty-events {
+    background: #0d0d10;
+    border: 1px dashed rgba(255, 255, 255, 0.15);
+    border-radius: var(--radius-md);
+    padding: var(--space-3xl);
+    text-align: center;
+  }
+
+  .empty-title {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: var(--space-xs);
+  }
+
+  .empty-desc {
+    color: var(--text-secondary);
+    margin-bottom: var(--space-lg);
+  }
+</style>

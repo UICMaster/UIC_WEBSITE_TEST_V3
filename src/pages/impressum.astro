@@ -1,0 +1,165 @@
+---
+// src/pages/impressum.astro
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout 
+  title="Impressum | Ultra Instinct Crew"
+  description="Impressum und rechtliche Angaben gemäß § 5 DDG der Ultra Instinct Crew."
+>
+  <div class="legal-page section-pad">
+    <div class="container legal-container">
+      
+      <a href="/" class="back-link">&larr; Zurück zur Startseite</a>
+
+      <div class="section-tag"># RECHTLICHES</div>
+      <h1 class="legal-title text-gradient">IMPRESSUM</h1>
+
+      <div class="legal-content card-monochrome">
+        <section class="legal-sec">
+          <h2>Angaben gemäß § 5 DDG</h2>
+          <p>
+            <strong>Ultra Instinct Crew</strong><br />
+            Stieglitzweg 4<br />
+            31582 Nienburg/Weser<br />
+            Deutschland
+          </p>
+        </section>
+
+        <section class="legal-sec">
+          <h3>Vertreten durch die Gesellschafter:</h3>
+          <p>
+            Matthias Meli<br />
+            Mahsun Baydak
+          </p>
+        </section>
+
+        <section class="legal-sec">
+          <h3>Kontakt</h3>
+          <p>
+            Telefon: +49 152 374285<br />
+            E-Mail: <a href="mailto:support@ultrainstinctcrew.com">support@ultrainstinctcrew.com</a>
+          </p>
+        </section>
+
+        <section class="legal-sec">
+          <h2>Social Media und andere Präsenzen</h2>
+          <p>Dieses Impressum gilt auch für unsere Auftritte auf:</p>
+          <ul class="legal-list">
+            <li>Twitch (<a href="https://www.twitch.tv/ultrainstinctcrew" target="_blank" rel="noopener">twitch.tv/ultrainstinctcrew</a>)</li>
+            <li>Twitter / X (<a href="https://x.com/uic_gaming" target="_blank" rel="noopener">x.com/uic_gaming</a>)</li>
+            <li>Discord (<a href="https://discord.gg/ultrainstinctcrew" target="_blank" rel="noopener">discord.gg/ultrainstinctcrew</a>)</li>
+          </ul>
+        </section>
+
+        <section class="legal-sec">
+          <h2>Rechtliche Hinweise zu genutzten Daten</h2>
+          
+          <h3>Riot Games Disclaimer</h3>
+          <p>
+            Ultra Instinct Crew wird nicht von Riot Games unterstützt und spiegelt nicht die Ansichten oder Meinungen von Riot Games oder anderen Personen wider, die offiziell an der Herstellung oder Verwaltung von League of Legends beteiligt sind. League of Legends und Riot Games sind Marken oder eingetragene Marken von Riot Games, Inc. League of Legends &copy; Riot Games, Inc.
+          </p>
+
+          <h3 style="margin-top: var(--space-md);">Turnierdaten (PrimeBot)</h3>
+          <p>
+            Zur Darstellung unserer sportlichen Erfolge nutzen wir Daten der Unofficial Prime League API von <a href="https://primebot.me" target="_blank" rel="noopener">primebot.me</a>. Der Abruf dieser Daten erfolgt automatisiert über einen serverseitigen Prozess.
+          </p>
+        </section>
+
+        <section class="legal-sec legal-divider">
+          <h2>Allgemeine Haftungsausschlüsse</h2>
+          
+          <h3>Haftung für Inhalte</h3>
+          <p>Als Diensteanbieter sind wir gemäß § 7 Abs. 1 DDG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 DDG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen.</p>
+
+          <h3 style="margin-top: var(--space-md);">Haftung für Links</h3>
+          <p>Unser Angebot enthält Links zu externen Websites Dritter. Auf deren Inhalte haben wir keinen Einfluss, weshalb wir für diese fremden Inhalte auch keine Gewähr übernehmen können. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich.</p>
+          
+          <h3 style="margin-top: var(--space-md);">Urheberrecht</h3>
+          <p>Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers.</p>
+        </section>
+
+        <div class="legal-stand text-mono">
+          Stand: 2026
+        </div>
+      </div>
+
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .legal-container {
+    max-width: 900px;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-xl);
+    font-weight: 600;
+  }
+
+  .back-link:hover {
+    color: var(--text-white);
+  }
+
+  .legal-title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 900;
+    margin-bottom: var(--space-xl);
+  }
+
+  .legal-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+    padding: clamp(1.5rem, 4vw, 3rem);
+  }
+
+  .legal-sec h2 {
+    font-size: 1.35rem;
+    color: var(--text-white);
+    margin-bottom: var(--space-xs);
+  }
+
+  .legal-sec h3 {
+    font-size: 1.0625rem;
+    color: var(--text-white);
+    margin-bottom: var(--space-xs);
+  }
+
+  .legal-sec p {
+    color: var(--text-secondary);
+    line-height: 1.7;
+    font-size: 0.9375rem;
+  }
+
+  .legal-sec a {
+    color: var(--text-white);
+    text-decoration: underline;
+  }
+
+  .legal-list {
+    list-style: disc;
+    padding-left: var(--space-lg);
+    color: var(--text-secondary);
+    font-size: 0.9375rem;
+    line-height: 1.7;
+  }
+
+  .legal-divider {
+    border-top: 1px solid var(--border-subtle);
+    padding-top: var(--space-xl);
+  }
+
+  .legal-stand {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    border-top: 1px solid var(--border-subtle);
+    padding-top: var(--space-md);
+  }
+</style>

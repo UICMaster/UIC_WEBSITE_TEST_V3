@@ -1,0 +1,46 @@
+---
+// src/pages/index.astro
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/home/Hero.astro';
+import About from '../components/home/About.astro';
+import Teams from '../components/home/Teams.astro';
+import Stats from '../components/home/Stats.astro';
+import Events from '../components/home/Events.astro';
+import Stream from '../components/home/Stream.astro';
+import Partners from '../components/home/Partners.astro';
+import MediaVault from '../components/home/MediaVault.astro';
+import AudioDeck from '../components/home/AudioDeck.astro';
+import { totalTeams } from '../utils/uicData';
+---
+
+<Layout 
+  title="Ultra Instinct Crew | League of Legends eSport Organisation & Community"
+  description={`Ultra Instinct Crew (UIC) ist eine deutsche League of Legends eSport Organisation in der Prime League mit ${totalTeams} aktiven Teams und einer engagierten Gaming-Gemeinschaft.`}
+>
+  <!-- 1. Start / Hero -->
+  <Hero />
+
+  <!-- 2. Über uns / Vereinsstruktur -->
+  <About />
+
+  <!-- 3. Roster & Teams (SSG pre-rendered) -->
+  <Teams />
+
+  <!-- 4. Prime League Stats & Match Center -->
+  <Stats />
+
+  <!-- 5. Discord Events Schedule -->
+  <Events />
+
+  <!-- 6. Twitch Live Stream (DSGVO Safe) -->
+  <Stream />
+
+  <!-- 7. Partners -->
+  <Partners />
+
+  <!-- 8. Media Vault & Join CTA -->
+  <MediaVault />
+
+  <!-- 9. Floating Audio Deck -->
+  <AudioDeck />
+</Layout>

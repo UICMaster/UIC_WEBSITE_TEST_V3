@@ -1,0 +1,230 @@
+---
+// src/components/home/Partners.astro
+---
+
+<section id="partners" class="section-pad partners-section">
+  <div class="container">
+    
+    <div class="section-header text-center">
+      <div class="section-badge-pill">PARTNER & KOOPERATIONEN</div>
+      <h2 class="section-title">
+        UNSERE <span class="text-gradient">PARTNER</span>
+      </h2>
+      <p class="section-desc centered">
+        Gemeinsam im eSport. Wir arbeiten eng mit Partnern aus den Bereichen Spielanalyse, Organisation und Vereinswesen zusammen.
+      </p>
+    </div>
+
+    <!-- Active Partner Logos: Open, Borderless Clean Showcase -->
+    <div class="sponsors-showcase">
+      
+      <a 
+        href="https://boellerbande.fp-labs.net/" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        class="sponsor-item"
+        aria-label="RiftOPS Partnerseite"
+      >
+        <img 
+          src="/assets/logo/riftops-horizontal-dark.svg" 
+          alt="RiftOPS Logo" 
+          class="sponsor-logo"
+          loading="lazy" 
+        />
+        <span class="sponsor-label text-mono">SPIELANALYSEN & STATISTIKEN</span>
+      </a>
+
+      <div class="sponsor-sep" aria-hidden="true"></div>
+
+      <a 
+        href="https://esport-genesiz.de/" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        class="sponsor-item"
+        aria-label="Esport Genesiz Partnerseite"
+      >
+        <img 
+          src="/assets/logo/GenesiZ_horizontal_tranz_V1.svg" 
+          alt="Esport Genesiz Logo" 
+          class="sponsor-logo"
+          loading="lazy" 
+        />
+        <span class="sponsor-label text-mono">ESPORT-ORGANISATION & GEMEINSCHAFT</span>
+      </a>
+
+    </div>
+
+    <!-- Contact & Become Partner CTA: Centered Underneath -->
+    <div class="partner-contact-wrap">
+      <div class="partner-contact-card">
+        <div class="contact-text-block">
+          <span class="contact-tag text-mono">PARTNERSCHAFT & SPONSORING</span>
+          <h3 class="contact-title">WERDE PARTNER DER ULTRA INSTINCT CREW</h3>
+          <p class="contact-desc">
+            Präsentiere deine Marke im Umfeld der Prime League, in unseren Live-Übertragungen und vor einer aktiven Gaming-Gemeinschaft.
+          </p>
+        </div>
+        <a 
+          href="mailto:support@ultrainstinctcrew.com?subject=Partnerschaftsanfrage%20UIC" 
+          class="btn btn-primary btn-partner-contact"
+        >
+          KONTAKT AUFNEHMEN &rarr;
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .partners-section {
+    background-color: #000000;
+    position: relative;
+  }
+
+  .text-center {
+    text-align: center;
+  }
+
+  .centered {
+    margin-inline: auto;
+  }
+
+  /* Open Borderless Sponsors Showcase */
+  .sponsors-showcase {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: clamp(2rem, 6vw, 4.5rem);
+    flex-wrap: wrap;
+    margin-bottom: var(--space-3xl);
+    padding: var(--space-lg) 0;
+  }
+
+  .sponsor-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    padding: var(--space-md) var(--space-xl);
+    transition: transform var(--transition-smooth);
+  }
+
+  .sponsor-item:hover {
+    transform: translateY(-3px);
+  }
+
+  .sponsor-logo {
+    max-height: 52px;
+    width: auto;
+    filter: brightness(0) invert(1);
+    opacity: 0.75;
+    transition: opacity var(--transition-fast), transform var(--transition-fast);
+  }
+
+  .sponsor-item:hover .sponsor-logo {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+
+  .sponsor-label {
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    transition: color var(--transition-fast);
+  }
+
+  .sponsor-item:hover .sponsor-label {
+    color: #ffffff;
+  }
+
+  .sponsor-sep {
+    width: 1px;
+    height: 48px;
+    background: rgba(255, 255, 255, 0.12);
+  }
+
+  @media (max-width: 640px) {
+    .sponsor-sep {
+      display: none;
+    }
+  }
+
+  /* Centered Contact Underneath */
+  .partner-contact-wrap {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .partner-contact-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-xl);
+    width: 100%;
+    max-width: 820px;
+    padding: var(--space-xl) var(--space-2xl);
+    background: #0d0d10;
+    border: 1px dashed rgba(255, 255, 255, 0.18);
+    border-radius: var(--radius-md);
+    text-align: left;
+    transition: border-color var(--transition-fast);
+  }
+
+  .partner-contact-card:hover {
+    border-color: rgba(255, 255, 255, 0.35);
+  }
+
+  .contact-text-block {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .contact-tag {
+    font-size: 0.6875rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+  }
+
+  .contact-title {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.15rem;
+    color: #ffffff;
+    letter-spacing: -0.01em;
+  }
+
+  .contact-desc {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .btn-partner-contact {
+    white-space: nowrap;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius-full);
+    font-weight: 700;
+    font-size: 0.8125rem;
+    letter-spacing: 0.04em;
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 768px) {
+    .partner-contact-card {
+      flex-direction: column;
+      text-align: center;
+      align-items: center;
+    }
+
+    .btn-partner-contact {
+      width: 100%;
+    }
+  }
+</style>
