@@ -22,7 +22,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '24'
 
       # Validates the data.json that UIC_ANALYSES pushed into this repo
       - name: Validate Synchronized Data
